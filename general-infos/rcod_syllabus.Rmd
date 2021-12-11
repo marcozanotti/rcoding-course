@@ -1,0 +1,43 @@
+---
+title: "R Coding  \n  - Course Syllabus -"
+author: "Marco Zanotti"
+date: "2021-2022"
+output:
+  pdf_document: default
+  rmdformats::downcute:
+    highlight: tango
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Lecture 1: R Programming
+
+**XX**:  
+- xx  
+- yy  
+
+
+## Lecture 2: Tidyverse
+
+**XX**:  
+- xx  
+- yy  
+
+
+## Lecture 3: Tidymodel
+
+**XX**:  
+- xx  
+- yy  
+
+
+## Lecture 4: Shiny & Flexdashboard
+
+**XX**:  
+- xx  
+- yy  
+

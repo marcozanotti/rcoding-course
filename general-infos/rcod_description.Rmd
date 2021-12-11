@@ -1,0 +1,70 @@
+---
+title: "R Coding"
+author: "Marco Zanotti"
+date: "2021-2022"
+output:
+  pdf_document: default
+  rmdformats::downcute:
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+&nbsp;  
+
+R... 
+
+For these reasons, nowadays...  
+
+
+## Course Structure
+
+The aim of the course is to teach **R Programming**.  
+The state-of-the-art and modern R packages are presented from a very practical 
+point of view, throughout R tutorials on each main topic. 
+
+* 10 hours: practical lectures on the main contents  
+
+
+## Contents
+
+* R Programming
+* Tidyverse
+* Tidymodels
+* Shiny & Flexdashboard
+
+
+\pagebreak
+
+
+## Evaluation
+
+Students...
+
+
+## Duration & Calendar
+
+The course is divided into 5 lectures (2 hours each).
+
+1. Monday 2022-02-xx, 9.00 - 11.00
+2. Monday 2022-02-xx, 9.00 - 11.00
+3. Monday 2022-02-xx, 9.00 - 11.00
+4. Monday 2022-03-xx, 9.00 - 11.00
+5. Monday 2022-03-xx, 9.00 - 11.00
+
+Lectures take place at University of Milan, Via Conservatorio 7.   
+
+
+## Requirements
+
+Requirements:
+
+* Basic knowledge of R / RMarkdown  
+* Personal laptop  
+
+
+For more information about the course contact zanottimarco17@gmail.com
+or look at the 
+[Course Syllabus](https://marcozanotti.github.io/rcoding-course/general-infos/rcod_syllabus.html)
