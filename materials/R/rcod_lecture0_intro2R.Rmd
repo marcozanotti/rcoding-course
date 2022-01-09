@@ -120,16 +120,6 @@ A simple example of a function
 <center>
 ![](../img/intro2R/f2.PNG)
 </center>  
-  
-&nbsp;  
-  
-An example of a common function of more than one variable for excel users:  
-  
-&nbsp;  
-  
-<center>
-![](../img/intro2R/vlookup.PNG)
-</center>  
 
 &nbsp;  
 &nbsp;  
@@ -323,7 +313,7 @@ website above or from the CRAN website below.
 &nbsp; 
 
 
-### CRAN & Packages
+## CRAN & Packages
 
 On the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), 
 instead, you can find all the R packages or libraries, coupled with their
@@ -346,7 +336,7 @@ use them, and sample data.
 &nbsp;  
 
 
-### Objects and Functions
+## Objects and Functions
 
 The R world    
   
@@ -377,7 +367,7 @@ print(my_object) # here the print function is called on the object my_object and
 &nbsp;  
 
 
-### R Environment
+## R Environment
 
 **Environment** can be thought of as a collection of objects (functions, 
 variables etc.). An environment is created when we first fire up the R 
@@ -397,7 +387,7 @@ live in the environment so multiple names can point to the same object.
 &nbsp;  
 
 
-### R messages
+## R messages
 
 Messages in R are displayed by functions call into the R Console and can be 
 of three main types:  
@@ -466,7 +456,7 @@ RStudio can be easily installed by downloading the correct file at
 &nbsp;  
 
 
-### Working with the RStudio IDE
+## Working with the RStudio IDE
 
 RStudio remarkably ease working with R, since it allows the user to work 
 through a variety of user friendly panes and tabs. Indeed, you can easily: 
@@ -496,7 +486,7 @@ and many other options.
 &nbsp;  
 
 
-### How to write R code: style guidelines
+## How to write R code: style guidelines
 
 When writing code, it is very important to keep in mind that it should be 
 easy to read. Hence, everyone should follow some very simple guidelines 
