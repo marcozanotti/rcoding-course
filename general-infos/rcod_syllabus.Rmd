@@ -14,28 +14,159 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Lecture 1: R Programming
+## Lecture 0 - Requirements: Introduction to R
+
+**Mathematics**:  
+- Vectors & Matrices    
+- Matrix Algebra  
+- Functions  
+
+**Programming**:  
+- What is a Programming Language?  
+- Programming & Natural Language: Similarities and Differences  
+
+**R**:  
+- What is the R Language?  
+- CRAN & Packages  
+- Objects and Functions  
+- R Environment  
+- R messages  
+- The R GUI  
+- The RStudio IDE  
+- Working with the RStudio IDE  
+- How to write R code: style guidelines  
+
+**Basic R**:  
+- Assignment Operator and Variables  
+- Some fundamental R commands  
+- Arithmetic with R  
+- Data Types  
+- Data Structures  
+- Accessing values & Subsetting  
+
+**Intermediate R**:  
+- Relational Operators  
+- Logical Operators  
+- Conditional subsetting  
+- Conditional Statements  
+- Looping Together  
+- Functions  
+
+**Extra Topics**:  
+- Tidy Data  
+- Importing Data with R  
+- Statistics  
+
+
+## Lecture 1: Tidyverse Basics
+
+**Tidyverse**:  
+- Core Tidyverse    
+- Import  
+- Wrangle  
+- Program  
+- Model  
+
+**R Code Evaluation Methods**:  
+- Standard Evaluation  
+- Non-Standard Evaluation  
+- Tidy Evaluation  
+
+**Pipe Operator**:  
+- Basic Piping  
+- Argument Placeholder  
+- Re-using Placeholder for Attributes  
+
+**Tibble**:  
+- Tibble Structure  
+
+**Stringr**:  
+- Modify  
+- Count Patterns  
+- Detect Patterns  
+- Extract Patterns  
+- Removing & Replacing Patterns  
+- Trimming  
+- Testing Patterns  
+- Base R Functions  
+
+**Forcats**:  
+- Count Levels  
+- Order Levels  
+- Modify Levels  
+
+**Lubridate**:  
+- Parse  
+- Differences  
+- Extract Time Periods  
+- Round  
+
+**Readr**:  
+- Readr  
+- Readxl  
+
+
+## Lecture 2: Tidyverse Wrangling
+
+**Tidyr**:  
+- Column Headers    
+- Multiple Variables  
+- Variables in Rows and Columns  
+- Multiple Types  
+- One Type in Multiple Tables  
+
+**Dplyr**:  
+- Rows    
+- Columns  
+- Groups  
+- Joins  
+- Utilities  
+
+**Dbplyr**:  
+- Dplyr database backend  
+
+
+## Lecture 3: Tidyverse Visualization
+
+**Ggplot2**:  
+- Initialization    
+- Aesthetics Mappings  
+- Geometries  
+- Statistical Transformations  
+- Position Adjustments  
+- Coordinate Systems  
+- Facets  
+- Other Useful Graphical Designs  
+
+**Plotly**:  
+- Ggplotly conversion  
+
+
+## Lecture 4: Tidyverse Functional Programming
+
+**Purrr**:  
+- For Loop vs Functionals   
+- The Map Functions  
+- The Power of Mapping  
+- Mapping Over Multiple Arguments  
+- Invoking Different Functions  
+
+
+## Lecture 5: RMarkdown
+
+**RMarkdown**:  
+- xx  
+- yy  
+
+
+## Lecture 6: Flexdashboard & Shiny Basics
 
 **XX**:  
 - xx  
 - yy  
 
 
-## Lecture 2: Tidyverse
-
-**XX**:  
-- xx  
-- yy  
-
-
-## Lecture 3: Tidymodel
-
-**XX**:  
-- xx  
-- yy  
-
-
-## Lecture 4: Shiny & Flexdashboard
+## Lecture 7: Flexdashboard Intermediate
 
 **XX**:  
 - xx  

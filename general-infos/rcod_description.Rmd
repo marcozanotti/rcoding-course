@@ -14,14 +14,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 &nbsp;  
 
-R... 
-
-For these reasons, nowadays...  
+**R Coding** is part of the 
+[Coding for Data Science](https://www.unimi.it/it/corsi/insegnamenti-dei-corsi-di-laurea/2022/coding-data-science-and-data-management)
+course.  
+The course aims at providing technical skills about coding/scripting aspects 
+for data analysis and to manage persistent data storage of sources and results 
+involved in analysis. On the one side, the Python programming language and 
+the R framework are illustrated. The goal is to deal with essential notions 
+about data structures and control structures of both Python and R. On the 
+other side, the goal is to present the core notions of relational databases, 
+such as keys, integrity, and primary/foreign key constraints, as well as the 
+SQL language for data definition, manipulation, and query. Recent and 
+innovative NoSQL solutions are also discussed, with special focus on a 
+document-oriented system called MongoDB.   
 
 
 ## Course Structure
 
-The aim of the course is to teach **R Programming**.  
+The **R Coding** part of the course aims at teaching **R Programming**.  
 The state-of-the-art and modern R packages are presented from a very practical 
 point of view, throughout R tutorials on each main topic. 
 
@@ -30,10 +40,13 @@ point of view, throughout R tutorials on each main topic.
 
 ## Contents
 
-* R Programming
-* Tidyverse
-* Tidymodels
-* Shiny & Flexdashboard
+* Tidyverse Basics  
+* Tidyverse Wrangling  
+* Tidyverse Visualization  
+* Tidyverse Functional Programming  
+* RMarkdown  
+* Flexdashboard & Shiny Basics  
+* Flexdashboard Intermediate  
 
 
 \pagebreak
@@ -61,8 +74,7 @@ Lectures take place at University of Milan, Via Conservatorio 7.
 
 Requirements:
 
-* Basic knowledge of R / RMarkdown  
-* Personal laptop  
+* Lecture 0 - Introduction to R
 
 
 For more information about the course contact zanottimarco17@gmail.com
