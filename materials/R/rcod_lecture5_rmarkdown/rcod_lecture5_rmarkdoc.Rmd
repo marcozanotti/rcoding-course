@@ -1,0 +1,217 @@
+---
+title: 'Lecture 5: RMarkdown'
+author: "Marco Zanotti"
+date: "2021/2022"
+output:
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+    toc_depth: 3
+  highlight: tango
+  theme: lumen
+fig_caption: yes
+---
+
+<!--
+A different type of YAML that makes use of a pre-defined Rmd format
+---
+title: "Lecture 5: RMarkdown"
+author: "Marco Zanotti"
+date: "2021/2022"
+output:
+  rmdformats::downcute:
+      highlight: tango
+---
+-->
+
+## RMardown
+
+So far, you’ve learned the tools to get your data into R, tidy it into a
+form convenient for analysis, and then understand your data through 
+transformation, visualization and modelling. However, it doesn’t matter 
+how great your analysis is unless you can explain it to others: 
+you need to **communicate** your results.  
+
+R Markdown provides an authoring framework for data science. 
+
+You can use a single R Markdown file to both  
+- save and execute code, and  
+- generate high quality reports that can be shared with an audience.  
+
+R Markdown was designed for easier reproducibility, since both the 
+computing code and narratives are in the same document, and results 
+are automatically generated from the source code. R Markdown supports 
+dozens of static and dynamic/interactive output formats.  
+
+There are three basic components of an R Markdown document: 
+the metadata, text, and code. The metadata is written between 
+the pair of three dashes ---. The syntax for the metadata is YAML 
+(YAML Ain’t Markup Language, https://en.wikipedia.org/wiki/YAML), 
+so sometimes it is also called the YAML metadata or the YAML frontmatter.  
+
+The body of a document follows the metadata. The syntax for text 
+(also known as prose or narratives) is Markdown.  
+
+
+### How to Create an RMarkdown Document
+
+Open a new .Rmd file in the RStudio IDE by going to File > New File > R Markdown.  
+
+
+### RMarkdown Workflow
+
+1. Open a new .Rmd file in the RStudio IDE by going to 
+   File > New File > R Markdown  
+2. Embed code in chunks. Run code by line, by chunk, or all at once.
+3. Write text and add tables, figures, images, and citations  
+   Format with Markdown syntax or the RStudio Visual Markdown Editor  
+4. Set output format(s) and options in the YAML header. Customize themes or 
+   add parameters to execute or add interactivity with Shiny  
+5. Save and render the whole document. Knit periodically to preview your 
+   work as you write  
+6. Share your work!  
+
+
+### Rendering
+
+The usual way to compile an R Markdown document is to click the Knit 
+button as shown in Figure 2.1, and the corresponding keyboard shortcut 
+is Ctrl + Shift + K (Cmd + Shift + K on macOS). Under the hood, RStudio 
+calls the function rmarkdown::render() to render the document in a new 
+R session. Please note the emphasis here, which often confuses R 
+Markdown users. Rendering an Rmd document in a new R session means 
+that none of the objects in your current R session (e.g., those you 
+created in your R console) are available to that session. Reproducibility 
+is the main reason that RStudio uses a new R session to render your 
+Rmd documents: in most cases, you may want your documents to continue 
+to work the next time you open R, or in other people’s computing 
+environments.  
+
+If you must render a document in the current R session, you can also 
+call rmarkdown::render() by yourself, and pass the path of the Rmd 
+file to this function. The second argument of this function is the 
+output format, which defaults to the first output format you specify 
+in the YAML metadata (if it is missing, the default is html_document).  
+
+There are two types of output formats in the rmarkdown package: 
+documents, and presentations.  
+
+
+### Learning RMarkdown
+
+To master RMarkdown follow 
+[RMarkdown the Definitive Guide](https://bookdown.org/yihui/rmarkdown/)  
+
+If you prefer a video introduction to R Markdown, I recommend that 
+you check out the website https://rmarkdown.rstudio.com, and watch 
+the videos in the “Get Started” section, which cover the basics of 
+R Markdown.  
+
+
+## Headers 
+
+To create a header to an RMarkdown document you can `#`. 
+The number of `#` used represents the level of the header.  
+
+
+## Text
+
+Text can simply be add writing normally as a text document.  
+
+**Bold text** is added with `**some text**` and *italic text* with `*some text*`.  
+
+One can also adapts the text to the output of an R command, such as
+'nrow(cars)' and 'ncol(cars)'. To include the output of an R command 
+within the text, use backticks and r. 
+For example... the iris dataset contains `r nrow(iris)` rows and 
+`r ncol(iris)` columns.  
+
+
+## Comments
+
+<!-- 
+Within these symbols I can write my comments, not to be shown in the html document
+This is our first R Markdown document.
+R Markdown is a file format for writing documents using R.
+It combines the syntax of markdown (a text format) and the syntax of R
+-->
+To add comments to an RMarkdown document you can use `<!-- some text -->`, as
+in html.  
+
+
+## Chunks
+
+Chunks are the places where code is used and they are created with the 
+following syntax  
+
+` ```{r chunk_name} # some code ``` `
+
+Chunks can be inserted quickly using the keyboard shortcut Ctrl + Alt + I 
+(macOS: Cmd + Option + I), or via the Insert menu in the editor toolbar.  
+
+Each chunk has a name. The name must be in the form 'r + some text', 
+for instance 'r data'. Within a chunk you can write R commands.
+
+```{r data, echo = TRUE, eval = TRUE}
+str(iris)
+```
+
+Chunks have options that controls how r commands and outputs are displayed
+in the html document. The are few fundamental options that are always used:  
+- `eval`: whether to evaluate a code chunk.  
+- `echo`: whether to echo the source code in the output document 
+(someone may not prefer reading your smart source code but only results).    
+- `include`: whether to include anything from a code chunk in the output document.  
+- `warning`, `message`, and `error`: whether to show warnings, messages, and 
+errors in the output document.  
+- `fig.width` and `fig.height`: the (graphical device) size of R plots in inches.   
+- `out.width` and `out.height`: the output size of R plots in the output document.  
+- `fig.align`: the alignment of plots. It can be 'left', 'center', or 'right'.   
+- `fig.cap`: the figure caption.  
+
+```{r packages, include=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+
+## Figures
+
+By default, figures produced by R code will be placed immediately after 
+the code chunk they were generated from.  
+
+```{r plot, echo = TRUE, fig.width = 5, fig.height = 4, fig.align='center'}
+plot(iris$Sepal.Length, iris$Petal.Length, xlab = "Sepal Lenght", ylab = "Petal Lenght")
+```
+
+
+## Statistics within Chunks
+
+One can simply perform statistical analysis within code chunks.
+
+```{r summary, echo = TRUE}
+summary(iris)
+```
+
+Math expression can be inserted by surrounding text into $.  
+
+I now want to fit the linear regression model to my data of the form  
+
+$$Y = \beta_0 + \beta_1 X + \varepsilon$$
+
+To do this, I simply use the function `lm`.
+
+```{r lm, echo = TRUE}
+model <- lm(Petal.Length ~ Sepal.Length, data = iris)
+```
+
+The model output is the following:  
+
+```{r lm out, echo = TRUE}
+summary(model)
+```
+
+We see that $\hat{\beta}_0$ is `r round(model$coefficients[1],2)` while the 
+slope is equal to `r round(model$coefficients[2],2)`.
+
