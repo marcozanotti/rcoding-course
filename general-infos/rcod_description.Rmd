@@ -44,37 +44,34 @@ point of view, throughout R tutorials on each main topic.
 * Tidyverse Wrangling  
 * Tidyverse Visualization  
 * Tidyverse Functional Programming  
-* RMarkdown  
-* Flexdashboard & Shiny Basics  
-* Flexdashboard Intermediate  
+* Tidymodels  
+* Flexdashboard UI  
+* Flexdashboard Reactivity - Shiny  
+* Flexdashboard in Production    
 
 
 \pagebreak
-
-
-## Evaluation
-
-Students...
 
 
 ## Duration & Calendar
 
 The course is divided into 5 lectures (2 hours each).
 
-1. Monday 2022-02-xx, 9.00 - 11.00
-2. Monday 2022-02-xx, 9.00 - 11.00
-3. Monday 2022-02-xx, 9.00 - 11.00
-4. Monday 2022-03-xx, 9.00 - 11.00
-5. Monday 2022-03-xx, 9.00 - 11.00
+1. Wednesday 2022-02-09, 16.30 - 18.30
+2. Friday 2022-02-11, 16.30 - 18.30
+3. Wednesday 2022-02-16, 16.30 - 18.30
+4. Wednesday 2022-02-23, 16.30 - 18.30
+5. Wednesday 2022-03-02, 16.30 - 18.30
 
-Lectures take place at University of Milan, Via Conservatorio 7.   
+Lectures take place at University of Milan, Via Conservatorio 7, and online.   
 
 
 ## Requirements
 
 Requirements:
 
-* Lecture 0 - Introduction to R
+* Lecture 0 - Introduction to R  
+* Lecture 0 - RMarkdown  
 
 
 For more information about the course contact zanottimarco17@gmail.com

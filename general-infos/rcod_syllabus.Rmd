@@ -58,6 +58,11 @@ knitr::opts_chunk$set(echo = TRUE)
 - Statistics  
 
 
+## Lecture 0 - Requirements: RMarkdown
+
+**RMarkdown** 
+
+
 ## Lecture 1: Tidyverse Basics
 
 **Tidyverse**:  
@@ -152,23 +157,39 @@ knitr::opts_chunk$set(echo = TRUE)
 - Invoking Different Functions  
 
 
-## Lecture 5: RMarkdown
+## Lecture 5: Tidymodels
 
-**RMarkdown**:  
-- xx  
-- yy  
-
-
-## Lecture 6: Flexdashboard & Shiny Basics
-
-**XX**:  
-- xx  
-- yy  
+**Tidymodels**:  
+- Recipes   
+- Engines  
+- Modelling  
+- Predicting  
 
 
-## Lecture 7: Flexdashboard Intermediate
+## Lecture 6: Flexdashboard UI
 
-**XX**:  
-- xx  
-- yy  
+**Static UI**:  
+- Layouts  
+- Components  
+- Sizing  
+- Paging  
+- Storyboards  
+- Sidebars  
+
+
+## Lecture 7: Flexdashboard UI - Shiny
+
+**Interactive UI**:  
+- Basic Shiny Components  
+- Inputs  
+- Rendering Functions  
+- Shinywidgets, Shinyjs, Shinymanager  
+
+
+## Lecture 8: Flexdashboard in Production
+
+**Production**:  
+- GitHub Pages for static .html  
+- Shiny Server for reactive .Rmd  
+- Shinyapps.io  
 
