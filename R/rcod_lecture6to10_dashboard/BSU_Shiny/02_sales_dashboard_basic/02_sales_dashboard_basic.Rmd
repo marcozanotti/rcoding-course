@@ -1,0 +1,81 @@
+---
+title: "Sales Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+
+# Core
+library(tidyverse)
+library(tidyquant)
+
+# Interactive Visualizations
+library(plotly)
+
+# Database
+library(odbc)
+library(RSQLite)
+```
+
+```{r}
+con <- dbConnect(RSQLite::SQLite(), "../00_data/bikes_database.db")
+
+# dbListTables(con)
+bikes_tbl <- tbl(con, "bikes")
+bikeshops_tbl <- tbl(con, "bikeshops")
+orderlines_tbl <- tbl(con, "orderlines")
+
+processed_data_tbl <- orderlines_tbl %>%
+    left_join(bikeshops_tbl, by = c("customer.id" = "bikeshop.id")) %>%
+    left_join(bikes_tbl, by = c("product.id" = "bike.id")) %>%
+    mutate(extended_price = quantity * price) %>%
+    collect()
+
+processed_data_tbl <- processed_data_tbl %>%    
+    mutate(order.date = ymd(order.date)) %>%
+    separate(location, into = c("city", "state"), sep = ", ") %>%
+    select(order.date, order.id, order.line, state, quantity, price, extended_price)
+    
+# processed_data_tbl
+
+dbDisconnect(con)
+```
+
+
+Column {data-width=1000}
+---------------------------------------------------------------
+
+### By State
+
+```{r}
+geo_plot_tbl <- processed_data_tbl %>%
+    group_by(state) %>%
+    summarise(total_revenue = sum(extended_price)) %>%
+    ungroup() %>%
+    mutate(label_text = str_glue("State: {state}
+                                 Revenue: {scales::dollar(total_revenue)}"))
+```
+
+
+```{r}
+geo_plot_tbl %>%
+    plot_geo(locationmode = "USA-states") %>%
+    add_trace(z         = ~total_revenue, 
+              locations = ~state, 
+              color     = ~total_revenue,
+              text      = ~label_text,
+              colors    = "Blues") %>%
+    layout(
+        geo = list(
+            scope = "usa",
+            projection = list(type = "albers usa"),
+            showlakes  = TRUE,
+            lakecolor  = toRGB("white")
+        )
+    )
+```
+

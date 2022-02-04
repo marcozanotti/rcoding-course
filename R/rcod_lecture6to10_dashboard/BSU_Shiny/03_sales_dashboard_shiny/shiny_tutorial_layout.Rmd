@@ -1,0 +1,99 @@
+---
+title: "Shiny Tutorial"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+# Shiny
+library(flexdashboard)
+library(shiny)
+library(DT)
+
+# Core
+library(tidyverse)
+library(tidyquant)
+
+# Database
+library(odbc)
+library(RSQLite)
+```
+
+```{r}
+# Make data
+set.seed(123)
+sales_data_tbl <- tibble(
+  date  = seq.Date(from = ymd("2018-01-01"), to = today(), length.out = 90),
+  class = sample(c("marketing", "sales", "research"), size = 90, replace = TRUE),
+  sales = runif(n = 90, min = 1, max = 100)
+)
+```
+
+
+
+
+Sidebar {.sidebar}
+------------------------
+
+```{r}
+# Inputs
+
+```
+
+
+```{r}
+# Reset Button
+
+```
+
+
+
+Column {data-width=500}
+-----------------------
+
+### Section - Checkbox Output
+
+```{r}
+
+```
+
+### Section - Date Range
+
+```{r}
+
+```
+
+### Section - Slider Output
+
+```{r}
+
+```
+
+
+Column {data-width=750}
+-----------------------
+
+```{r}
+# Reactive Filter
+
+```
+
+
+### Section - Reactive Output
+
+```{r}
+
+
+```
+
+
+### Section - Reactive Summary
+
+```{r}
+
+
+```
+

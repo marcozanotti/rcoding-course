@@ -1,0 +1,170 @@
+---
+title: "Shiny Tutorial"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+# Shiny
+library(flexdashboard)
+library(shiny)
+library(DT)
+
+# Core
+library(tidyverse)
+library(tidyquant)
+```
+
+```{r}
+# Make data
+set.seed(123)
+sales_data_tbl <- tibble(
+  date  = seq.Date(from = ymd("2018-01-01"), to = today(), length.out = 90),
+  class = sample(c("marketing", "sales", "research"), size = 90, replace = TRUE),
+  sales = runif(n = 90, min = 1, max = 100)
+)
+```
+
+
+
+
+Sidebar {.sidebar}
+------------------------
+
+```{r}
+# Inputs
+checkboxGroupInput(inputId = "checkbox_group", 
+                   label   = h4("Checkbox Group"), 
+                   choices = c("Marketing" = "marketing",
+                               "R&D"       = "research",
+                               "Sales"     = "sales"), 
+                   selected = c("marketing", "research", "sales"))
+
+dateRangeInput(inputId = "date_range", 
+               label   = h4("Date Range"), 
+               start   = "2018-01-01", 
+               end     = today(),          # "2019-05-10" 
+               min     = min(sales_data_tbl$date), 
+               max     = max(sales_data_tbl$date), 
+               startview = "year")
+
+sliderInput(inputId = "slider_input", 
+            label   = h4("Slider Range"), 
+            min     = 1,
+            max     = 100, 
+            value   = c(40, 60), 
+            step    = 1, 
+            round   = TRUE, 
+            pre     = "$")
+```
+
+
+```{r}
+# Reset Button
+actionButton(inputId = "reset", 
+             label   = "Reset", 
+             icon    = icon("sync"))
+
+observeEvent(eventExpr = input$reset, handlerExpr = {
+  
+  updateCheckboxGroupInput(session  = session, 
+                           inputId  = "checkbox_group", 
+                           selected = c("marketing", "research", "sales"))
+  
+  updateDateRangeInput(session = session, 
+                       inputId = "date_range", 
+                       start   = min(sales_data_tbl$date), 
+                       end     = today())
+  
+  updateSliderInput(session = session, 
+                    inputId = "slider_input", 
+                    value   = c(40, 60))
+  
+  
+})
+```
+
+
+
+Column {data-width=500}
+-----------------------
+
+### Section - Checkbox Output
+
+```{r}
+output$checkbox_values <- renderPrint(input$checkbox_group)
+
+textOutput(outputId = "checkbox_values")
+```
+
+### Section - Date Range
+
+```{r}
+output$date_range_values <- renderPrint(input$date_range)
+
+textOutput(outputId = "date_range_values")
+```
+
+### Section - Slider Output
+
+```{r}
+output$slider_values <- renderPrint(input$slider_input)
+
+textOutput(outputId = "slider_values")
+```
+
+
+Column {data-width=750}
+-----------------------
+
+```{r}
+# Reactive Filter
+sales_data_filtered <- reactive({
+  
+  sales_data_tbl %>%
+    filter(class %in% input$checkbox_group) %>%
+    filter(date %>% between(left  = ymd(input$date_range[1]), 
+                            right = ymd(input$date_range[2]))) %>%
+    filter(sales %>% between(left  = input$slider_input[1],
+                             right = input$slider_input[2]))
+})
+
+```
+
+
+### Section - Reactive Output
+
+```{r}
+#  renderPrint( sales_data_filtered() )
+
+output$dt_output_1 <- DT::renderDataTable(expr = {
+  
+  sales_data_filtered() %>%
+    mutate(sales = scales::dollar(sales))
+  
+}, options = list(scrollY = "250px"))
+
+DTOutput(outputId = "dt_output_1")
+```
+
+
+### Section - Reactive Summary
+
+```{r}
+output$dt_output_2 <- DT::renderDataTable(expr = {
+  
+  sales_data_filtered() %>%
+    group_by(class) %>%
+    summarise(total_revenue = sum(sales)) %>%
+    ungroup() %>%
+    mutate(total_revenue = scales::dollar(total_revenue))
+  
+}, options = list(scrollY = "250px"))
+
+DTOutput(outputId = "dt_output_2")
+
+```
+

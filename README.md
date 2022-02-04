@@ -32,3 +32,5 @@ focusing on how to code with modern and state-of-the-art R packages.
 -   [Lectures](https://github.com/marcozanotti/rcoding-course/tree/master/R)  
 -   [Requirements - Introduction to
     R](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0_intro2R.html)
+-   [Requirements -
+    RMarkdown](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0_rmarkdown.html)

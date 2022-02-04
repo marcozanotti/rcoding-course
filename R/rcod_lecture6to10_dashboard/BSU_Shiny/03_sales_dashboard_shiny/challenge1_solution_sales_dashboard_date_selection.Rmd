@@ -1,0 +1,190 @@
+---
+title: "Sales Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(shinyWidgets)
+
+# Core
+library(tidyverse)
+library(tidyquant)
+
+# Interactive Visualizations
+library(plotly)
+
+# Database
+library(odbc)
+library(RSQLite)
+```
+
+```{r}
+con <- dbConnect(RSQLite::SQLite(), "../00_data/bikes_database.db")
+# con <- dbConnect(RSQLite::SQLite(), "00_data/bikes_database.db")
+
+# dbListTables(con)
+bikes_tbl <- tbl(con, "bikes")
+bikeshops_tbl <- tbl(con, "bikeshops")
+orderlines_tbl <- tbl(con, "orderlines")
+
+processed_data_tbl <- orderlines_tbl %>%
+    left_join(bikeshops_tbl, by = c("customer.id" = "bikeshop.id")) %>%
+    left_join(bikes_tbl, by = c("product.id" = "bike.id")) %>%
+    mutate(extended_price = quantity * price) %>%
+    collect()
+
+processed_data_tbl <- processed_data_tbl %>%    
+    mutate(order.date = ymd(order.date)) %>%
+    separate(location, into = c("city", "state"), sep = ", ") %>%
+    
+    separate(description, 
+             into = c("category_1", "category_2", "frame_material"),
+             sep = " - ") %>%
+    
+    select(order.date, order.id, order.line, state, quantity, price,
+           extended_price, category_1:frame_material)
+    
+# processed_data_tbl
+
+dbDisconnect(con)
+```
+
+Column {.sidebar}
+---------------------------------------------------------------
+
+```{r}
+
+dateRangeInput(
+  inputId = "date_range", 
+  label   = h4("Date Range"),
+  start   = min(processed_data_tbl$order.date), 
+  end     = max(processed_data_tbl$order.date), 
+  min     = min(processed_data_tbl$order.date), 
+  max     = max(processed_data_tbl$order.date), 
+  startview = "month")
+
+
+shinyWidgets::checkboxGroupButtons(
+  inputId   = "checkbox_category_1", 
+  label     = h4("Bike Type"), 
+  choices   = unique(processed_data_tbl$category_1), 
+  selected  = unique(processed_data_tbl$category_1), 
+  checkIcon = list(
+    yes = icon("ok", lib = "glyphicon"),
+    no  = icon("remove", lib = "glyphicon")
+  ))
+
+shinyWidgets::pickerInput(
+  inputId  = "picker_category_2", 
+  label    = h4("Bike Family"), 
+  choices  = unique(processed_data_tbl$category_2), 
+  selected = unique(processed_data_tbl$category_2), 
+  multiple = TRUE,
+  options  = list(
+    `actions-box` = TRUE,
+    size = 10,
+    `selected-text-format` = "count > 3"
+  )
+)
+
+br()
+hr()
+br()
+
+actionButton(inputId = "reset", label = "Reset", icon = icon("sync"))
+
+observeEvent(eventExpr = input$reset, handlerExpr = {
+  
+  updateCheckboxGroupButtons(
+    session  = session, 
+    inputId  = "checkbox_category_1", 
+    selected = unique(processed_data_tbl$category_1))
+  
+  updatePickerInput(
+    session = session, 
+    inputId = "picker_category_2", 
+    selected = unique(processed_data_tbl$category_2))
+  
+  updateDateRangeInput(
+    session = session, 
+    inputId = "date_range", 
+    start   = min(processed_data_tbl$order.date), 
+    end     = max(processed_data_tbl$order.date))
+  
+})
+
+# renderPrint(input$date_range)
+
+# renderPrint(input$picker_category_2)
+
+# renderText(input$checkbox_category_1)
+```
+
+
+Column {data-width=1000}
+---------------------------------------------------------------
+
+### By State
+
+```{r}
+
+geo_plot_tbl <- reactive({
+
+  processed_data_tbl %>%
+    
+    filter(order.date %>% between(left  = input$date_range[1], 
+                                  right = input$date_range[2])) %>%
+
+    filter(category_1 %in% input$checkbox_category_1) %>%
+    
+    filter(category_2 %in% input$picker_category_2) %>%
+
+    group_by(state) %>%
+    summarise(total_revenue = sum(extended_price)) %>%
+    ungroup() %>%
+    mutate(label_text = str_glue("State: {state}
+                                 Revenue: {scales::dollar(total_revenue)}"))
+
+})
+
+
+# geo_plot_tbl <- processed_data_tbl %>%
+#     group_by(state) %>%
+#     summarise(total_revenue = sum(extended_price)) %>%
+#     ungroup() %>%
+#     mutate(label_text = str_glue("State: {state}
+#                                  Revenue: {scales::dollar(total_revenue)}"))
+```
+
+
+```{r}
+output$plotly_1 <- renderPlotly(expr = {
+  
+  geo_plot_tbl() %>%
+    plot_geo(locationmode = "USA-states") %>%
+    add_trace(z         = ~total_revenue, 
+              locations = ~state, 
+              color     = ~total_revenue,
+              text      = ~label_text,
+              colors    = "Blues") %>%
+    layout(
+        geo = list(
+            scope = "usa",
+            projection = list(type = "albers usa"),
+            showlakes  = TRUE,
+            lakecolor  = toRGB("white")
+        )
+    )
+  
+})
+
+plotlyOutput(outputId = "plotly_1")
+
+```
+

@@ -1,0 +1,166 @@
+---
+title: "Price Prediction App"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    css: css/styles-default.css
+    logo: img/logo-cannondale.png
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+
+# 1.0 Libraries ----
+
+# App
+library(flexdashboard)
+library(shiny)
+library(shinyjs)
+library(shinyWidgets)
+
+# Core
+library(tidyverse)
+library(tidyquant)
+
+# Visualizations
+library(plotly)
+
+# Modeling
+library(parsnip)
+
+# Database
+library(odbc)
+library(RSQLite)
+
+
+
+# 2.0 Data ----
+con <- dbConnect(RSQLite::SQLite(), "../00_data/bikes_database.db")
+# con <- dbConnect(RSQLite::SQLite(), "00_data/bikes_database.db")
+# dbListTables(con)
+bikes_tbl <- tbl(con, "bikes") %>% collect()
+dbDisconnect(con)
+
+# Scripts
+source("../00_scripts/02_process_data.R")
+source("../00_scripts/03_make_predictions.R")
+source("plot_bike_prediction_cannondale.R")
+
+# Model
+model_xgboost <- read_rds("../00_models/model_xgboost.rds")
+```
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+useShinyjs(rmd = TRUE)
+
+# Bike Model Input ----
+textInput(inputId = "text_bike_model", label = h4("Bike Model"), value = "Jekyll Al 1 Black Inc.")
+
+# Bike Family (Category 2) ----
+
+category_hierachy_tbl <- bikes_tbl %>% 
+  separate_bike_description(keep_description_column = TRUE, append = FALSE) %>%
+  distinct(category_1, category_2)
+
+pickerInput(inputId  = "picker_category_2", 
+            label    = h4("Bike Family"), 
+            choices  = category_hierachy_tbl$category_2, 
+            selected = "Over Mountain")
+  
+
+# Bike Type (Category 1) ----
+h4("Bike Type")
+bike_type <- reactive({
+  category_hierachy_tbl %>%
+    filter(category_2 == input$picker_category_2) %>%
+    pull(category_1)
+})
+
+output$bike_type <- renderText(bike_type())
+
+textOutput(outputId = "bike_type") %>% em() %>% strong()
+
+# Frame Material ----
+br()
+pickerInput(inputId  = "picker_frame_material", 
+            label    = h4("Frame Material"), 
+            choices  = c("Aluminum", "Carbon"), 
+            selected = "Aluminum")
+
+
+br()
+hr()
+br()
+
+actionButton(inputId = "apply", label = "Apply", icon = icon(name = "play", lib = "font-awesome"))
+
+actionButton("reset", label = "Reset", icon = icon("sync"))
+
+observeEvent(eventExpr = input$reset, handlerExpr = {
+  
+  updateTextInput(session = session, inputId = "text_bike_model", value = "Jekyll Al 1 Black Inc.")
+  
+  updatePickerInput(session = session, inputId = "picker_category_2", selected = "Over Mountain")
+  
+  updatePickerInput(session = session, inputId = "picker_frame_material", selected = "Aluminum")
+  
+  delay(ms = 300, expr = {
+    click(id = "apply")
+  })
+  
+})
+
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+```{r}
+new_bike_tbl <- eventReactive(eventExpr = input$apply, valueExpr = {
+  
+  generate_new_bike(
+    bike_model = input$text_bike_model, 
+    category_1 = bike_type(), 
+    category_2 = input$picker_category_2, 
+    frame_material = input$picker_frame_material, 
+    .ml_model = model_xgboost)
+  
+}, ignoreNULL = FALSE)
+
+
+```
+
+
+### Price Prediction vs Product Portfolio
+
+```{r}
+# renderPrint(new_bike_tbl())
+
+output$plotly_1 <- renderPlotly({
+  bind_bike_prediction(bikes_tbl, new_bike_tbl()) %>%
+    plot_bike_prediction_cannondale()
+})
+
+plotlyOutput("plotly_1")
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Price Prediction Used These Features
+
+```{r}
+renderTable({
+  new_bike_tbl() %>% format_table()
+})
+
+
+```
+
+
