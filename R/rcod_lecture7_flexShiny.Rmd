@@ -1,0 +1,53 @@
+---
+title: "Flexdashboard Reactivity with Shiny"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+
+
+Column {data-width=500}
+---------------------------------------------------------------
+
+### Overview
+
+By adding **Shiny** to a flexdashboard, you can create dashboards that enable 
+viewers to change underlying parameters and see the results immediately, 
+or that update themselves incrementally as their underlying data changes 
+(see reactiveFileReader and reactivePoll). This is done by adding 
+**runtime: shiny** to a standard flexdashboard and then adding one or more 
+input controls and/or reactive expressions that dynamically drive the 
+appearance of the components within the dashboard.
+
+Using Shiny with flexdashboard turns a static R Markdown report into an 
+Interactive Document. It’s important to note that interactive documents 
+need to be deployed to a Shiny Server to be shared broadly (whereas static 
+R Markdown documents are standalone web pages that can be attached to emails 
+or served from any standard web server).
+
+Note that the **shinydashboard** package provides another way to create 
+dashboards with Shiny.
+
+
+
+
+
+Column {data-width=500}
+---------------------------------------------------------------
+
+### Tutorial
+
+Follow the:
+
+[Flexdashboard using Shiny](https://pkgs.rstudio.com/flexdashboard/articles/shiny.html)
+
+Throughout this tutorial you can learn about:
+
+- Basic Shiny Components
+- Inputs
+- Rendering Functions  
+
+Moreover, follow the rcod_lecture7_shiny1 and rcod_lecture7_shiny2.  
+

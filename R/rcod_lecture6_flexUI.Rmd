@@ -1,0 +1,54 @@
+---
+title: "Flexdashboard UI"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+
+
+Column {data-width=500}
+---------------------------------------------------------------
+
+### Overview
+
+The goal of flexdashboard is to make it easy to create interactive 
+dashboards for R, using R Markdown:
+
+- Use **R Markdown** to publish a group of related data visualizations 
+  as a dashboard
+- Support for a **wide variety of components** including htmlwidgets; base, 
+  lattice, and grid graphics; tabular data; gauges and value boxes; and 
+  text annotations
+- Flexible and easy to specify **row and column-based layouts**. Components 
+  are intelligently re-sized to fill the browser and adapted for display 
+  on mobile devices
+- **Storyboard** layouts for presenting sequences of visualizations and 
+  related commentary
+- Optionally use **Shiny** to drive visualizations dynamically
+- Optionally use **bslib** to easily customize main colors, fonts, and more
+
+
+
+Column {data-width=500}
+---------------------------------------------------------------
+
+### Tutorial
+
+Follow the:
+
+1. [Flexdashboard UI Tutorial](https://pkgs.rstudio.com/flexdashboard/articles/using.html)
+2. [Sample Layouts Tutorial](https://pkgs.rstudio.com/flexdashboard/articles/layouts.html)
+3. [Theming Tutorial]()
+
+Throughout these tutorials you can learn about:
+
+- Layouts
+- Components
+- Sizing  
+- Paging  
+- Storyboards  
+- Sidebars  
+- Mobile  
+- Appearance & Theming  

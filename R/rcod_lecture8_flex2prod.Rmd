@@ -1,0 +1,82 @@
+---
+title: "Flexdashboard in Production"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+
+
+Column {data-width=500}
+---------------------------------------------------------------
+
+### Static HTML
+
+Flexdashboards without Shiny interactive components are just HTML pages
+hence can be shared as any other basic HTML file: attaching 
+it to and e-mail, sending as documents into your business chat or even
+uploading it to a website.    
+
+One of the most efficient way to share you dashboard is indeed to host it
+on the web (for free) using [GitHub Pages](https://pages.github.com/).  
+
+Follow these simple steps to deploy your HTML Flexdashboard to the web:  
+
+1. Login to [GitHub](https://github.com/) and create a new **public** repository  
+2. From the green code tab of your new repo, copy the HTTPS link   
+3. Locally, through RStudio, create a new **RStudio Project** from Version 
+Control and link it to your GitHub repo using the HTTPS link  
+4. Place your *flexdashboard.Rmd* file into the project folder, knit, commit 
+and push the new files to GitHub   
+5. From the settings of your GitHub repo, go to **Pages** and activate them  
+6. Your dashboard is now available at 
+https://user-name.github.io/repo-name/dashboard-name.html
+
+
+Column {data-width=500}
+---------------------------------------------------------------
+
+### Reactive Rmd
+
+Using Shiny with flexdashboard turns a static R Markdown report into an 
+interactive document. It’s important to note that interactive documents 
+cannot be shared as static HTML files, but need to be deployed as a service
+to a web server.   
+
+The easiest way is through 
+[Shiny Server](https://www.rstudio.com/products/shiny/shiny-server/) 
+or directly via [Shinyapps.io](https://www.shinyapps.io/) (but the
+free version limits you to 5 dashboards and small online time). 
+Deploying your dashboard allows you to share it broadly with no limits.  
+
+Follow these simple steps to deploy your Rmd Flexdashboard via Shiny Server:  
+
+1. Install **Shiny R package** as admin  
+2. Install **Shiny Server** (once installed it starts automatically)
+3. Install all the **R packages** required by your flexdashboard as an admin 
+(for example, on Ubuntu shell run 
+`sudo su - -c "R -e \"install.packages('package_name', repos='https://cran.rstudio.com/')\""`
+)  
+4. To host the app just copy the directory of your dashboard to 
+**/srv/shiny-server/**. At this point, the Shiny service automatically points
+to the .Rmd of the dashboard and deploys hosts it on 
+http://localhost:3838/dashboard-directory-name/  
+
+
+Notes:  
+
+The default configuration file is installed at 
+**/etc/shiny-server/shiny-server.conf** if it doesn't already exist.  
+The default configuration creates a single server listening on port 3838, 
+serving any application contained within **/srv/shiny-server/** at the root 
+URL (/).   
+See also the 
+[Shiny Server Basic Installation Guide](https://www.rstudio.com/products/shiny/download-server/)
+and the 
+[Shiny Server Administrator Guide](https://docs.rstudio.com/shiny-server/).  
+
+
+To host your app to the web you need some host web server as 
+[AWS Services](https://www.charlesbordet.com/en/guide-shiny-aws/#).  
+
