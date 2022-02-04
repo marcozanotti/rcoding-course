@@ -21,7 +21,6 @@
 # data science. All packages share an underlying design philosophy, 
 # grammar, and data structures.
 
-install.packages("tidyverse")
 library(tidyverse)
 
 
@@ -581,6 +580,7 @@ starwars %>%
 # vignette("translation-function").
 
 library(dbplyr, warn.conflicts = TRUE)
+library(DBI)
 
 # dbplyr is designed to work with database tables as if they were local 
 # data frames. Database connections are coordinated by the DBI package. 
@@ -612,4 +612,38 @@ summary_query %>% show_query()
 summary_query %>% collect()
 res <- summary_query %>% collect()
 res
+
+
+# * Bikes Database --------------------------------------------------------
+
+# Here is the database that we work with throughout flexdashboard tutorials.
+
+con <- DBI::dbConnect(RSQLite::SQLite(), "data/bikes_database.db")
+
+DBI::dbListTables(con)
+bikes_tbl <- tbl(con, "bikes")
+bikes_tbl
+bikeshops_tbl <- tbl(con, "bikeshops")
+bikeshops_tbl
+orderlines_tbl <- tbl(con, "orderlines")
+orderlines_tbl
+
+processed_data_tbl <- orderlines_tbl %>%
+  left_join(bikeshops_tbl, by = c("customer.id" = "bikeshop.id")) %>%
+  left_join(bikes_tbl, by = c("product.id" = "bike.id")) %>%
+  mutate(extended_price = quantity * price) %>%
+  collect()
+
+dbDisconnect(con)
+
+processed_data_tbl
+glimpse(processed_data_tbl)
+
+processed_data_tbl <- processed_data_tbl %>%    
+  mutate(order.date = lubridate::ymd(order.date)) %>%
+  separate(location, into = c("city", "state"), sep = ", ") %>%
+  group_by(state) %>%
+  summarise(total_revenue = sum(extended_price)) %>%
+  ungroup() 
+processed_data_tbl %>% View()
 

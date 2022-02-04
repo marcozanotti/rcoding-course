@@ -27,7 +27,6 @@
 # data science. All packages share an underlying design philosophy, 
 # grammar, and data structures.
 
-install.packages("tidyverse")
 library(tidyverse)
 
 
@@ -153,7 +152,7 @@ library(tidyverse)
 # for iterating on R objects, there are two additional tidyverse packages 
 # that help with general programming challenges:
 #   - magrittr provides the pipe, %>% used throughout the tidyverse. 
-#     It also provide a number of more specialised piping operators 
+#     It also provide a number of more specialized piping operators 
 #     (like %$% and %<>%) that can be useful in other places
 #   - glue provides an alternative to paste() that makes it easier to 
 #     combine data and strings
@@ -295,9 +294,9 @@ df$x
   
 select(df, 1) # selects the first column 
 select(df, last_col()) # selects the last column
-select(df, c(a, b, c)) # selects columns a, b, and c
-select(df, starts_with("a")) # selects all columns whose name starts with “a”
-select(df, ends_with("z")) # selects all columns whose name ends with “z”
+select(df, c(x, y)) # selects columns x, and y
+select(df, starts_with("x")) # selects all columns whose name starts with “x”
+select(df, ends_with("y")) # selects all columns whose name ends with “y”
 select(df, where(is.numeric)) # selects all numeric columns
 
 
@@ -352,9 +351,9 @@ the_data <-
 
 # * Basic Piping ----------------------------------------------------------
 
-# x %>% f() is equivalent to f(x)
-# x %>% f(y) is equivalent to f(x, y)
-# x %>% f() %>% g() %>% h() is equivalent to h(g(f(x)))
+x %>% f() is equivalent to f(x)
+x %>% f(y) is equivalent to f(x, y)
+x %>% f() %>% g() %>% h() is equivalent to h(g(f(x)))
 
 # “Equivalent” is not technically exact: evaluation is non-standard, 
 # and the left-hand side is evaluated before passed on to the right-hand 
@@ -363,8 +362,8 @@ the_data <-
 
 # * Argument Placeholder --------------------------------------------------
 
-# x %>% f(y, .) is equivalent to f(y, x)
-# x %>% f(y, z = .) is equivalent to f(y, z = x)
+x %>% f(y, .) is equivalent to f(y, x)
+x %>% f(y, z = .) is equivalent to f(y, z = x)
 
 # The . has a placeholder function when coupled with the pipe.
 
@@ -376,9 +375,9 @@ the_data <-
 # in a nested expressions magrittr will still apply the first-argument rule. 
 # The reason is that in most cases this results more clean code.
 
-# x %>% f(y = nrow(.), z = ncol(.)) is equivalent to f(x, y = nrow(x), z = ncol(x))
+x %>% f(y = nrow(.), z = ncol(.)) is equivalent to f(x, y = nrow(x), z = ncol(x))
 # this behavior can be overruled by enclosing the right-hand side in braces:
-# x %>% {f(y = nrow(.), z = ncol(.))} is equivalent to f(y = nrow(x), z = ncol(x))
+x %>% {f(y = nrow(.), z = ncol(.))} is equivalent to f(y = nrow(x), z = ncol(x))
 
 
 
@@ -699,7 +698,7 @@ fct_collapse(
 
 # Sometimes you just want to lump together all the small groups to make 
 # a plot or table simpler. That’s the job of fct_lump().
-# The default behaviour is to progressively lump together the smallest 
+# The default behavior is to progressively lump together the smallest 
 # groups, ensuring that the aggregate is still the smallest group.
 # We can use the n parameter to specify how many groups (excluding other) 
 # we want to keep.

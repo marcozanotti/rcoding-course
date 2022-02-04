@@ -20,7 +20,6 @@
 # data science. All packages share an underlying design philosophy, 
 # grammar, and data structures.
 
-install.packages("tidyverse")
 library(tidyverse)
 
 
