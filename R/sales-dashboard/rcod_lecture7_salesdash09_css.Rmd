@@ -1,0 +1,423 @@
+---
+title: "Sales Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    css: css/styles-default.css
+    logo: img/logo.png
+runtime: shiny
+---
+
+```{r setup, include=FALSE, message=FALSE}
+source("../utils.R")
+source("../packages.R")
+```
+
+```{r auth}
+credentials <- read.csv("auth.txt")
+shinymanager::auth_ui(id = "auth")
+auth <- shiny::callModule(
+  module = shinymanager::auth_server,
+  id = "auth",
+  check_credentials = shinymanager::check_credentials(credentials)
+)
+```
+
+```{r}
+renderUI({
+  if (input$view_mode) {
+    includeCSS("css/styles-default.css")
+  } else {
+    includeCSS("css/styles-dark.css")
+  }
+})
+```
+
+```{r data}
+path_to_data <- "../../data/bikes_database.db"
+con <- dbConnect(RSQLite::SQLite(), path_to_data)
+
+# dbListTables(con)
+bikes_tbl <- tbl(con, "bikes")
+bikeshops_tbl <- tbl(con, "bikeshops")
+orderlines_tbl <- tbl(con, "orderlines")
+
+processed_data_tbl <- orderlines_tbl %>%
+    left_join(bikeshops_tbl, by = c("customer.id" = "bikeshop.id")) %>%
+    left_join(bikes_tbl, by = c("product.id" = "bike.id")) %>%
+    mutate(extended_price = quantity * price) %>%
+    collect()
+
+processed_data_tbl <- processed_data_tbl %>%    
+    mutate(order.date = ymd(order.date)) %>%
+    separate(location, into = c("city", "state"), sep = ", ") %>%
+    separate(
+      description, 
+      into = c("category_1", "category_2", "frame_material"),
+      sep = " - "
+    ) %>%
+    select(
+      order.date, order.id, order.line, state, quantity, price,
+      extended_price, category_1:frame_material, bikeshop.name
+    )
+# processed_data_tbl
+
+dbDisconnect(con)
+```
+
+
+
+Column {.sidebar}
+---------------------------------------------------------------
+
+```{r}
+useShinyjs(rmd = TRUE) # use Shiny JavaScript to allow delay on buttons
+
+dateRangeInput(
+  inputId = "date_range_1",
+  label = h4("Date Range"),
+  start = min(processed_data_tbl$order.date),
+  end = max(processed_data_tbl$order.date),
+  min = min(processed_data_tbl$order.date),
+  max = max(processed_data_tbl$order.date)
+)
+
+shinyWidgets::checkboxGroupButtons(
+  inputId = "checkbox_category_1",
+  label = h4("Bike Type"),
+  choices = unique(processed_data_tbl$category_1),
+  selected = unique(processed_data_tbl$category_1),
+  checkIcon = list(
+    yes = icon("ok", lib = "glyphicon"),
+    no = icon("remove", lib = "glyphicon")
+  )
+)
+
+shinyWidgets::pickerInput(
+  inputId = "picker_category_2",
+  label = h4("Bike Family"),
+  choices = unique(processed_data_tbl$category_2),
+  selected = unique(processed_data_tbl$category_2),
+  multiple = TRUE,
+  options = list(
+    `actions-box` = TRUE,
+    size = 10,
+    `selected-text-format` = "count > 3"
+  )
+)
+
+shinyWidgets::pickerInput(
+  inputId  = "picker_bikeshop_name", 
+  label = h4("Bike Shop (Customer)"),
+  choices = unique(processed_data_tbl$bikeshop.name) %>% sort(),
+  selected = unique(processed_data_tbl$bikeshop.name) %>% sort(),
+  multiple = TRUE,
+  options = list(
+    `actions-box` = TRUE,
+    size = 10,
+    `selected-text-format` = "count > 3"
+  )
+)
+
+br() # break rule
+hr() # horizontal rule
+br() # break rule
+
+h4("Forecast Mode")
+switchInput(
+  inputId = "forecast_mode", 
+  value = FALSE, 
+  onStatus = "success", 
+  onLabel = "On", 
+  offLabel = "Off",
+  handleWidth = 80, 
+  labelWidth  = 80, 
+  inline = TRUE, 
+  width = "150px"
+)
+
+conditionalPanel(
+  condition = "input.forecast_mode == 1",
+  numericInput(
+    inputId = "n_future",
+    label = "Forecast Horizon",
+    value = 12, 
+    min = 1
+  )
+)
+
+br() # break rule
+hr() # horizontal rule
+br() # break rule
+
+actionButton(inputId = "apply", label = "Apply", icon = icon("play"))
+
+actionButton(inputId = "reset", label = "Reset", icon = icon("sync"))
+
+observeEvent(eventExpr = input$reset, handlerExpr = {
+  
+  updateDateRangeInput(
+    session = session,
+    inputId = "date_range_1",
+    start = min(processed_data_tbl$order.date),
+    end = max(processed_data_tbl$order.date)
+  )
+  
+  updateCheckboxGroupButtons(
+    session = session, 
+    inputId = "checkbox_category_1", 
+    selected = unique(processed_data_tbl$category_1))
+  
+  updatePickerInput(
+    session = session, 
+    inputId = "picker_category_2", 
+    selected = unique(processed_data_tbl$category_2))
+  
+  updateRadioGroupButtons(
+    session = session, 
+    inputId = "time_unit", 
+    selected = "month"
+  )
+    updatePickerInput(
+    session = session, 
+    inputId = "picker_bikeshop_name",
+    selected = unique(processed_data_tbl$bikeshop.name) %>% sort())
+  
+  updateSwitchInput(
+    session = session,
+    inputId = "forecast_mode",
+    value = FALSE
+  )
+  
+  updateNumericInput(
+    session = session,
+    inputId = "n_future",
+    value = 12
+  )
+  
+   shinyjs::delay(ms = 300, expr = {shinyjs::click(id = "apply")})
+ 
+})
+
+br() # break rule
+hr() # horizontal rule
+br() # break rule
+
+h5("View Mode")
+switchInput(
+  inputId = "view_mode",
+  value = TRUE,
+  onStatus = "success",
+  offStatus = "primary",
+  onLabel = "Light",
+  offLabel = "Dark",
+  handleWidth = 80,
+  labelWidth = 80,
+  inline = TRUE,
+  width = "150px"
+)
+
+
+# input <- list(
+#   date_range_1 = c(min(processed_data_tbl$order.date), max(processed_data_tbl$order.date)),
+#   checkbox_category_1 = unique(processed_data_tbl$category_1),
+#   picker_category_2 = unique(processed_data_tbl$category_2),
+#   picker_bikeshop_name = unique(processed_data_tbl$bikeshop.name) 
+# )
+```
+
+```{r}
+processed_data_filtered_tbl <- eventReactive(
+  eventExpr = input$apply,
+  valueExpr = {
+    # processed_data_filtered_tbl <- 
+    processed_data_tbl %>%
+      filter(between(order.date, input$date_range_1[1], input$date_range_1[2])) %>%
+      filter(category_1 %in% input$checkbox_category_1) %>%
+      filter(category_2 %in% input$picker_category_2) %>% 
+      filter(bikeshop.name %in% input$picker_bikeshop_name)
+  }, 
+  ignoreNULL = FALSE
+)
+```
+
+
+
+Row {data-height=150}
+---------------------------------------------------------------
+
+```{r}
+summary_values_tbl <- reactive({
+  # summary_values_tbl <- 
+  processed_data_filtered_tbl() %>%
+    summarize(
+      health_metric = unique(order.id) %>% length(),
+      wealth_metric = sum(extended_price),
+      wise_metric = mean(price) %>% round(0)
+    )
+})
+```
+
+### Health
+
+```{r}
+renderValueBox({
+  valueBox(
+    value = summary_values_tbl()$health_metric %>% scales::comma(), 
+    caption = "Orders", 
+    icon = "fa-heartbeat", 
+    color = case_when(
+      summary_values_tbl()$health_metric < 200 ~ "danger",
+      summary_values_tbl()$health_metric < 500 ~ "warning",
+      TRUE ~ "success"
+    )
+  )
+})
+```
+
+### Wealthy
+
+```{r}
+renderValueBox({
+  valueBox(
+    value = summary_values_tbl()$wealth_metric %>% scales::dollar(suffix = "M"), 
+    caption = "Sales", 
+    icon = "fa-money-check-alt", 
+    color = case_when(
+      summary_values_tbl()$wealth_metric < 5e6  ~ "danger",
+      summary_values_tbl()$wealth_metric < 10e6 ~ "warning",
+      TRUE ~ "success"
+    )
+  )
+})
+```
+
+
+### Wise
+
+```{r}
+renderValueBox({
+  valueBox(
+    value = summary_values_tbl()$wise_metric, 
+    caption = "Ratio, Mountain to Road", 
+    icon = "fa-brain", 
+    color = case_when(
+      summary_values_tbl()$wise_metric < 1000 ~ "danger",
+      summary_values_tbl()$wise_metric > 4000 ~ "success",
+      TRUE ~ "warning"
+    )
+  )
+})
+```
+
+
+
+Row {data-height=850}
+---------------------------------------------------------------
+
+### By State
+
+```{r}
+geo_plot_tbl <- reactive({
+  # geo_plot_tbl <-
+  processed_data_filtered_tbl() %>%
+    group_by(state) %>%
+    summarise(total_revenue = sum(extended_price)) %>%
+    ungroup() %>%
+    mutate(label_text = str_glue("State: {state}
+                                 Revenue: {scales::dollar(total_revenue)}"))
+})
+```
+
+```{r}
+output$plotly_1 <- renderPlotly(expr = {
+  geo_plot_tbl() %>%
+    plot_geo(locationmode = "USA-states") %>%
+    add_trace(
+      z = ~ total_revenue,
+      locations = ~ state,
+      color = ~ total_revenue,
+      text = ~ label_text,
+      colors = "Blues"
+    ) %>%
+    layout(
+      geo = list(
+        scope = "usa",
+        projection = list(type = "albers usa"),
+        showlakes = TRUE,
+        lakecolor = toRGB("white")
+      )
+    ) %>% 
+    colorbar(
+      title = "Total Revenue",
+      orientation = "h" # it will be possible in the future (https://github.com/plotly/plotly.js/issues/1244)
+    )
+})
+
+plotlyOutput(outputId = "plotly_1")
+```
+
+
+
+### Over Time
+
+```{r}
+shinyWidgets::radioGroupButtons(
+  inputId = "time_unit", 
+  label = "Time Unit", 
+  choices = c("D" = "day", "W" = "week", "M" = "month", "Q" = "quarter", "Y" = "year"), 
+  selected = "month", 
+  status = "primary", 
+  justified = TRUE, 
+  checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = NULL)
+)
+
+observeEvent(eventExpr = input$time_unit, {
+  if (input$forecast_mode) {
+    delay(300, click(id = "apply"))
+  }
+})
+
+observeEvent(eventExpr = input$forecast_mode, {
+  delay(300, click(id = "apply"))
+}, once = TRUE)
+
+# input <- c(input, list(time_unit = "month", forecast_mode = 1, n_future = 12))
+```
+
+
+```{r}
+time_plot_tbl <- reactive({
+  # time_plot_tbl <- 
+  processed_data_filtered_tbl() %>%
+      aggregate_time_series(time_unit = input$time_unit)
+})
+
+time_plot_predictions_tbl <- eventReactive(eventExpr = input$apply, {
+  if (input$forecast_mode) {
+    # time_plot_predictions_tbl <- 
+    time_plot_tbl() %>%
+      generate_forecast(n_future = input$n_future, seed = 123)
+  }
+})
+```
+
+```{r}
+output$plotly_2 <- renderPlotly({
+
+  if (input$forecast_mode) {
+    p <- time_plot_predictions_tbl() %>% plot_forecast()
+  } else {
+    p <- time_plot_tbl() %>% plot_time_series()
+  }
+  
+  p %>% layout(margin = list(b = 200))
+
+})
+
+plotlyOutput(outputId = "plotly_2")
+```
+
+
+
