@@ -34,7 +34,7 @@ The lecture aims at:
 &nbsp;  
   
 <center>
-![](../img/intro2R/math.jpg){width=100%}
+![](img/intro2R/math.jpg){width=100%}
 </center> 
 
 &nbsp;  
@@ -49,7 +49,7 @@ arranged in rows and columns."
 &nbsp;  
   
 <center>
-![](../img/intro2R/matrix.PNG){width=60%}
+![](img/intro2R/matrix.PNG){width=60%}
 </center>  
   
 &nbsp;  
@@ -59,7 +59,7 @@ In particular, matrices can be divided by the following common types
 &nbsp;  
   
 <center>
-![](../img/intro2R/matrix2.PNG){width=100%}
+![](img/intro2R/matrix2.PNG){width=100%}
 </center>  
 
 &nbsp;  
@@ -84,7 +84,7 @@ set $Y$ (possibly the same set), the codomain of the function."
 &nbsp;  
   
 <center>
-![](../img/intro2R/function.PNG){width=50%}
+![](img/intro2R/function.PNG){width=50%}
 </center>  
   
 &nbsp;  
@@ -108,7 +108,7 @@ output $y$.
 &nbsp;  
   
 <center>
-![](../img/intro2R/f1.PNG)
+![](img/intro2R/f1.PNG)
 </center>  
   
 &nbsp;  
@@ -118,7 +118,7 @@ A simple example of a function
 &nbsp;  
   
 <center>
-![](../img/intro2R/f2.PNG)
+![](img/intro2R/f2.PNG)
 </center>  
 
 &nbsp;  
@@ -132,7 +132,7 @@ A simple example of a function
 &nbsp;  
   
 <center>
-![](../img/intro2R/prog1.jpg)
+![](img/intro2R/prog1.jpg)
 </center>
 
 &nbsp;  
@@ -157,7 +157,7 @@ or other sets of instructions for computers to execute."
 &nbsp;  
   
 <center>
-![](../img/intro2R/kid.jpg)
+![](img/intro2R/kid.jpg)
 </center>  
   
 &nbsp;  
@@ -186,13 +186,13 @@ just few of the most common.
 &nbsp;  
   
 <center>
-![](../img/intro2R/prog2.PNG)
+![](img/intro2R/prog2.PNG)
 </center>
 
 &nbsp;  
   
 <center>
-![](../img/intro2R/prog3.jpeg){width=80%}
+![](img/intro2R/prog3.jpeg){width=80%}
 </center>
 
 &nbsp;  
@@ -260,7 +260,7 @@ and return **AN** output.
 &nbsp;  
   
 <center>
-![](../img/intro2R/rlogo.jpg){width=100%}
+![](img/intro2R/rlogo.jpg){width=100%}
 </center>
 
 &nbsp;  
@@ -298,7 +298,7 @@ All you need to know about R can be found on the
 &nbsp;  
   
 <center>
-![](../img/intro2R/rproj.PNG){width=100%}
+![](img/intro2R/rproj.PNG){width=100%}
 </center>
 
 &nbsp;  
@@ -324,7 +324,7 @@ for R.
 &nbsp;  
   
 <center>
-![](../img/intro2R/cran.PNG){width=100%}
+![](img/intro2R/cran.PNG){width=100%}
 </center>
 
 &nbsp;  
@@ -381,7 +381,7 @@ live in the environment so multiple names can point to the same object.
 &nbsp;  
   
 <center>
-![](../img/intro2R/environment.png){width=100%}
+![](img/intro2R/environment.png){width=100%}
 </center>
 
 &nbsp;  
@@ -406,7 +406,7 @@ to eventually recover problems.
 &nbsp;  
   
 <center>
-![](../img/intro2R/messages.jpg){width=100%}
+![](img/intro2R/messages.jpg){width=100%}
 </center>
 
 &nbsp;  
@@ -420,7 +420,7 @@ comes with the installation of the R software.
 &nbsp;  
   
 <center>
-![](../img/intro2R/rgui.PNG){width=100%}
+![](img/intro2R/rgui.PNG){width=100%}
 </center>
 
 &nbsp;  
@@ -431,7 +431,7 @@ comes with the installation of the R software.
 &nbsp;  
   
 <center>
-![](../img/intro2R/rstudiologo.png){width=100%}
+![](img/intro2R/rstudiologo.png){width=100%}
 </center>
 
 &nbsp;  
@@ -474,13 +474,13 @@ and many other options.
 &nbsp;  
   
 <center>
-![](../img/intro2R/panes.png){width=100%}
+![](img/intro2R/panes.png){width=100%}
 </center>
 
 &nbsp;  
   
 <center>
-![](../img/intro2R/panes2.PNG){width=100%}
+![](img/intro2R/panes2.PNG){width=100%}
 </center>
 
 &nbsp;  
@@ -512,7 +512,7 @@ To see more look at [Google guidelines](https://google.github.io/styleguide/Rgui
 &nbsp;  
   
 <center>
-![](../img/intro2R/codeiscoming.jpg){width=100%}
+![](img/intro2R/codeiscoming.jpg){width=100%}
 </center>
 
 &nbsp;  
@@ -667,7 +667,7 @@ In R there exists the following 5 main data types
 &nbsp;  
   
 <center>
-![](../img/intro2R/datatyp1.png){width=100%}
+![](img/intro2R/datatyp1.png){width=100%}
 </center>
 
 &nbsp;  
@@ -739,13 +739,13 @@ Finally, there are few special value types:
 &nbsp;  
   
 <center>
-![](../img/intro2R/datastr1.png){width=100%}
+![](img/intro2R/datastr1.png){width=100%}
 </center>
 
 &nbsp;  
 
 <center>
-![](../img/intro2R/datastr2.png){width=100%}
+![](img/intro2R/datastr2.png){width=100%}
 </center>
 
 &nbsp;   
@@ -1006,7 +1006,7 @@ and here are summarized some conversion rules
 &nbsp;  
 
 <center>
-![](../img/intro2R/conversion.PNG){width=100%}
+![](img/intro2R/conversion.PNG){width=100%}
 </center>
 
 &nbsp;
@@ -1180,7 +1180,7 @@ x
 &nbsp;  
 
 <center>
-![](../img/intro2R/ctrlflow.png){width=100%}
+![](img/intro2R/ctrlflow.png){width=100%}
 </center> 
   
 &nbsp;    
@@ -1349,7 +1349,7 @@ and something else otherwise. Every time this is the case, you end up using
 &nbsp;  
 
 <center>
-![](../img/intro2R/if.PNG){width=50%}
+![](img/intro2R/if.PNG){width=50%}
 </center> 
   
 &nbsp;
@@ -1404,7 +1404,7 @@ if (is_even) {
 &nbsp;  
 
 <center>
-![](../img/intro2R/ifelse.PNG){width=100%}
+![](img/intro2R/ifelse.PNG){width=100%}
 </center>
 
 &nbsp;  
@@ -1653,7 +1653,7 @@ gets more optimized with respect to code efficiency.
 &nbsp;  
 
 <center>
-![](../img/intro2R/loops.PNG){width=100%}
+![](img/intro2R/loops.PNG){width=100%}
 </center>
 
 &nbsp;
@@ -1671,7 +1671,7 @@ be repeated, you will go with `repeat` or `while` loop.
 &nbsp;  
 
 <center>
-![](../img/intro2R/repeat.PNG){width=50%}
+![](img/intro2R/repeat.PNG){width=50%}
 </center>
 
 &nbsp;
@@ -1718,7 +1718,7 @@ repeat {
 &nbsp;  
 
 <center>
-![](../img/intro2R/while.PNG){width=50%}
+![](img/intro2R/while.PNG){width=50%}
 </center>
 
 &nbsp;
@@ -1760,7 +1760,7 @@ while (x < 1000) { # check the condition
 &nbsp;  
 
 <center>
-![](../img/intro2R/for.PNG){width=50%}
+![](img/intro2R/for.PNG){width=50%}
 </center>
 
 &nbsp;
@@ -1973,7 +1973,7 @@ In the context of computer programming we can state this principle as the
 &nbsp;  
 
 <center>
-![](../img/intro2R/bbox.PNG){width=100%}
+![](img/intro2R/bbox.PNG){width=100%}
 </center>
 
 &nbsp;
@@ -2015,7 +2015,7 @@ of a vector of numbers
 &nbsp;  
 
 <center>
-![](../img/intro2R/args.png){width=75%}
+![](img/intro2R/args.png){width=75%}
 </center>
 
 &nbsp;
@@ -2385,7 +2385,7 @@ that you can do when working with data:
 &nbsp;  
 
 <center>
-![](../img/intro2R/joins.png){width=100%}
+![](img/intro2R/joins.png){width=100%}
 </center>
 
 &nbsp;
