@@ -563,9 +563,50 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 # a coordinate system, and a faceting scheme.
 
 
-# * Ggplot2 Extensions ----------------------------------------------------
+# Ggplot2 Extensions ------------------------------------------------------
 
 # https://exts.ggplot2.tidyverse.org/index.html
+
+
+# * Patchwork -------------------------------------------------------------
+
+# Patchwork allows to combine different ggplot2 objects
+
+library(patchwork)
+
+p1 <- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot() +
+  coord_flip()
+p2 <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth()
+
+p1 | p2 # patchwork sintax
+
+
+wrap_plots(p1, p2, guides = "collect") &
+  guides(colour = guide_legend(nrow = 1)) &
+  theme(legend.position = "top")
+
+p3 <- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_jitter() +
+  geom_violin(mapping = aes(fill = drv), alpha = .5) +
+  geom_hline(
+    yintercept = mpg %>% group_by(drv) %>% summarise(means = mean(hwy)) %>% pull(means), 
+    linetype = 2, 
+    col = c("red", "green", "blue")
+  ) + 
+  scale_fill_manual(values = c("red", "green", "blue")) +
+  labs(
+    title = "Boxplots", 
+    subtitle = "colored by drv", 
+    caption = "Fig. 1",
+    x = "Classes", 
+    y = "HMY", 
+    fill = "DRV Types"
+  )
+
+(p1 | p2) / p3 # patchwork sintax
 
 
 

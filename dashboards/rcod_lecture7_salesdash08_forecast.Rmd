@@ -8,9 +8,18 @@ output:
 runtime: shiny
 ---
 
+<!-- 
+Contents:
+- add inputs
+   - picker
+   - swith for forecast mode
+   - numeric with conditionalPanel on forecast mode
+- use observeEvent on time_unit
+-->
+
 ```{r setup, include=FALSE, message=FALSE}
-source("../utils.R")
-source("../packages.R")
+source("../R/utils.R")
+source("../R/packages.R")
 ```
 
 ```{r auth}
@@ -24,7 +33,7 @@ source("../packages.R")
 ```
 
 ```{r data}
-path_to_data <- "../../data/bikes_database.db"
+path_to_data <- "../data/bikes_database.db"
 con <- dbConnect(RSQLite::SQLite(), path_to_data)
 
 # dbListTables(con)

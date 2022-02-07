@@ -9,9 +9,18 @@ output:
 runtime: shiny
 ---
 
+<!-- 
+Contents:
+- add inputs
+   - switch for dark mode
+- include default css
+- include dark mode css
+- include logo
+-->
+
 ```{r setup, include=FALSE, message=FALSE}
-source("../utils.R")
-source("../packages.R")
+source("../R/utils.R")
+source("../R/packages.R")
 ```
 
 ```{r auth}
@@ -35,7 +44,7 @@ renderUI({
 ```
 
 ```{r data}
-path_to_data <- "../../data/bikes_database.db"
+path_to_data <- "../data/bikes_database.db"
 con <- dbConnect(RSQLite::SQLite(), path_to_data)
 
 # dbListTables(con)

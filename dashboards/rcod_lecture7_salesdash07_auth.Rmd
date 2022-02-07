@@ -4,13 +4,20 @@ output:
   flexdashboard::flex_dashboard:
     orientation: rows
     vertical_layout: fill
-    css: css/auth.css # try without css
+    # css: css/auth.css # try without css
 runtime: shiny
 ---
 
+<!-- 
+Contents:
+- add authentication 
+- use shinymanager
+- add css for auth panel
+-->
+
 ```{r setup, include=FALSE, message=FALSE}
-source("../utils.R")
-source("../packages.R")
+source("../R/utils.R")
+source("../R/packages.R")
 ```
 
 ```{r auth}
@@ -24,7 +31,7 @@ auth <- shiny::callModule(
 ```
 
 ```{r data}
-path_to_data <- "../../data/bikes_database.db"
+path_to_data <- "../data/bikes_database.db"
 con <- dbConnect(RSQLite::SQLite(), path_to_data)
 
 # dbListTables(con)
