@@ -18,6 +18,7 @@ pkgs <- c(
   "shinyWidgets",
   "shinyjs",
   "shinymanager",
-  "nycflights13"
+  "nycflights13",
+  "lmtest"
 )
 install_and_load(pkgs)
