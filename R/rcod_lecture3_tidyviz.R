@@ -563,9 +563,71 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 # a coordinate system, and a faceting scheme.
 
 
+
 # Ggplot2 Extensions ------------------------------------------------------
 
 # https://exts.ggplot2.tidyverse.org/index.html
+
+# * Ggiraph ---------------------------------------------------------------
+
+library(ggplot2)
+library(rvg)
+library(ggiraph)
+
+data <- mtcars
+data$carname <- row.names(data)
+
+gg_point <- data %>% 
+  ggplot() +
+  geom_point_interactive(
+    aes(x = wt, y = qsec, color = disp, tooltip = carname, data_id = carname)
+  ) + 
+  theme_minimal()
+
+girafe(ggobj = gg_point)
+
+
+# * Gganimate -------------------------------------------------------------
+
+library(ggplot2)
+library(gganimate)
+
+# For example, suppose we wanted to create an animation similar to the Gapminder 
+# world animation, using Jenny Bryan's gapminder package for the data.
+library(gapminder)
+gapminder
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+
+
+# * Ggrepel ---------------------------------------------------------------
+
+library(ggplot2)
+library(ggrepel)
+
+data <- mtcars[1:8, ] 
+
+data %>%  
+  ggplot() +
+  geom_point(aes(wt, mpg), color = 'red') +
+  geom_text(aes(wt, mpg, label = rownames(data))) +
+  theme_classic(base_size = 16)
+
+set.seed(42)
+data %>%  
+  ggplot() +
+  geom_point(aes(wt, mpg), color = 'red') +
+  geom_text_repel(aes(wt, mpg, label = rownames(data))) +
+  theme_classic(base_size = 16)
 
 
 # * Patchwork -------------------------------------------------------------
@@ -573,7 +635,7 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 # Patchwork allows to combine different ggplot2 objects
 
 library(patchwork)
-
+mpg
 p1 <- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
   geom_boxplot() +
   coord_flip()
@@ -607,6 +669,47 @@ p3 <- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
   )
 
 (p1 | p2) / p3 # patchwork sintax
+
+
+# * Ggside ----------------------------------------------------------------
+
+library(ggside)
+
+mpg %>% 
+  ggplot(aes(hwy, cty, color = class)) +
+  geom_point(size = 2, alpha = .3) +
+  geom_smooth(aes(color = NULL), se = TRUE) +
+  geom_xsidedensity(
+    aes(y = after_stat(density), fill = class),
+    alpha = .5, size = 1, position = "stack"
+  ) + 
+  geom_ysidedensity(
+    aes(x = after_stat(density), fill = class),
+    alpha = .5, size = 1, position = "stack"
+  ) + 
+  theme_minimal()
+
+mpg %>% 
+  ggplot(aes(cty, hwy, color = class)) +
+  geom_point(size = 2, alpha = .3) +
+  geom_smooth(aes(color = NULL), se = TRUE) +
+  geom_xsideboxplot(alpha = .5, size = 1) +
+  facet_grid(cols = vars(cyl), scales = "free_x") +
+  theme_minimal()
+
+
+# * Ggdist ----------------------------------------------------------------
+
+library(ggdist)
+
+mpg %>% 
+  filter(cyl %in% c(4, 6, 8)) %>% 
+  ggplot(aes(factor(cyl), hwy, fill = factor(cyl))) +
+  stat_halfeye(adjust = .5, justification = -.2, .width = 0, point_colour = NA) +
+  geom_boxplot(width = .12, outlier.color = NA, alpha = .5) +
+  stat_dots(side = "left", justification = 1.1, binwidth = .25) +
+  coord_flip() +
+  theme_minimal()
 
 
 

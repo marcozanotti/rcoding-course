@@ -19,6 +19,12 @@ pkgs <- c(
   "shinyjs",
   "shinymanager",
   "nycflights13",
-  "lmtest"
+  "rvg", 
+  "ggiraph",
+  "ggrepel",
+  "gganimate",
+  "gapminder",
+  "ggside",
+  "ggdist"
 )
 install_and_load(pkgs)

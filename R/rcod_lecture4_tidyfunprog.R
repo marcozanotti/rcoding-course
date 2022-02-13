@@ -242,7 +242,7 @@ model_one_summary$r.squared
 model_one_summary[["r.squared"]]
 
 # extract summary for each model
-models %>%
+summaries_mods <- models %>%
   map(summary)
 
 # extract r.squared from each summary of each model
@@ -271,7 +271,7 @@ models %>%
 # the map2() and pmap() functions. 
 # For example, imagine you want to simulate some random normals with 
 # different means. You know how to do that with map().
-  
+
 mu <- list(5, 10, -3)
 map(mu, rnorm, n = 5)
 

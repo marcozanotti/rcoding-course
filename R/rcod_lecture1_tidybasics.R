@@ -215,9 +215,9 @@ rev(w) # reverse the order of `w`
 # language, they are one of the most surprising features of R. Consider the 
 # following simple snippet of code that plots a sine curve:
 
-x <- seq(0, 2 * pi, length = 100)
-sinx <- sin(x)
-plot(x, sinx, type = "l")
+values <- seq(0, 2 * pi, length = 100)
+sinx <- sin(values)
+plot(x = values, y = sinx, type = "l")
 
 # Look at the labels on the axes. How did R know that the variable on the x 
 # axis is called x and the variable on the y axis is called sinx? In most
@@ -258,12 +258,12 @@ plot(x, sinx, type = "l")
 # In most (but not all1) base R functions you need to refer to variables with $, 
 # leading to code that repeats the name of the data frame many times:
 
+starwars
 starwars[starwars$homeworld == "Naboo" & starwars$species == "Human", ]
  
 # The dplyr equivalent of this code is more concise because data masking allows 
 # you to need to type starwars once:
  
-filter(starwars, homeworld == "Naboo", species == "Human")
 filter(starwars, homeworld == "Naboo" & species == "Human")
  
 # Data- and env-variables
