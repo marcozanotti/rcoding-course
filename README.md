@@ -34,3 +34,29 @@ focusing on how to code with modern and state-of-the-art R packages.
     R](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0/rcod_lecture0_intro2R.html)
 -   [Requirements -
     RMarkdown](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0/rcod_lecture0_rmarkdown.html)
+
+*Suggested material*
+
+Git & GitHub:
+
+-   [Pro Git](https://git-scm.com/book/en/v2)  
+-   [Happy Git with R](https://happygitwithr.com/index.html)
+
+R Programming:
+
+-   [R for Data Science](https://r4ds.had.co.nz/)  
+-   [Efficient R
+    Programming](https://csgillespie.github.io/efficientR/index.html)  
+-   [R Packages](https://r-pkgs.org/index.html)  
+-   [Advanced R](https://adv-r.hadley.nz/)
+
+RMarkdown & Shiny:
+
+-   [RMarkdown: The Definitive
+    Guide](https://bookdown.org/yihui/rmarkdown/)  
+-   [Mastering Shiny](https://mastering-shiny.org/)  
+-   [Shiny Tutorials](https://shiny.rstudio.com/tutorial/)
+
+Everything with R:
+
+-   [Big Book of R](https://www.bigbookofr.com/)
