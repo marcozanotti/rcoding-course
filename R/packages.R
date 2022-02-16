@@ -25,6 +25,7 @@ pkgs <- c(
   "gganimate",
   "gapminder",
   "ggside",
-  "ggdist"
+  "ggdist",
+  "grafify"
 )
 install_and_load(pkgs)

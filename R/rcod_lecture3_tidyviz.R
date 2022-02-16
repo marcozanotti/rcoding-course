@@ -712,6 +712,27 @@ mpg %>%
   theme_minimal()
 
 
+# * Grafify ---------------------------------------------------------------
+
+library(grafify)
+
+# scatter bars
+mpg %>% plot_scatterbar_sd(cyl, hwy)
+
+# scatter boxplots
+mpg %>% plot_scatterbox(cyl, hwy, jitter = 0.2, alpha = 0.5)
+
+# scatter violin
+mpg %>% plot_dotviolin(cyl, hwy, dotsize = 1, ColPal = "bright")
+
+# before & after
+mpg %>% 
+  group_by(model, year) %>% 
+  summarise(mean_hwy = mean(hwy)) %>% 
+  ungroup() %>% 
+  plot_befafter_colors(year, mean_hwy, model)
+
+
 
 # Plotly ------------------------------------------------------------------
 
