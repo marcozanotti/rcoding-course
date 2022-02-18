@@ -104,6 +104,7 @@ install_and_load <- function(pkgs, repos = getOption("repos")) {
 
 
 # Functions for rcod_lecture7_salesdash08_forecast
+# function to perform time series aggregation
 aggregate_time_series <- function(data, time_unit = "month") {
 
   output_tbl <- data %>%
@@ -118,6 +119,7 @@ aggregate_time_series <- function(data, time_unit = "month") {
 
 }
 
+# function to plot the time series
 plot_time_series <- function(data) {
 
   g <- data %>%
@@ -133,34 +135,37 @@ plot_time_series <- function(data) {
 
 }
 
+# function to generate the forecast with ML models (Elastic Net or XGBoost)
 generate_forecast <- function(data, n_future = 12, seed = NULL) {
 
-  train_tbl <- data %>%
-    tk_augment_timeseries_signature()
-
-  future_data_tbl <- data %>%
-    tk_index() %>%
-    tk_make_future_timeseries(
-      n_future = n_future,
-      inspect_weekdays = TRUE,
-      inspect_months = TRUE
-    ) %>%
-    tk_get_timeseries_signature()
-
+  # frequency
   time_scale <- data %>%
     tk_index() %>%
     tk_get_timeseries_summary() %>%
     pull(scale)
-
-  if (time_scale == "year") {
-    model <- linear_reg(mode = "regression") %>%
-      set_engine(engine = "lm") %>%
-      fit.model_spec(
-        total_sales ~ .,
-        data = train_tbl %>% select(total_sales, index.num)
-      )
+  
+  # recipe
+  ml_rcp <- recipe(total_sales ~ ., data = data %>% select(-label_text)) %>% 
+    step_timeseries_signature(date) %>% 
+    step_normalize(date_index.num) %>% 
+    step_rm(matches("(iso)|(xts)|(lbl)|(hour)|(minute)|(second)|(hour12)|(am.pm)")) %>% 
+    step_rm(date)
+  
+  # future data
+  future_tbl <- data %>% 
+    future_frame(.date_var = date, .length_out = n_future)
+    
+  if (time_scale %in% c("quarter", "year")) {
+    
+    model <- linear_reg(
+      mode = "regression",
+      penalty = 0.05,
+      mixture = 0.5
+    ) %>%
+      set_engine(engine = "glmnet")
+    
   } else {
-    set.seed(seed)
+    
     model <- boost_tree(
       mode = "regression",
       mtry = 20,
@@ -170,32 +175,36 @@ generate_forecast <- function(data, n_future = 12, seed = NULL) {
       learn_rate = 0.01,
       loss_reduction = 0.01
     ) %>%
-      set_engine(engine = "xgboost") %>%
-      fit.model_spec(
-        total_sales ~ .,
-        data = train_tbl %>% select(-date, -label_text, -diff)
-      )
+      set_engine(engine = "xgboost")
+    
   }
 
-  prediction_tbl <- predict(model, new_data = future_data_tbl) %>%
-    bind_cols(future_data_tbl) %>%
-    select(.pred, index) %>%
-    rename(total_sales = .pred, date = index) %>%
+  set.seed(seed)
+  wkfl_fit <- workflow() %>% 
+    add_recipe(ml_rcp) %>% 
+    add_model(model) %>% 
+    fit(data = data %>% select(-label_text))
+  
+  prediction_tbl <- wkfl_fit %>% 
+    predict(new_data = future_tbl) %>%
+    bind_cols(future_tbl) %>%
+    rename(total_sales = .pred) %>%
     mutate(label_text = str_glue("Date: {date}
                                  Revenue: {scales::dollar(total_sales)}")) %>%
     add_column(key = "Prediction")
 
   output_tbl <- data %>%
     add_column(key = "Actual") %>%
+    relocate(total_sales, .before = date) %>% 
     bind_rows(prediction_tbl)
 
   return(output_tbl)
 
 }
 
+# function to plot the forecast results
 plot_forecast <- function(data) {
 
-  # Yearly - LM Smoother
   time_scale <- data %>%
     tk_index() %>%
     tk_get_timeseries_summary() %>%
@@ -214,7 +223,7 @@ plot_forecast <- function(data) {
     labs(x = "", y = "")
 
   # Yearly - LM Smoother
-  if (time_scale == "year") {
+  if (time_scale %in% c("quarter", "year")) {
     g <- g +
       geom_smooth(method = "lm", size = 0.5)
   } else {
