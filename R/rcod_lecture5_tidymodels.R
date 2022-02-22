@@ -115,6 +115,7 @@ library(tidymodels)
 
 # Modelling with Tidymodels -----------------------------------------------
 
+source("R/utils.R")
 source("R/packages.R")
 
 
@@ -196,7 +197,13 @@ base_rcp
 base_rcp %>% prep() %>% juice() %>% glimpse()
 
 
-# Engines -----------------------------------------------------------------
+# * Engines ---------------------------------------------------------------
+
+# Linear Regression 
+lm_spec <- linear_reg(
+  mode = "regression"
+) %>%
+  set_engine(engine = "lm")
 
 # Elastic Net 
 elanet_spec <- linear_reg(
@@ -221,6 +228,13 @@ xgb_spec <- boost_tree(
 
 # * Workflows -------------------------------------------------------------
 
+# Linear Regression
+set.seed(123)
+lm_wkfl <- workflow() %>% 
+  add_recipe(base_rcp) %>% 
+  add_model(lm_spec) %>% 
+  fit(data = training(splits))
+
 # Elastic Net
 set.seed(123)
 elanet_wkfl <- workflow() %>% 
@@ -237,6 +251,11 @@ xgb_wkfl <- workflow() %>%
 
 
 # * Evaluation ------------------------------------------------------------
+
+# Linear Regression
+lm_wkfl_last <- lm_wkfl %>% 
+  last_fit(splits)
+lm_wkfl_last %>% pull(.metrics)
 
 # Elastic Net
 elanet_wkfl_last <- elanet_wkfl %>% 
@@ -282,4 +301,151 @@ output_tbl <- bikes_data_preproc %>%
 
 output_tbl %>% 
   timetk::plot_time_series(date, total_sales, .color_var = key)
+
+
+
+# Explainable AI ----------------------------------------------------------
+
+library(skimr)
+library(DataExplorer)
+library(performance)
+library(DALEX)
+library(modelStudio)
+
+
+# * Explorative Data Analysis ---------------------------------------------
+
+mpg
+skimr::skim(mpg)
+DataExplorer::create_report(mpg)
+
+
+# * Linear Regression Model Diagnostics -----------------------------------
+
+mod_lm <- linear_reg() %>% 
+  set_engine("lm") %>% 
+  fit(hwy ~ displ + class, data = mpg)
+performance::check_model(mod_lm)
+
+# Plots 1 & 2 analyze the linearity of the residuals (in-sample 
+# model error) versus the fitted values. We want to make sure that our 
+# model is error is relatively flat.
+
+# Plots 3 & 4 analyze for collinearity and high leverage points.
+# * Collinearity is when features are highly correlated, which can throw 
+#   off simple regression models (more advanced models use a concept called 
+#   regularization and hyperparameter tuning to control for collinearity).
+# * High Leverage Points are observations that deviate far from the average. 
+#   These can skew the predictions for linear models, and removal or model 
+#   adjustment may be necessary to control model performance.
+
+# Plots 5 & 6 analyze for the normality of residuals, which is how the model 
+# error is distributed. If the distributions are skewed, this can indicate 
+# problems with the model.
+
+# Assesment
+# * 1-2: when our model predictions are around 30, our model has larger 
+#        error compared to below 30. We may want to inspect these points to 
+#        see what could be contributing to the lower predictions than actuals.
+# * 3-4: both of the features have low collinearity (green bars). 
+#        None of the predictins are outside of the contour lines indicating 
+#        we don’t have high leverage points. No model adjustments are necessary.
+# * 5-6: several points towards the end of the quantile plot do fall along 
+#        the straight-line. This indicates that the model is not predicting 
+#        well for these points. 
+#        A slight increase in density around 15, which looks to shift the 
+#        distribution to the left of zero. This means that the high-error 
+#        predictions should be investigated further to see why the model 
+#        is far off on this subset of the data.
+       
+       
+# on our model
+performance::check_model(lm_wkfl$fit$fit)
+
+
+# * Machine Learning Explainers -------------------------------------------
+
+# Explainers
+# With a predictive model in hand, we are ready to create an explainer. 
+# In basic terms, an explainer is a consistent and unified way to explain 
+# predictive models. The explainer can accept many different model types like
+# Tidymodels, mlr3, H2O or Python Scikit Learn Models, and it returns the 
+# explanation results from the model in a consistent format for investigation.
+
+mod_xgb <- boost_tree(
+  mode = "regression",
+  learn_rate = 0.3
+) %>%
+  set_engine(engine = "xgboost") %>% 
+  fit(hwy ~ ., data = mpg)
+
+explainer <- DALEX::explain(
+  model = mod_xgb,
+  data = mpg,
+  y = mpg$hwy,
+  label = "XGBoost"
+)
+explainer
+modelStudio::modelStudio(explainer)
+
+# Feature Importance Plot
+# The feature importance plot is a global representation. This means that it 
+# looks all of your observations and tells you which features (columns that 
+# help you predict) have in-general the most predictive value for your model.
+
+# Break Down Plot
+# The Breakdown plot is a local representation that explains one specific 
+# observation. The plot then shows a intercept (starting value) and the 
+# positive or negative contribution that each feature has to developing 
+# the prediction.
+
+# Note: Global Versus Local Explanations
+# I can select a different observation, and we get a completely different
+# Break Down plot. This is what happens with local explainers. They change 
+# telling us different insights by each observation.
+
+# Shapley Values
+# Shapley values are a local representation of the feature importance. 
+# Instead of being global, the shapley values will change by observation 
+# telling you again the contribution.
+# The shapley values are related closely to the Breakdown plot, however 
+# you may seem slight differences in the feature contributions. The order 
+# of the shapley plot is always in the most important magnitude 
+# contribution. We also get positive and negative indicating if the 
+# feature decreases or increases the prediction.
+
+# Partial Dependence Plot
+# The partial dependence plot helps us examine one feature at a time. 
+# Above we are only looking at Displacement. The partial dependence is 
+# a global representation, meaning it will not change by observation, 
+# but rather helps us see how the model predicts over a range of values 
+# for the feature being examined.
+
+
+# on our model
+data_tbl <- bikes_data_preproc %>% 
+  timetk::tk_augment_timeseries_signature() %>% 
+  mutate(index.num = standardize_vec(index.num)) %>% 
+  select(-matches("(iso)|(xts)|(day)|(hour)|(minute)|(second)|(hour12)|(am.pm)")) %>% 
+  select(-date)
+mod <- boost_tree(
+  mode = "regression",
+  mtry = 20,
+  trees = 500,
+  min_n = 3,
+  tree_depth = 8,
+  learn_rate = 0.01,
+  loss_reduction = 0.01
+) %>%
+  set_engine(engine = "xgboost") %>% 
+  fit(total_sales ~ ., data = data_tbl)
+
+explainer <- DALEX::explain(
+  model = mod,
+  data = data_tbl,
+  y = data_tbl$total_sales,
+  label = "XGBoost"
+)
+explainer
+modelStudio::modelStudio(explainer = explainer)
 
