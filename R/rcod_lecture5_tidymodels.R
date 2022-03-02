@@ -96,7 +96,7 @@ library(tidymodels)
 # code for modeling or calculating statistics.
 
 
-# *Tune -------------------------------------------------------------------
+# * Tune ------------------------------------------------------------------
 
 # https://tune.tidymodels.org/
 
@@ -256,6 +256,7 @@ xgb_wkfl <- workflow() %>%
 lm_wkfl_last <- lm_wkfl %>% 
   last_fit(splits)
 lm_wkfl_last %>% pull(.metrics)
+lm_wkfl_last %>% pull(.predictions)
 
 # Elastic Net
 elanet_wkfl_last <- elanet_wkfl %>% 
@@ -297,7 +298,7 @@ output_tbl <- bikes_data_preproc %>%
   relocate(total_sales, .before = date) %>% 
   bind_rows(prediction_tbl) %>%
   mutate(label_text = str_glue("Date: {date}
-                                 Revenue: {scales::dollar(total_sales)}"))
+                               Revenue: {scales::dollar(total_sales)}"))
 
 output_tbl %>% 
   timetk::plot_time_series(date, total_sales, .color_var = key)

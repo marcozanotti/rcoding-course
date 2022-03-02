@@ -12,7 +12,7 @@ runtime: shiny
 Contents:
 - add inputs
    - picker
-   - swith for forecast mode
+   - switch for forecast mode
    - numeric with conditionalPanel on forecast mode
 - use observeEvent on time_unit
 -->
