@@ -1,7 +1,7 @@
 ---
 title: "R Coding"
 author: "Marco Zanotti"
-date: "2021-2022"
+date: ""
 output:
   pdf_document: default
   rmdformats::downcute:
@@ -14,19 +14,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 &nbsp;  
 
-**R Coding** is part of the 
-[Coding for Data Science](https://www.unimi.it/it/corsi/insegnamenti-dei-corsi-di-laurea/2022/coding-data-science-and-data-management)
-course.  
-The course aims at providing technical skills about coding/scripting aspects 
-for data analysis and to manage persistent data storage of sources and results 
-involved in analysis. On the one side, the Python programming language and 
-the R framework are illustrated. The goal is to deal with essential notions 
-about data structures and control structures of both Python and R. On the 
-other side, the goal is to present the core notions of relational databases, 
-such as keys, integrity, and primary/foreign key constraints, as well as the 
-SQL language for data definition, manipulation, and query. Recent and 
-innovative NoSQL solutions are also discussed, with special focus on a 
-document-oriented system called MongoDB.   
+The course aims at providing technical skills about coding/scripting
+aspects for data analysis and to manage persistent data storage of
+sources and results involved in analysis. On the one side, the R framework is 
+illustrated. The goal is to deal first with essential notions about data 
+structures and control structures of R, then to learn how to code with modern 
+and state-of-the-art R packages.  
 
 
 ## Course Structure
@@ -57,13 +50,13 @@ point of view, throughout R tutorials on each main topic.
 
 The course is divided into 5 lectures (2 hours each).
 
-1. Wednesday 2022-02-09, 16.30 - 18.30
-2. Friday 2022-02-11, 16.30 - 18.30
-3. Wednesday 2022-02-16, 16.30 - 18.30
-4. Wednesday 2022-02-23, 16.30 - 18.30
-5. Wednesday 2022-03-02, 16.30 - 18.30
+1. Day yyyy-mm-dd, 16.30 - 18.30
+2. Day yyyy-mm-dd, 16.30 - 18.30
+3. Day yyyy-mm-dd, 16.30 - 18.30
+4. Day yyyy-mm-dd, 16.30 - 18.30
+5. Day yyyy-mm-dd, 16.30 - 18.30
 
-Lectures take place at University of Milan, Via Conservatorio 7, and online.   
+Lectures take place at ...   
 
 
 ## Requirements

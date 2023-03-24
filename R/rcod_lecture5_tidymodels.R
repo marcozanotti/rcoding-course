@@ -1,7 +1,6 @@
 # R Coding ----
 
 # Lecture 5: Tidymodels ---------------------------------------------------
-# 2021/2022
 # Marco Zanotti
 
 # Goals:

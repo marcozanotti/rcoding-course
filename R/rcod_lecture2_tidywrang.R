@@ -1,7 +1,6 @@
 # R Coding ----
 
 # Lecture 2: Tidyverse Wrangling ------------------------------------------
-# 2021/2022
 # Marco Zanotti
 
 # Goals:
@@ -504,7 +503,7 @@ flights_small %>% left_join(weather)
 
 flights_small %>% left_join(planes, by = "tailnum")
 
-flights_small %>% left_join(airports, c("dest" = "faa"))
+flights_small %>% left_join(airports, by = c("dest" = "faa"))
 
 
 # * Utilities -------------------------------------------------------------

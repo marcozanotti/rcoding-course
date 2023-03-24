@@ -1,0 +1,56 @@
+---
+title: "R Coding"
+author: "Marco Zanotti"
+date: ""
+output:
+  pdf_document: default
+  rmdformats::downcute:
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+&nbsp;  
+
+The course aims at providing technical skills about coding/scripting
+aspects for data analysis and to manage persistent data storage of
+sources and results involved in analysis. On the one side, the R framework is 
+illustrated. The goal is to deal first with essential notions about data 
+structures and control structures of R, then to learn how to code with modern 
+and state-of-the-art R packages.  
+
+
+## Course Structure
+
+The **R Coding** part of the course aims at teaching **R Programming**.  
+The state-of-the-art and modern R packages are presented from a very practical 
+point of view, throughout R tutorials on each main topic. 
+
+
+## Contents
+
+* Tidyverse Basics  
+* Tidyverse Wrangling  
+* Tidyverse Visualization  
+* Tidyverse Functional Programming  
+* Tidymodels  
+* Flexdashboard UI  
+* Flexdashboard Reactivity - Shiny  
+* Flexdashboard in Production    
+
+Specific business needs may be discussed during the lectures.
+
+
+## Duration
+
+The course has a duration of 20 hours.
+
+
+## Beneficiaries
+
+This course is intended for data scientist, data analyst, statisticians, 
+IT specialists, developers, project managers and business leaders who want 
+to develop the most in-demand R programming skills.
+

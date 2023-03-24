@@ -1,7 +1,6 @@
 # R Coding ----
 
 # Lecture 1: Tidyverse Basics ---------------------------------------------
-# 2021/2022
 # Marco Zanotti
 
 # Goals:
@@ -344,6 +343,11 @@ the_data <-
     ),
     name, height, mass, mass_lbs
   )
+
+# or
+the_data <- filter(starwars, height > 200) 
+the_data <- mutate(the_data, mass_lbs = mass * 2.205) # convert kg to lbs
+the_data <- select(the_data, name, height, mass, mass_lbs)
 
 # CTRL + MAIUSC + M is the RStudio shortcut for the %>%
 # Since R version 4.1, the native pipe operator |> has been introduced  

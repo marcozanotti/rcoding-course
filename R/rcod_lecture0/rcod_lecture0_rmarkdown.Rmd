@@ -1,7 +1,7 @@
 ---
 title: 'Lecture 5: RMarkdown'
 author: "Marco Zanotti"
-date: "2021/2022"
+date: ""
 output:
   html_document:
     toc: yes

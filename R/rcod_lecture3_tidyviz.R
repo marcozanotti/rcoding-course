@@ -1,7 +1,6 @@
 # R Coding ----
 
 # Lecture 3: Tidyverse Visualization --------------------------------------
-# 2021/2022
 # Marco Zanotti
 
 # Goals:
@@ -458,7 +457,7 @@ bar + coord_polar()
 # scatterplot faceted by class
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) + 
-  facet_wrap(~ class, nrow = 2)
+  facet_wrap(~ class, nrow = 1)
 
 # To facet your plot on the combination of two variables, add facet_grid() 
 # to your plot call. The first argument of facet_grid() is also a formula. 

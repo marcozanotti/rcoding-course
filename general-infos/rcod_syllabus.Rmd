@@ -1,7 +1,7 @@
 ---
 title: "R Coding  \n  - Course Syllabus -"
 author: "Marco Zanotti"
-date: "2021-2022"
+date: ""
 output:
   pdf_document: default
   rmdformats::downcute:
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Lecture 0 - Requirements: Introduction to R
+## Lecture 0: Introduction to R
 
 **Mathematics**:  
 - Vectors & Matrices    
@@ -58,7 +58,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - Statistics  
 
 
-## Lecture 0 - Requirements: RMarkdown
+## Lecture 0: RMarkdown
 
 **RMarkdown** 
 

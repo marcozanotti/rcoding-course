@@ -1,7 +1,6 @@
 # R Coding ----
 
 # Lecture 4: Tidyverse Functional Programming -----------------------------
-# 2021/2022
 # Marco Zanotti
 
 # Goals:
