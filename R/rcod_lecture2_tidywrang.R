@@ -4,9 +4,10 @@
 # Marco Zanotti
 
 # Goals:
-# - Tidyr
-# - Dplyr
-# - Dbplyr
+# - tidyr
+# - dplyr
+# - sqldf
+# - dbplyr
 
 
 
@@ -24,7 +25,7 @@ library(tidyverse)
 
 
 
-# Tidyr -------------------------------------------------------------------
+# tidyr -------------------------------------------------------------------
 
 # https://tidyr.tidyverse.org/
 # The goal of tidyr is to help you create tidy data. Tidy data is data where:
@@ -234,7 +235,7 @@ rank
 
 
 
-# Dplyr -------------------------------------------------------------------
+# dplyr -------------------------------------------------------------------
 
 # https://dplyr.tidyverse.org/
 
@@ -568,7 +569,30 @@ starwars %>%
 
 
 
-# Dbplyr ------------------------------------------------------------------
+# sqldf -------------------------------------------------------------------
+
+# sqldf is an R package for runing SQL statements on R data frames, optimized 
+# for convenience. The user simply specifies an SQL statement in R using data 
+# frame names in place of table names and a database with appropriate table 
+# layouts/schema is automatically created, the data frames are automatically 
+# loaded into the database, the specified SQL statement is performed, the result 
+# is read back into R and the database is deleted all automatically behind the 
+# scenes making the database's existence transparent to the user who only 
+# specifies the SQL statement. Surprisingly this can at times be even faster 
+# than the corresponding pure R calculation (although the purpose of the project 
+# is convenience and not speed).
+
+library(sqldf)
+
+sqldf("select * from iris limit 5")
+sqldf("select count(*) from iris")
+sqldf("select Species, count(*) from iris group by Species")
+
+# there are a lot of examples here https://github.com/ggrothendieck/sqldf
+
+
+
+# dbplyr ------------------------------------------------------------------
 
 # dbplyr is the database backend for dplyr. It allows you to use remote 
 # database tables as if they are in-memory data frames by automatically 
