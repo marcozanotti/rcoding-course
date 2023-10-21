@@ -1,5 +1,5 @@
 ---
-title: "| R Coding \n Lecture 0: Introduction to R"
+title: "R Coding - Lecture 0: Introduction to R"
 author: "Marco Zanotti"
 date: ""
 output: 
