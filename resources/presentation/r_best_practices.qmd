@@ -1,0 +1,303 @@
+---
+title: "💯 R Best Practices"
+subtitle: How to set up a reproducible and collaborative workflow
+title-slide-attributes:
+  data-background-color: "lightblue"
+format:
+  revealjs:
+    theme: simple
+    incremental: true
+---
+
+# Index
+
+* 🚧 Project Configuration
+* ✨ Tips and Tricks
+* ♻️ Reproducible Workflow
+* 🌐 Follow Standards
+
+# 🚧 Project Configuration
+Code smells, projects and scaffolding
+
+## 🚧 Project Configuration
+### 🚩 Dont's
+
+. . .
+
+```{.r}
+rm(list = ls())
+```
+
+. . .
+
+::: callout-important
+This does **not** reset the **workspace**: all it does is delete user-created objects from the global workspace.
+
+| • Any packages that have ever been attached via `library()` are still available.
+| • Any options that have been set to non-default values remain that way.
+| • Working directory is not affected.
+:::
+
+## 🚧 Project Configuration
+### ✔️ Do's
+
+-   You should *always* reason in terms of **sessions**, not **workspace**: don't be afraid to use `Restart R Session` (`shift + cmd + 0`).
+
+. . .
+
+::: callout-warning
+This effectively means that you have to re-run your code! But you can also use caching with [RMarkdown](https://bookdown.org/yihui/rmarkdown-cookbook/cache.html) and [Quarto](https://quarto.org/docs/computations/caching.html#knitr-cache) notebooks.
+:::
+
+-   **Write your code in R scripts/notebooks**, avoid using the console and save your progress often!
+
+## 🚧 Project Configuration
+### ✔️ Do's
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+• When you quit R, do **not** save the workspace to an `.Rdata` file.
+
+• When you launch, do **not** reload the workspace from an `.Rdata` file.
+
+• In RStudio, set this via *Preferences > Options \> General*.
+
+:::
+
+::: {.column width="40%"}
+
+![ ](https://rstats.wtf/img/rstudio-workspace.png){fig-align="center"}
+
+:::
+::::
+
+## 🚧 Project Configuration
+### 🚩 Dont's
+
+`setwd("/Users/jenny/cuddly_broccoli/verbose/...")`
+
+* The chance of the `setwd()` command having the desired effect – making the file paths work – for anyone besides its author is 0%.
+* It’s also unlikely to work for the author one or two years or computers from now.
+* Hard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle.
+
+## 🚧 Project Configuration
+### ✔️ Use `Projects`
+
+::::{.columns}
+
+:::{.column width="60%"}
+
+• Create a project with the top-left icon next to `New file`, or from the *Command Palette*.
+
+• Open and manage `Projects` from the top-right drop-down menu.
+
+• You can also open projects by double clicking on the `*.Rproj` file in your filesystem.
+
+:::
+
+:::{.column width="40%"}
+
+![ ](https://rstats.wtf/img/rstudio-project-switching.png)
+
+:::
+
+::::
+
+::: {.footer}
+[resource](https://support.posit.co/hc/en-us/articles/200526207-Using-Projects)
+:::
+
+## 🚧 Project Configuration
+### ✔️ Use `{here}`
+
+```{.r code-line-numbers="2|5|10"}
+library(ggplot2)
+library(here)
+
+# reads from `./data/raw_foofy_data.csv`
+df <- read.delim(here("data", "raw_foofy_data.csv"))
+
+p <- ggplot(df, aes(x, y)) + geom_point()
+
+# saves to `./figs/foofy_scatterplot.png`
+ggsave(here("figs", "foofy_scatterplot.png"))
+```
+
+## 🚧 Project Configuration
+### 🎁 Extra
+
+* Give meaningful names to variables. Stop saving each dataframe as `df`.
+
+. . .
+
+> “There are only two hard things in Computer Science: cache invalidation and naming things.”
+
+
+# ✨ Tips and Tricks
+Filenames, commands and documentation
+
+## ✨Tips and Tricks
+### 📁 File names should be
+
+* **machine readable**: no spaces, no accents, no punctuation, no special characters, all lowercase.
+* **human readable**.
+* **play well with default ordering**.
+
+. . .
+
+::: callout-warning
+Avoid `/` and `\` for file names especially!
+:::
+
+## ✨Tips and Tricks
+### 📁 File names should be
+
+*  Use `_` to delimit words.
+*  Use `-` to delimit meta-data fields.
+*  Use dates and numbering to enforce ordering.
+
+. . .
+
+::: callout-tip
+## Example
+`2022_11_05-lecture_01-r_best_practices`
+:::
+
+## ✨Tips and Tricks
+### 📁 File names should be
+
+::: callout-tip
+
+## Example
+
+`01-helper-data-loading.R`
+
+`02-helper-data-visualisation.R`
+
+`03-helper-ml-model_tuning.R`
+:::
+
+*  Split the code across different scripts, rather than maintaining an expensive monolith.
+   In this way, you will only have to re-run the parts you actually need.
+
+## ✨Tips and Tricks
+### 📁 Project structure
+
+*  If the number of scripts grows, create sub-directories using the same naming criteria.
+*  There are many ways to structure a directory tree. For simplicity, you might want to start with:
+
+. . .
+
+```
+      .
+      ├── data
+      │  ├── external       # external data that does not belong to raw
+      │  ├── interim        # intermediate manipulations
+      │  ├── processed      # final data used for analysis/models
+      │  └── raw            # raw data should never change!
+      ├── reports           # notebooks with analysis and exploration
+      ├── src               # contains the source code, also named `R`
+      ├── your-proj.Rproj   # ❗Project file
+      └── README.md         # info about the project
+```
+
+## ✨Tips and Tricks
+### 📁 Project structure
+
+*  Or... at least
+
+. . .
+
+```
+      .
+      ├── data
+      ├── R                 # contains the R code
+      ├── your-proj.Rproj   # ❗Project file
+      └── README.md         # info about the project
+```
+
+## ✨Tips and Tricks
+### ⚙️ Commands
+
+* `cmd + shift + P` calls the **command palette**: from there, you can call *any* command.
+* Get help about any function:
+
+. . .
+
+```{.r}
+help('as.data.frame')
+?function
+??function # if you do not recall the package
+```
+
+## ✨Tips and Tricks
+### 📚 Documentation
+
+* Use [`vignettes`](https://r-pkgs.org/vignettes.html):
+
+. . .
+
+> A vignette is like a book chapter or an academic paper: it can describe the problem that your package is designed to solve, and then show the reader how to solve it.
+
+* You can see all the installed vignettes with `browseVignettes()` and view one with `vignette('your-vignette')`.
+
+# ♻️ Reproducible Workflow
+Use `{renv}` to create and manage virtual environments
+
+## ♻️ Reproducible Workflow
+### 📦 Virtual environments
+
+* Are self-contained, isolated boxes to run code independently from the other libraries
+installed on your computer.
+  * i.e., this **encapsulates local packages** (*vis-à-vis* **global** ones).
+* Provides all the details to exactly reproduce the environment you are writing your
+code into (starting from specific package versions).
+
+## ♻️ Reproducible Workflow
+### 📦 Virtual environments
+
+1. Install `{renv}`: `install.packages('renv')`
+2. Create a new `Project`.
+3. Run `renv::init()`: this will initialise a new environment
+    * and create a `renv/` folder, as well as a `renv.lock` (which contains the
+      details about every library you use).
+4. Keep installing packages with `install.packages()` (which is actually calling `renv::install()` under the hood).
+
+# 🌐Follow Standards
+
+## 🌐Follow Standards
+### 🔍 Linting
+
+-   Use [`{lintr}`](https://github.com/r-lib/lintr) as a *static analysis tool*:
+
+. . .
+
+> It checks for adherence to a given style, identifying syntax errors and possible semantic issues, then reports them to you so you can take action.
+
+* It also enforces the [*tidyverse style guide*](https://style.tidyverse.org/) 👀
+
+## 🌐Follow Standards
+### 🪄 Formatters
+
+* Use [`{styler}`](https://github.com/r-lib/styler)
+
+. . .
+
+![ ](https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif)
+
+## 🌐Follow Standards
+### 🪄 Formatters
+
+* If you are using `git` (you should) and GitHub, you can use **GitHub Actions**
+to build a continuous integration (CI) pipeline:
+
+1. Install the `{usethis}` package.
+2. Run `usethis::use_github_action('lint')`.
+2. Run `usethis::use_github_action('style')`.
+
+* These commands will generate the configurations to run `{lintr}` and `{styler}`, inside `.github/workflows`.
+
+
+# Thank you!

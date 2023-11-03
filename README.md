@@ -30,9 +30,14 @@ focusing on how to code with modern and state-of-the-art R packages.
 
 - [Introduction to
   R](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0/rcod_lecture0_intro2R.html)
-- [RMarkdown](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0/rcod_lecture0_rmarkdown.html)
+- [Introduction to
+  RMarkdown](https://marcozanotti.github.io/rcoding-course/R/rcod_lecture0/rcod_lecture0_rmarkdown.html)
+- [💯 R Best
+  Practices](https://marcozanotti.github.io/rcoding-course/resources/presentation/r_best_practices.html)
 - [Tutorials
   (lectures)](https://github.com/marcozanotti/rcoding-course/tree/master/R)
+- [Other
+  Resources](https://github.com/marcozanotti/rcoding-course/tree/master/resources)
 
 ## Suggested References
 

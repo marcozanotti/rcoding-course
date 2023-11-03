@@ -668,4 +668,4 @@ processed_data_tbl <- processed_data_tbl %>%
   group_by(state) %>%
   summarise(total_revenue = sum(extended_price)) %>%
   ungroup() 
-processed_data_tbl %>% VieW()
+processed_data_tbl %>% View()

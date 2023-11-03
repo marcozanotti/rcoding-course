@@ -355,9 +355,9 @@ the_data <- select(the_data, name, height, mass, mass_lbs)
 
 # * Basic Piping ----------------------------------------------------------
 
-x %>% f() is equivalent to f(x)
-x %>% f(y) is equivalent to f(x, y)
-x %>% f() %>% g() %>% h() is equivalent to h(g(f(x)))
+# x %>% f() is equivalent to f(x)
+# x %>% f(y) is equivalent to f(x, y)
+# x %>% f() %>% g() %>% h() is equivalent to h(g(f(x)))
 
 # “Equivalent” is not technically exact: evaluation is non-standard, 
 # and the left-hand side is evaluated before passed on to the right-hand 
@@ -366,8 +366,8 @@ x %>% f() %>% g() %>% h() is equivalent to h(g(f(x)))
 
 # * Argument Placeholder --------------------------------------------------
 
-x %>% f(y, .) is equivalent to f(y, x)
-x %>% f(y, z = .) is equivalent to f(y, z = x)
+# x %>% f(y, .) is equivalent to f(y, x)
+# x %>% f(y, z = .) is equivalent to f(y, z = x)
 
 # The . has a placeholder function when coupled with the pipe.
 
@@ -379,9 +379,9 @@ x %>% f(y, z = .) is equivalent to f(y, z = x)
 # in a nested expressions magrittr will still apply the first-argument rule. 
 # The reason is that in most cases this results more clean code.
 
-x %>% f(y = nrow(.), z = ncol(.)) is equivalent to f(x, y = nrow(x), z = ncol(x))
+# x %>% f(y = nrow(.), z = ncol(.)) is equivalent to f(x, y = nrow(x), z = ncol(x))
 # this behavior can be overruled by enclosing the right-hand side in braces:
-x %>% {f(y = nrow(.), z = ncol(.))} is equivalent to f(y = nrow(x), z = ncol(x))
+# x %>% {f(y = nrow(.), z = ncol(.))} is equivalent to f(y = nrow(x), z = ncol(x))
 
 
 
