@@ -317,7 +317,6 @@ library(modelStudio)
 
 mpg
 skimr::skim(mpg)
-DataExplorer::create_report(mpg)
 
 
 # * Linear Regression Model Diagnostics -----------------------------------

@@ -8,9 +8,9 @@
 
 
 
-<title>Flexdashboard in Production</title>
+<title>App Name</title>
 
-<meta property="og:title" content="Flexdashboard in Production" />
+<meta property="og:title" content="App Name" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -712,14 +712,6 @@ font-weight: 500;
 .nav-tabs-custom > .nav-tabs > li > a:active {
 font-weight: 500;
 }
-@media only screen and (min-width: 768px) {
-html, body {
-height: 100%;
-}
-#dashboard-container {
-height: 100%;
-}
-}
 </style>
 
 
@@ -742,7 +734,7 @@ height: 100%;
   
 </span>
 <span class="navbar-brand">
-  Flexdashboard in Production
+  App Name
   <span class="navbar-author">
         </span>
 </span>
@@ -2549,79 +2541,67 @@ window.FlexDashboardComponents.push({
 
 <div id="dashboard-container">
 
-<div id="column" class="section level2" data-width="500">
-<h2>Column</h2>
-<div id="static-html" class="section level3">
-<h3>Static HTML</h3>
-<p>Flexdashboards without Shiny interactive components are just HTML
-pages hence can be shared as any other basic HTML file: attaching it to
-and e-mail, sending as documents into your business chat or even
-uploading it to a website.</p>
-<p>One of the most efficient way to share you dashboard is indeed to
-host it on the web (for free) using <a href="https://pages.github.com/">GitHub Pages</a>.</p>
-<p>Follow these simple steps to deploy your HTML Flexdashboard to the
-web:</p>
-<ol style="list-style-type: decimal">
-<li>Login to <a href="https://github.com/">GitHub</a> and create a new
-<strong>public</strong> repository<br />
-</li>
-<li>From the green code tab of your new repo, copy the HTTPS link<br />
-</li>
-<li>Locally, through RStudio, create a new <strong>RStudio
-Project</strong> from Version Control and link it to your GitHub repo
-using the HTTPS link<br />
-</li>
-<li>Place your <em>flexdashboard.Rmd</em> file into the project folder,
-knit, commit and push the new files to GitHub<br />
-</li>
-<li>From the settings of your GitHub repo, go to <strong>Pages</strong>
-and activate them<br />
-</li>
-<li>Your dashboard is now available at <a href="https://user-name.github.io/repo-name/dashboard-name.html" class="uri">https://user-name.github.io/repo-name/dashboard-name.html</a></li>
-</ol>
+<!-- Sidebar {.sidebar} -->
+<!-- ======================================================================= -->
+<!-- Button Inputs -->
+<!-- - Input 1 -->
+<!-- - Input 2 -->
+<!-- Page 1 -->
+<!-- ======================================================================= -->
+<div id="sidebar" class="section level2 sidebar">
+<h2 class="sidebar">Sidebar</h2>
+<p>Button Inputs</p>
+<ul>
+<li><p>Input 1</p></li>
+<li><p>Input 2</p></li>
+</ul>
+</div>
+<div id="column" class="section level2 tabset" data-height="650">
+<h2 class="tabset">Column</h2>
+<div id="chart-a-1" class="section level3">
+<h3>Chart A-1</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
 </div>
 </div>
-<div id="column-1" class="section level2" data-width="500">
-<h2>Column</h2>
-<div id="reactive-rmd" class="section level3">
-<h3>Reactive Rmd</h3>
-<p>Using Shiny with flexdashboard turns a static R Markdown report into
-an interactive document. It’s important to note that interactive
-documents cannot be shared as static HTML files, but need to be deployed
-as a service to a web server.</p>
-<p>The easiest way is through <a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny
-Server</a> or directly via <a href="https://www.shinyapps.io/">Shinyapps.io</a> (but the free version
-limits you to 5 dashboards and small online time). Deploying your
-dashboard allows you to share it broadly with no limits.</p>
-<p>Follow these simple steps to deploy your Rmd Flexdashboard via Shiny
-Server:</p>
-<ol style="list-style-type: decimal">
-<li>Install <strong>Shiny R package</strong> as admin<br />
-</li>
-<li>Install <strong>Shiny Server</strong> (once installed it starts
-automatically)</li>
-<li>Install all the <strong>R packages</strong> required by your
-flexdashboard as an admin (for example, on Ubuntu shell run
-<code>sudo su - -c &quot;R -e \&quot;install.packages(&#39;package_name&#39;, repos=&#39;https://cran.rstudio.com/&#39;)\&quot;&quot;</code>
-)<br />
-</li>
-<li>To host the app just copy the directory of your dashboard to
-<strong>/srv/shiny-server/</strong>. At this point, the Shiny service
-automatically points to the .Rmd of the dashboard and deploys hosts it
-on <a href="http://localhost:3838/dashboard-directory-name/" class="uri">http://localhost:3838/dashboard-directory-name/</a></li>
-</ol>
-<p>Notes:</p>
-<p>The default configuration file is installed at
-<strong>/etc/shiny-server/shiny-server.conf</strong> if it doesn’t
-already exist.<br />
-The default configuration creates a single server listening on port
-3838, serving any application contained within
-<strong>/srv/shiny-server/</strong> at the root URL (/).<br />
-See also the <a href="https://www.rstudio.com/products/shiny/download-server/">Shiny
-Server Basic Installation Guide</a> and the <a href="https://docs.rstudio.com/shiny-server/">Shiny Server Administrator
-Guide</a>.</p>
-<p>To host your app to the web you need some host web server as <a href="https://www.charlesbordet.com/en/guide-shiny-aws/#">AWS
-Services</a>.</p>
+<div id="chart-a-2" class="section level3">
+<h3>Chart A-2</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+</div>
+</div>
+<div id="column-1" class="section level2 tabset tabset-fade" data-height="350">
+<h2 class="tabset tabset-fade">Column</h2>
+<div id="chart-b" class="section level3">
+<h3>Chart B</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+</div>
+<div id="chart-c" class="section level3">
+<h3>Chart C</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+</div>
+<div id="chart-d" class="section level3">
+<h3>Chart D</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<!-- Page 2 {data-orientation=columns} -->
+<!-- ======================================================================= -->
+<!-- Column {data-height=200} -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ### Chart E -->
+<!-- ```{r} -->
+<!-- ``` -->
+<!-- Column {data-height=200} -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ### Chart F -->
+<!-- ```{r} -->
+<!-- ``` -->
 </div>
 </div>
 
@@ -2647,8 +2627,8 @@ $(document).ready(function () {
 $(document).ready(function () {
   FlexDashboard.init({
     theme: "cosmo",
-    fillPage: true,
-    orientation: "columns",
+    fillPage: false,
+    orientation: "rows",
     storyboard: false,
     defaultFigWidth: 576,
     defaultFigHeight: 460,
