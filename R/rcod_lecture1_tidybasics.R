@@ -217,6 +217,7 @@ rev(w) # reverse the order of `w`
 values <- seq(0, 2 * pi, length = 100)
 sinx <- sin(values)
 plot(x = values, y = sinx, type = "l")
+plot(x = values, y = sin(values), type = "l")
 
 # Look at the labels on the axes. How did R know that the variable on the x 
 # axis is called x and the variable on the y axis is called sinx? In most
@@ -351,6 +352,9 @@ the_data <- select(the_data, name, height, mass, mass_lbs)
 
 # CTRL + MAIUSC + M is the RStudio shortcut for the %>%
 # Since R version 4.1, the native pipe operator |> has been introduced  
+# BE CAREFUL: The magrittr %>% and the native |> are not exactly the same !!!!!!!!!!!
+# https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/#:~:text=%25%3E%25%20allows%20you%20to%20drop,%7C%3E%20always%20requires%20the%20parentheses.
+
 
 
 # * Basic Piping ----------------------------------------------------------
@@ -504,7 +508,7 @@ str_squish("  hello   world  ")
 # * Count Patterns --------------------------------------------------------
 str_length("hello")
 
-str_count("hello", "h") # c letter
+str_count("hello", "h") # h letter
 str_count("hello;", "\\w") # word + numbers
 str_count("hello", "\\d") # digits
 

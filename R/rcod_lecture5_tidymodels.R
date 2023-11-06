@@ -9,6 +9,9 @@
 # - Engines
 # - Modelling
 
+# Bonus:
+# - Explainable AI (XAI)
+
 
 
 # Tidyverse ---------------------------------------------------------------
