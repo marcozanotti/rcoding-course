@@ -22,6 +22,7 @@ sales_data_tbl <- tibble(
 )
 ```
 
+<!-- This is the full template to be used to create the empty dashboard live. !!!!!!!!!! -->
 
 
 Sidebar {.sidebar}

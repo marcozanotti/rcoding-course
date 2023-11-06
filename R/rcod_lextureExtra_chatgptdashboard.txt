@@ -1,0 +1,28 @@
+
+We want to build a flexdashboard using chatgpt.
+
+Start by creating an empty .Rmd then use the chatgpt prompt:
+- be as precise as possible in your questions
+- start simple and build the code progressively
+
+
+(1)
+I want to build a dashboard in R to analyze the iris dataset. 
+I want to use the flexdashboard package. Please, create an empty .Rmd 
+template with a just a YAML header and a sidebar.
+
+(2)
+Now add also two columns to this and correct the YAML.
+
+(3)
+Now add a check box input to the sidebar to select the iris species.
+
+(4)
+Now add a ggplot graph into the first column plotting the petal length vs
+the petal width for the species selected by the input.  
+
+
+(5)
+Now add to the second coluumn a ggplot graph into the first column 
+plotting the boxplot of sepal length for the different species and coloring 
+also by species.
