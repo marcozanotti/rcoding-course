@@ -6,14 +6,14 @@ title-slide-attributes:
 format:
   revealjs:
     theme: simple
-    incremental: true
+    incremental: false
 ---
 
 # Index
 
 * 🚧 Project Configuration
 * ✨ Tips and Tricks
-* ♻️ Reproducible Workflow
+<!-- * ♻️ Reproducible Workflow -->
 * 🌐 Follow Standards
 
 # 🚧 Project Configuration
@@ -243,27 +243,27 @@ help('as.data.frame')
 
 * You can see all the installed vignettes with `browseVignettes()` and view one with `vignette('your-vignette')`.
 
-# ♻️ Reproducible Workflow
-Use `{renv}` to create and manage virtual environments
+<!-- # ♻️ Reproducible Workflow -->
+<!-- Use `{renv}` to create and manage virtual environments -->
 
-## ♻️ Reproducible Workflow
-### 📦 Virtual environments
+<!-- ## ♻️ Reproducible Workflow -->
+<!-- ### 📦 Virtual environments -->
 
-* Are self-contained, isolated boxes to run code independently from the other libraries
-installed on your computer.
-  * i.e., this **encapsulates local packages** (*vis-à-vis* **global** ones).
-* Provides all the details to exactly reproduce the environment you are writing your
-code into (starting from specific package versions).
+<!-- * Are self-contained, isolated boxes to run code independently from the other libraries -->
+<!-- installed on your computer. -->
+<!--   * i.e., this **encapsulates local packages** (*vis-à-vis* **global** ones). -->
+<!-- * Provides all the details to exactly reproduce the environment you are writing your -->
+<!-- code into (starting from specific package versions). -->
 
-## ♻️ Reproducible Workflow
-### 📦 Virtual environments
+<!-- ## ♻️ Reproducible Workflow -->
+<!-- ### 📦 Virtual environments -->
 
-1. Install `{renv}`: `install.packages('renv')`
-2. Create a new `Project`.
-3. Run `renv::init()`: this will initialise a new environment
-    * and create a `renv/` folder, as well as a `renv.lock` (which contains the
-      details about every library you use).
-4. Keep installing packages with `install.packages()` (which is actually calling `renv::install()` under the hood).
+<!-- 1. Install `{renv}`: `install.packages('renv')` -->
+<!-- 2. Create a new `Project`. -->
+<!-- 3. Run `renv::init()`: this will initialise a new environment -->
+<!--     * and create a `renv/` folder, as well as a `renv.lock` (which contains the -->
+<!--       details about every library you use). -->
+<!-- 4. Keep installing packages with `install.packages()` (which is actually calling `renv::install()` under the hood). -->
 
 # 🌐Follow Standards
 
@@ -287,17 +287,17 @@ code into (starting from specific package versions).
 
 ![ ](https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif)
 
-## 🌐Follow Standards
-### 🪄 Formatters
+<!-- ## 🌐Follow Standards -->
+<!-- ### 🪄 Formatters -->
 
-* If you are using `git` (you should) and GitHub, you can use **GitHub Actions**
-to build a continuous integration (CI) pipeline:
+<!-- * If you are using `git` (you should) and GitHub, you can use **GitHub Actions** -->
+<!-- to build a continuous integration (CI) pipeline: -->
 
-1. Install the `{usethis}` package.
-2. Run `usethis::use_github_action('lint')`.
-2. Run `usethis::use_github_action('style')`.
+<!-- 1. Install the `{usethis}` package. -->
+<!-- 2. Run `usethis::use_github_action('lint')`. -->
+<!-- 2. Run `usethis::use_github_action('style')`. -->
 
-* These commands will generate the configurations to run `{lintr}` and `{styler}`, inside `.github/workflows`.
+<!-- * These commands will generate the configurations to run `{lintr}` and `{styler}`, inside `.github/workflows`. -->
 
 
 # Thank you!

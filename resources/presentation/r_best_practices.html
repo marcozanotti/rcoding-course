@@ -397,10 +397,9 @@
 <section id="index" class="title-slide slide level1 center">
 <h1>Index</h1>
 <ul>
-<li class="fragment">🚧 Project Configuration</li>
-<li class="fragment">✨ Tips and Tricks</li>
-<li class="fragment">♻️ Reproducible Workflow</li>
-<li class="fragment">🌐 Follow Standards</li>
+<li>🚧 Project Configuration</li>
+<li>✨ Tips and Tricks <!-- * ♻️ Reproducible Workflow --></li>
+<li>🌐 Follow Standards</li>
 </ul>
 </section>
 
@@ -438,7 +437,7 @@
 <h2>🚧 Project Configuration</h2>
 <h3 id="dos">✔️ Do’s</h3>
 <ul>
-<li class="fragment">You should <em>always</em> reason in terms of <strong>sessions</strong>, not <strong>workspace</strong>: don’t be afraid to use <code>Restart R Session</code> (<code>shift + cmd + 0</code>).</li>
+<li>You should <em>always</em> reason in terms of <strong>sessions</strong>, not <strong>workspace</strong>: don’t be afraid to use <code>Restart R Session</code> (<code>shift + cmd + 0</code>).</li>
 </ul>
 <div class="fragment">
 <div class="callout callout-warning callout-captioned callout-style-default">
@@ -455,7 +454,7 @@
 </div>
 </div>
 <ul>
-<li class="fragment"><strong>Write your code in R scripts/notebooks</strong>, avoid using the console and save your progress often!</li>
+<li><strong>Write your code in R scripts/notebooks</strong>, avoid using the console and save your progress often!</li>
 </ul>
 </div>
 </section>
@@ -481,9 +480,9 @@
 <h3 id="donts-1">🚩 Dont’s</h3>
 <p><code>setwd("/Users/jenny/cuddly_broccoli/verbose/...")</code></p>
 <ul>
-<li class="fragment">The chance of the <code>setwd()</code> command having the desired effect – making the file paths work – for anyone besides its author is 0%.</li>
-<li class="fragment">It’s also unlikely to work for the author one or two years or computers from now.</li>
-<li class="fragment">Hard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle.</li>
+<li>The chance of the <code>setwd()</code> command having the desired effect – making the file paths work – for anyone besides its author is 0%.</li>
+<li>It’s also unlikely to work for the author one or two years or computers from now.</li>
+<li>Hard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle.</li>
 </ul>
 </section>
 <section id="project-configuration-5" class="slide level2">
@@ -520,7 +519,7 @@
 <h2>🚧 Project Configuration</h2>
 <h3 id="extra">🎁 Extra</h3>
 <ul>
-<li class="fragment">Give meaningful names to variables. Stop saving each dataframe as <code>df</code>.</li>
+<li>Give meaningful names to variables. Stop saving each dataframe as <code>df</code>.</li>
 </ul>
 <div class="fragment">
 <blockquote>
@@ -537,9 +536,9 @@
 <h2>✨Tips and Tricks</h2>
 <h3 id="file-names-should-be">📁 File names should be</h3>
 <ul>
-<li class="fragment"><strong>machine readable</strong>: no spaces, no accents, no punctuation, no special characters, all lowercase.</li>
-<li class="fragment"><strong>human readable</strong>.</li>
-<li class="fragment"><strong>play well with default ordering</strong>.</li>
+<li><strong>machine readable</strong>: no spaces, no accents, no punctuation, no special characters, all lowercase.</li>
+<li><strong>human readable</strong>.</li>
+<li><strong>play well with default ordering</strong>.</li>
 </ul>
 <div class="fragment">
 <div class="callout callout-warning callout-captioned callout-style-default">
@@ -561,9 +560,9 @@
 <h2>✨Tips and Tricks</h2>
 <h3 id="file-names-should-be-1">📁 File names should be</h3>
 <ul>
-<li class="fragment">Use <code>_</code> to delimit words.</li>
-<li class="fragment">Use <code>-</code> to delimit meta-data fields.</li>
-<li class="fragment">Use dates and numbering to enforce ordering.</li>
+<li>Use <code>_</code> to delimit words.</li>
+<li>Use <code>-</code> to delimit meta-data fields.</li>
+<li>Use dates and numbering to enforce ordering.</li>
 </ul>
 <div class="fragment">
 <div class="callout callout-tip callout-captioned callout-style-default">
@@ -600,15 +599,15 @@
 </div>
 </div>
 <ul>
-<li class="fragment">Split the code across different scripts, rather than maintaining an expensive monolith. In this way, you will only have to re-run the parts you actually need.</li>
+<li>Split the code across different scripts, rather than maintaining an expensive monolith. In this way, you will only have to re-run the parts you actually need.</li>
 </ul>
 </section>
 <section id="tips-and-tricks-4" class="slide level2">
 <h2>✨Tips and Tricks</h2>
 <h3 id="project-structure">📁 Project structure</h3>
 <ul>
-<li class="fragment">If the number of scripts grows, create sub-directories using the same naming criteria.</li>
-<li class="fragment">There are many ways to structure a directory tree. For simplicity, you might want to start with:</li>
+<li>If the number of scripts grows, create sub-directories using the same naming criteria.</li>
+<li>There are many ways to structure a directory tree. For simplicity, you might want to start with:</li>
 </ul>
 <div class="fragment">
 <pre><code>      .
@@ -627,7 +626,7 @@
 <h2>✨Tips and Tricks</h2>
 <h3 id="project-structure-1">📁 Project structure</h3>
 <ul>
-<li class="fragment">Or… at least</li>
+<li>Or… at least</li>
 </ul>
 <div class="fragment">
 <pre><code>      .
@@ -641,8 +640,8 @@
 <h2>✨Tips and Tricks</h2>
 <h3 id="commands">⚙️ Commands</h3>
 <ul>
-<li class="fragment"><code>cmd + shift + P</code> calls the <strong>command palette</strong>: from there, you can call <em>any</em> command.</li>
-<li class="fragment">Get help about any function:</li>
+<li><code>cmd + shift + P</code> calls the <strong>command palette</strong>: from there, you can call <em>any</em> command.</li>
+<li>Get help about any function:</li>
 </ul>
 <div class="fragment">
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">help</span>(<span class="st">'as.data.frame'</span>)</span>
@@ -654,45 +653,33 @@
 <h2>✨Tips and Tricks</h2>
 <h3 id="documentation">📚 Documentation</h3>
 <ul>
-<li class="fragment">Use <a href="https://r-pkgs.org/vignettes.html"><code>vignettes</code></a>:</li>
+<li>Use <a href="https://r-pkgs.org/vignettes.html"><code>vignettes</code></a>:</li>
 </ul>
 <div class="fragment">
 <blockquote>
 <p>A vignette is like a book chapter or an academic paper: it can describe the problem that your package is designed to solve, and then show the reader how to solve it.</p>
 </blockquote>
 <ul>
-<li class="fragment">You can see all the installed vignettes with <code>browseVignettes()</code> and view one with <code>vignette('your-vignette')</code>.</li>
+<li>You can see all the installed vignettes with <code>browseVignettes()</code> and view one with <code>vignette('your-vignette')</code>.</li>
 </ul>
+<!-- # ♻️ Reproducible Workflow -->
+<!-- Use `{renv}` to create and manage virtual environments -->
+<!-- ## ♻️ Reproducible Workflow -->
+<!-- ### 📦 Virtual environments -->
+<!-- * Are self-contained, isolated boxes to run code independently from the other libraries -->
+<!-- installed on your computer. -->
+<!--   * i.e., this **encapsulates local packages** (*vis-à-vis* **global** ones). -->
+<!-- * Provides all the details to exactly reproduce the environment you are writing your -->
+<!-- code into (starting from specific package versions). -->
+<!-- ## ♻️ Reproducible Workflow -->
+<!-- ### 📦 Virtual environments -->
+<!-- 1. Install `{renv}`: `install.packages('renv')` -->
+<!-- 2. Create a new `Project`. -->
+<!-- 3. Run `renv::init()`: this will initialise a new environment -->
+<!--     * and create a `renv/` folder, as well as a `renv.lock` (which contains the -->
+<!--       details about every library you use). -->
+<!-- 4. Keep installing packages with `install.packages()` (which is actually calling `renv::install()` under the hood). -->
 </div>
-</section></section>
-<section>
-<section id="reproducible-workflow" class="title-slide slide level1 center">
-<h1>♻️ Reproducible Workflow</h1>
-<p>Use <code>{renv}</code> to create and manage virtual environments</p>
-</section>
-<section id="reproducible-workflow-1" class="slide level2">
-<h2>♻️ Reproducible Workflow</h2>
-<h3 id="virtual-environments">📦 Virtual environments</h3>
-<ul>
-<li class="fragment">Are self-contained, isolated boxes to run code independently from the other libraries installed on your computer.
-<ul>
-<li class="fragment">i.e., this <strong>encapsulates local packages</strong> (<em>vis-à-vis</em> <strong>global</strong> ones).</li>
-</ul></li>
-<li class="fragment">Provides all the details to exactly reproduce the environment you are writing your code into (starting from specific package versions).</li>
-</ul>
-</section>
-<section id="reproducible-workflow-2" class="slide level2">
-<h2>♻️ Reproducible Workflow</h2>
-<h3 id="virtual-environments-1">📦 Virtual environments</h3>
-<ol type="1">
-<li class="fragment">Install <code>{renv}</code>: <code>install.packages('renv')</code></li>
-<li class="fragment">Create a new <code>Project</code>.</li>
-<li class="fragment">Run <code>renv::init()</code>: this will initialise a new environment
-<ul>
-<li class="fragment">and create a <code>renv/</code> folder, as well as a <code>renv.lock</code> (which contains the details about every library you use).</li>
-</ul></li>
-<li class="fragment">Keep installing packages with <code>install.packages()</code> (which is actually calling <code>renv::install()</code> under the hood).</li>
-</ol>
 </section></section>
 <section>
 <section id="follow-standards" class="title-slide slide level1 center">
@@ -703,14 +690,14 @@
 <h2>🌐Follow Standards</h2>
 <h3 id="linting">🔍 Linting</h3>
 <ul>
-<li class="fragment">Use <a href="https://github.com/r-lib/lintr"><code>{lintr}</code></a> as a <em>static analysis tool</em>:</li>
+<li>Use <a href="https://github.com/r-lib/lintr"><code>{lintr}</code></a> as a <em>static analysis tool</em>:</li>
 </ul>
 <div class="fragment">
 <blockquote>
 <p>It checks for adherence to a given style, identifying syntax errors and possible semantic issues, then reports them to you so you can take action.</p>
 </blockquote>
 <ul>
-<li class="fragment">It also enforces the <a href="https://style.tidyverse.org/"><em>tidyverse style guide</em></a> 👀</li>
+<li>It also enforces the <a href="https://style.tidyverse.org/"><em>tidyverse style guide</em></a> 👀</li>
 </ul>
 </div>
 </section>
@@ -718,26 +705,19 @@
 <h2>🌐Follow Standards</h2>
 <h3 id="formatters">🪄 Formatters</h3>
 <ul>
-<li class="fragment">Use <a href="https://github.com/r-lib/styler"><code>{styler}</code></a></li>
+<li>Use <a href="https://github.com/r-lib/styler"><code>{styler}</code></a></li>
 </ul>
 <div class="fragment">
 <p><img data-src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif"></p>
+<!-- ## 🌐Follow Standards -->
+<!-- ### 🪄 Formatters -->
+<!-- * If you are using `git` (you should) and GitHub, you can use **GitHub Actions** -->
+<!-- to build a continuous integration (CI) pipeline: -->
+<!-- 1. Install the `{usethis}` package. -->
+<!-- 2. Run `usethis::use_github_action('lint')`. -->
+<!-- 2. Run `usethis::use_github_action('style')`. -->
+<!-- * These commands will generate the configurations to run `{lintr}` and `{styler}`, inside `.github/workflows`. -->
 </div>
-</section>
-<section id="follow-standards-3" class="slide level2">
-<h2>🌐Follow Standards</h2>
-<h3 id="formatters-1">🪄 Formatters</h3>
-<ul>
-<li class="fragment">If you are using <code>git</code> (you should) and GitHub, you can use <strong>GitHub Actions</strong> to build a continuous integration (CI) pipeline:</li>
-</ul>
-<ol type="1">
-<li class="fragment">Install the <code>{usethis}</code> package.</li>
-<li class="fragment">Run <code>usethis::use_github_action('lint')</code>.</li>
-<li class="fragment">Run <code>usethis::use_github_action('style')</code>.</li>
-</ol>
-<ul>
-<li class="fragment">These commands will generate the configurations to run <code>{lintr}</code> and <code>{styler}</code>, inside <code>.github/workflows</code>.</li>
-</ul>
 </section></section>
 <section id="thank-you" class="title-slide slide level1 center">
 <h1>Thank you!</h1>
