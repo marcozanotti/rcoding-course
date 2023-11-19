@@ -119,7 +119,7 @@ col_summary(df, sd)
 # The idea of passing a function to another function is an extremely powerful 
 # idea, and it’s one of the behaviours that makes R a functional programming 
 # language. It might take you a while to wrap your head around the idea, 
-# but it’s worth the investment. In the rest of the chapter, you’ll learn 
+# but it’s worth the investment. In the rest of the lecture, you’ll learn 
 # about and use the purrr package, which provides functions that eliminate 
 # the need for many common for loops. The apply family of functions in base 
 # R (apply(), lapply(), tapply(), etc) solve a similar problem, but purrr 

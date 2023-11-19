@@ -216,6 +216,7 @@ rev(w) # reverse the order of `w`
 
 values <- seq(0, 2 * pi, length = 100)
 sinx <- sin(values)
+
 plot(x = values, y = sinx, type = "l")
 plot(x = values, y = sin(values), type = "l")
 
@@ -356,7 +357,6 @@ the_data <- select(the_data, name, height, mass, mass_lbs)
 # https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/#:~:text=%25%3E%25%20allows%20you%20to%20drop,%7C%3E%20always%20requires%20the%20parentheses.
 
 
-
 # * Basic Piping ----------------------------------------------------------
 
 x %>% f() is equivalent to f(x)
@@ -406,6 +406,7 @@ library(tibble)
 
 # Create a tibble from an existing object with as_tibble():
 df <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
+df <- data.frame(a = 1:1000)
 df
 str(df)
 
@@ -473,6 +474,7 @@ str_pad("hello", width = 8, side = "left", pad = "x")
 str_pad("hello", width = 8, side = "right", pad = "y")
 str_pad("hello", width = 7, side = "both", pad = "z")
 str_pad("hello", 10, pad = c("-", "_", " "))
+str_pad("hellohello", width = 8, side = "left", pad = "x")
 
 # Case
 str_to_lower("HEllO")
@@ -489,6 +491,8 @@ str_split("hello", "e")
 str_split("hello", "e") %>% unlist()
 
 s <- "This string is moderately long"
+# length(s)
+nchar(s)
 rbind(
   str_trunc(s, 20, "right"),
   str_trunc(s, 20, "left"),
@@ -510,12 +514,13 @@ str_length("hello")
 
 str_count("hello", "h") # h letter
 str_count("hello;", "\\w") # word + numbers
+str_count("hello;", "[:punct:]") # punctuation
 str_count("hello", "\\d") # digits
 
 
 # * Detect Patterns -------------------------------------------------------
 str_locate("hello", "e")
-str_locate("hello", "l")
+str_locate("hello", "ll")
 
 str_detect("hello", "h")
 str_detect("hello", "\\w")
@@ -533,9 +538,9 @@ str_sub("hello world", 4, 8)
 
 str_extract("hello", "el")
 str_extract("hello", "lo")
-str_extract(c("hello", "world"), "w")
-str_extract_all(c("hello", "world"), "w")
-str_extract_all(c("hello", "world"), "w") %>% unlist()
+str_extract(c("hello", "worldw"), "w")
+str_extract_all(c("hello", "worldw"), "w")
+str_extract_all(c("hello", "worldw"), "w") %>% unlist()
 
 
 # * Removing & Replacing Patterns -----------------------------------------
