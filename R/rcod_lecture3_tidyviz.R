@@ -65,17 +65,17 @@ str(diamonds)
 # Moreover, in order to draw the plot, it is necessary to provide the data and
 # to map the desired aesthetics.
 
-# initializes the pane to the plot
+# initialize the pane to the plot
 ggplot() 
 
-# adds a desired layer
-ggplot() + 
-  geom_point()
-
-# provides the dataframe 
+# provide the dataframe 
 ggplot(data = mpg)
 
-# maps the variables
+# add a desired layer
+ggplot(data = mpg) + 
+  geom_point()
+
+# map the variables
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy))
 

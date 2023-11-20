@@ -89,7 +89,7 @@ billboard
 names(billboard)
 billboard %>% 
   pivot_longer(
-    wk1:wk76, 
+    wk1:wk76, # -c(artist, track, date.entered)
     names_to = "week", 
     values_to = "rank", 
     values_drop_na = TRUE
@@ -161,7 +161,7 @@ weather <- tibble(
   d20 = runif(32, min = 0, max = 30),
   d30 = runif(32, min = 0, max = 30)
 ) %>% 
-  arrange(id, year, month)
+  dplyr::arrange(id, year, month)
 weather
 
 weather %>% 
@@ -203,7 +203,7 @@ billboard_long <- billboard %>%
     values_to = "rank", 
     values_drop_na = TRUE
   ) %>% 
-  mutate(
+  dplyr::mutate(
     week = as.integer(stringr::str_remove(week, "wk")),
     date = as.Date(date.entered) + 7 * (week - 1),
     date.entered = NULL
@@ -211,13 +211,13 @@ billboard_long <- billboard %>%
 billboard_long
 
 song <- billboard_long %>% 
-  distinct(artist, track) %>%
-  mutate(song_id = row_number(), .before = everything())
+  dplyr::distinct(artist, track) %>%
+  dplyr::mutate(song_id = dplyr::row_number(), .before = everything())
 song
 
 rank <- billboard_long %>%
-  left_join(song, by = c("artist", "track")) %>%
-  select(song_id, date, week, rank)
+  dplyr::left_join(song, by = c("artist", "track")) %>%
+  dplyr::select(song_id, date, week, rank)
 rank
 
 
@@ -383,7 +383,32 @@ starwars %>%
     BMI = mass / (height_m^2)
   )
 
-starwars %>% mutate(across(where(is.numeric), ~ .x / 100))
+starwars %>% 
+  mutate(
+    across(where(is.numeric), ~ .x / 100)
+  )
+
+starwars |> select(name:species) |> str()
+starwars$height / 100
+
+div_by_smth <- function(x, div = 100) {
+  x / div
+}
+starwars$height |> div_by_smth()
+
+starwars |> 
+  mutate(
+    height = div_by_smth(height), 
+    mass = div_by_smth(mass),
+    birth_year = div_by_smth(birth_year)
+  )
+
+starwars |> 
+  mutate(
+    height = height / 100, 
+    mass = mass / 100,
+    birth_year = birth_year / 100 
+  )
 
 
 # * Groups ----------------------------------------------------------------
@@ -424,6 +449,7 @@ min_max <- list(
 starwars %>% summarise(across(where(is.numeric), min_max))
 
 # group_by
+starwars$species |> table()
 starwars %>% group_by(species)
 starwars %>% group_by(species) %>% tally(sort = TRUE)
 
@@ -506,6 +532,11 @@ flights_small %>% left_join(planes, by = "tailnum")
 
 flights_small %>% left_join(airports, by = c("dest" = "faa"))
 
+# right_join()
+# inner_join()
+# anti_join()
+# full_join()
+
 
 # * Utilities -------------------------------------------------------------
 
@@ -529,8 +560,8 @@ obi <- starwars %>%
   filter(name == "Obi-Wan Kenobi")
 obi
 
-bind_rows(luke, obi)
-bind_cols(luke, obi)
+bind_rows(luke, obi) # rbind
+bind_cols(luke, obi) # cbind
 
 
 # rowwise
@@ -547,6 +578,7 @@ bind_cols(luke, obi)
 starwars %>% 
   select(name, height, mass) %>% 
   mutate(average = mean(c(height, mass), na.rm = TRUE))
+mean(c(starwars$height, starwars$mass), na.rm = TRUE)
 
 starwars %>% 
   select(name, height, mass) %>% 
@@ -565,6 +597,11 @@ starwars %>%
 starwars %>% 
   select(name, height, mass) %>% 
   rowwise(name) %>% 
+  summarise(average = mean(c(height, mass), na.rm = TRUE))
+
+starwars %>% 
+  select(name, height, mass, homeworld) %>% 
+  rowwise(name, homeworld) %>% 
   summarise(average = mean(c(height, mass), na.rm = TRUE))
 
 
