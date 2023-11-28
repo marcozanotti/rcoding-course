@@ -18,7 +18,7 @@ source("../R/utils.R")
 source("../R/packages.R")
 ```
 
-```{r}
+```{r import and clean data}
 path_to_data <- "../data/bikes_database.db"
 con <- dbConnect(RSQLite::SQLite(), path_to_data)
 

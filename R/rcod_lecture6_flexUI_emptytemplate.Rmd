@@ -12,3 +12,4 @@ library(flexdashboard)
 
 <!-- This is an empty template to create the dashboard live. !!!!!!!!!! -->
 <!-- Clear all the content after the lecture. !!!!!!!!!!!!!!!!!!!!!!!!! -->
+
