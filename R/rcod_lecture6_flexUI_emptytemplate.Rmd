@@ -1,0 +1,14 @@
+---
+title: "Flexdashboard UI Tutorial"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+<!-- This is an empty template to create the dashboard live. !!!!!!!!!! -->
+<!-- Clear all the content after the lecture. !!!!!!!!!!!!!!!!!!!!!!!!! -->

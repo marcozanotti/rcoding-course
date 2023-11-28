@@ -1,0 +1,36 @@
+---
+title: "Flexdashboard Shiny Tutorial"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+source("utils.R")
+source("packages.R")
+```
+
+```{r}
+# Make data
+set.seed(123)
+sales_data_tbl <- tibble(
+  date  = seq.Date(from = ymd("2018-01-01"), to = today(), length.out = 90),
+  class = sample(c("marketing", "sales", "research"), size = 90, replace = TRUE),
+  sales = runif(n = 90, min = 1, max = 100)
+)
+```
+
+<!-- 
+We want to create a dashboard that looks like this:
+- a sidebar with three inputs (a date input, a checkbox inpput and a slider input)
+- a reset buttton  
+- one column with three sections printing the inputs values
+- one column with two sections showing the filtered data and a summary of the filtered data
+-->
+
+<!-- This is an empty template to create the dashboard live. !!!!!!!!!! -->
+<!-- Clear all the content after the lecture. !!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
