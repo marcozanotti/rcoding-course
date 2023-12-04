@@ -13,10 +13,10 @@ Contents:
    - date range 
    - check box
    - picker
+- add reset button + observeEvent 
 - add reactivity
    - reactive data filtering based on inputs
-- add reset button + observeEvent 
-- add rendering
+- add rendering to plot 
 -->
 
 ```{r setup, include=FALSE, message=FALSE}

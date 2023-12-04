@@ -9,7 +9,7 @@ runtime: shiny
 
 <!-- 
 Contents:
-- add new input, radio button
+- add new input, radio button (local input for time plot only)
 - add reactivity to time plot
 - add rendering time plot
 -->

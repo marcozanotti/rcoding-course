@@ -28,16 +28,23 @@ bikeshops_tbl <- tbl(con, "bikeshops")
 orderlines_tbl <- tbl(con, "orderlines")
 
 processed_data_tbl <- orderlines_tbl %>%
-    left_join(bikeshops_tbl, by = c("customer.id" = "bikeshop.id")) %>%
-    left_join(bikes_tbl, by = c("product.id" = "bike.id")) %>%
-    mutate(extended_price = quantity * price) %>%
-    collect()
+  left_join(bikeshops_tbl, by = c("customer.id" = "bikeshop.id")) %>%
+  left_join(bikes_tbl, by = c("product.id" = "bike.id")) %>%
+  mutate(extended_price = quantity * price) %>%
+  collect()
 
 processed_data_tbl <- processed_data_tbl %>%    
-    mutate(order.date = ymd(order.date)) %>%
-    separate(location, into = c("city", "state"), sep = ", ") %>%
-    select(order.date, order.id, order.line, state, quantity, price, extended_price)
-    
+  mutate(order.date = ymd(order.date)) %>%
+  separate(location, into = c("city", "state"), sep = ", ") %>%
+  separate(
+      description, 
+      into = c("category_1", "category_2", "frame_material"),
+      sep = " - "
+    ) %>%
+    select(
+      order.date, order.id, order.line, state, quantity, price,
+      extended_price, category_1:frame_material
+    )
 # processed_data_tbl
 
 dbDisconnect(con)

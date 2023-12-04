@@ -11,7 +11,7 @@ runtime: shiny
 <!-- 
 Contents:
 - add inputs
-   - picker
+   - picker for shops
    - switch for forecast mode
    - numeric with conditionalPanel on forecast mode
 - use observeEvent on time_unit
@@ -165,22 +165,26 @@ observeEvent(eventExpr = input$reset, handlerExpr = {
   updateCheckboxGroupButtons(
     session = session, 
     inputId = "checkbox_category_1", 
-    selected = unique(processed_data_tbl$category_1))
+    selected = unique(processed_data_tbl$category_1)
+  )
   
   updatePickerInput(
     session = session, 
     inputId = "picker_category_2", 
-    selected = unique(processed_data_tbl$category_2))
+    selected = unique(processed_data_tbl$category_2)
+  )
   
   updateRadioGroupButtons(
     session = session, 
     inputId = "time_unit", 
     selected = "month"
   )
-    updatePickerInput(
+  
+  updatePickerInput(
     session = session, 
     inputId = "picker_bikeshop_name",
-    selected = unique(processed_data_tbl$bikeshop.name) %>% sort())
+    selected = unique(processed_data_tbl$bikeshop.name) %>% sort()
+  )
   
   updateSwitchInput(
     session = session,
@@ -194,7 +198,7 @@ observeEvent(eventExpr = input$reset, handlerExpr = {
     value = 12
   )
   
-   shinyjs::delay(ms = 300, expr = {shinyjs::click(id = "apply")})
+  shinyjs::delay(ms = 300, expr = {shinyjs::click(id = "apply")})
  
 })
 

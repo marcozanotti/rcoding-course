@@ -4,7 +4,7 @@ output:
   flexdashboard::flex_dashboard:
     orientation: rows
     vertical_layout: fill
-    css: css/auth.css # try without css
+    css: css/auth.css # try without css (Cascading Style Sheets)
 runtime: shiny
 ---
 
