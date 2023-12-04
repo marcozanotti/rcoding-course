@@ -72,37 +72,37 @@ sliderInput(
 ```
 
 ```{r reset}
-# actionButton(
-#   inputId = "reset",
-#   label = "Reset",
-#   icon = icon("sync")
-# )
-# 
-# observeEvent(
-#   eventExpr = input$reset, 
-#   handlerExpr = {
-#     
-#     updateCheckboxGroupInput(
-#       session  = session, 
-#       inputId  = "checkbox_group", 
-#       selected = c("marketing", "research", "sales")
-#     )
-#     
-#     updateDateRangeInput(
-#       session = session,
-#       inputId = "date_range",
-#       start = min(sales_data_tbl$date),
-#       end = today()
-#     )
-#     
-#     updateSliderInput(
-#       session = session,
-#       inputId = "slider_input",
-#       value = c(40, 60)
-#     )
-#     
-#   }
-# )
+actionButton(
+  inputId = "reset",
+  label = "Reset",
+  icon = icon("sync")
+)
+
+observeEvent(
+  eventExpr = input$reset,
+  handlerExpr = {
+
+    updateCheckboxGroupInput(
+      session  = session,
+      inputId  = "checkbox_group",
+      selected = c("marketing", "research", "sales")
+    )
+
+    updateDateRangeInput(
+      session = session,
+      inputId = "date_range",
+      start = min(sales_data_tbl$date),
+      end = today()
+    )
+
+    updateSliderInput(
+      session = session,
+      inputId = "slider_input",
+      value = c(40, 60)
+    )
+
+  }
+)
 ```
 
 
