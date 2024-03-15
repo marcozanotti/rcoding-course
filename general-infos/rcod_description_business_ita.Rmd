@@ -1,0 +1,54 @@
+---
+title: "Programmazione R & BI per il Business"
+author: "Marco Zanotti"
+date: ""
+output:
+  pdf_document: default
+  rmdformats::downcute:
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Obiettivi
+
+Il corso ha un duplice obiettivo: fornire competenze tecniche su 
+programmazione e scripting per l'analisi dei dati con il linguaggio R; 
+apprendere le tecniche per la creazione di dashboard per l'analisi dei dati.  
+
+Durante la parte di **Programmazione R** verranno presentate le basi del
+linguaggio R e le moderne librerie di sviluppo. Durante la parte di **BI**, 
+invece, verranno presentate le tecniche per la creazione di dashboard 
+con l'utilizzo del framework **Shiny**.
+
+
+## Contents
+
+* Tidyverse Basics  
+* Tidyverse Wrangling  
+* Tidyverse Visualization  
+* Tidyverse Functional Programming  
+* Tidymodels  
+* Shiny Basics  
+* Flexdashboard UI  
+* Shiny Reactivity    
+* Advanced Shiny Components     
+
+Eventuali esigenze aziendali riguardo a tematiche di interesse
+possono essere valutate insieme al docente per rimodulare il 
+corso sulla base dei desiderata del cliente.  
+
+
+## Duration
+
+The course has a duration of 20 hours.
+
+
+## Beneficiaries
+
+I destinatari di questo corso sono data scientist, data analyst, 
+statistici, professionisti IT, sviluppatori, capi progetto che 
+vogliono acquisire know how di programmazione R e BI per la data analysis.  
+

@@ -1,5 +1,5 @@
 ---
-title: "R Coding"
+title: "R Coding & BI for Business"
 author: "Marco Zanotti"
 date: ""
 output:
@@ -12,21 +12,20 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-&nbsp;  
+## Purposes
 
 The course aims at providing technical skills about coding/scripting
 aspects for data analysis and to manage persistent data storage of
 sources and results involved in analysis. On the one side, the R framework is 
 illustrated. The goal is to deal first with essential notions about data 
 structures and control structures of R, then to learn how to code with modern 
-and state-of-the-art R packages.  
-
-
-## Course Structure
+and state-of-the-art R packages.   
 
 The **R Coding** part of the course aims at teaching **R Programming**.  
 The state-of-the-art and modern R packages are presented from a very practical 
-point of view, throughout R tutorials on each main topic. 
+point of view, throughout R tutorials on each main topic.
+The **BI** part of the course aims at teaching how to create modern data 
+analysis dashboard using **Shiny** and **flexdashboard**.  
 
 
 ## Contents
@@ -36,11 +35,12 @@ point of view, throughout R tutorials on each main topic.
 * Tidyverse Visualization  
 * Tidyverse Functional Programming  
 * Tidymodels  
+* Shiny Basics  
 * Flexdashboard UI  
-* Flexdashboard Reactivity - Shiny  
-* Flexdashboard in Production    
+* Shiny Reactivity    
+* Advanced Shiny Components    
 
-Specific business needs may be discussed during the lectures.
+Specific business needs and adjustments may be discussed. 
 
 
 ## Duration
@@ -52,5 +52,5 @@ The course has a duration of 20 hours.
 
 This course is intended for data scientist, data analyst, statisticians, 
 IT specialists, developers, project managers and business leaders who want 
-to develop the most in-demand R programming skills.
+to develop the most in-demand R & BI programming skills.
 

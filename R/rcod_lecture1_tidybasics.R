@@ -260,13 +260,14 @@ plot(x = values, y = sin(values), type = "l")
 # leading to code that repeats the name of the data frame many times:
 
 starwars
+starwars$homeworld == "Naboo" & starwars$species == "Human"
 starwars[starwars$homeworld == "Naboo" & starwars$species == "Human", ]
  
 # The dplyr equivalent of this code is more concise because data masking allows 
 # you to need to type starwars once:
  
 filter(starwars, homeworld == "Naboo" & species == "Human")
- 
+
 # Data- and env-variables
 # The key idea behind data masking is that it blurs the line between the two 
 # different meanings of the word “variable”:
@@ -295,6 +296,7 @@ df$x
   
 select(df, 1) # selects the first column 
 select(df, last_col()) # selects the last column
+select(df, x) # selects columns x, and y
 select(df, c(x, y)) # selects columns x, and y
 select(df, starts_with("x")) # selects all columns whose name starts with “x”
 select(df, ends_with("y")) # selects all columns whose name ends with “y”
@@ -406,11 +408,13 @@ library(tibble)
 
 # Create a tibble from an existing object with as_tibble():
 df <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
+df
 df <- data.frame(a = 1:1000)
 df
 str(df)
 
 tbl <- as_tibble(df)
+tbl
 str(tbl)
 # This will work for reasonable inputs that are already data.frames, 
 # lists, matrices, or tables.
@@ -430,6 +434,13 @@ tribble(
   "a", 2,  3.6,
   "b", 1,  8.5
 )
+
+# Useful
+m <- matrix(1:9, nrow = 3, ncol = 3)
+rownames(m) <- c("a", "b", "c")
+colnames(m) <- c("x", "y", "z")
+m
+m %>% as_tibble(rownames = "names") # convert matrix to tibble
 
 
 
