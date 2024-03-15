@@ -185,11 +185,3 @@ knitr::opts_chunk$set(echo = TRUE)
 - Rendering Functions  
 - Shinywidgets, Shinyjs, Shinymanager  
 
-
-## Lecture 8: Flexdashboard in Production
-
-**Production**:  
-- GitHub Pages for static .html  
-- Shiny Server for reactive .Rmd  
-- Shinyapps.io  
-
