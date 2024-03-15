@@ -24,7 +24,7 @@ invece, verranno presentate le tecniche per la creazione di dashboard
 con l'utilizzo del framework **Shiny**.
 
 
-## Contents
+## Contenuti
 
 * Tidyverse Basics  
 * Tidyverse Wrangling  
@@ -41,12 +41,12 @@ possono essere valutate insieme al docente per rimodulare il
 corso sulla base dei desiderata del cliente.  
 
 
-## Duration
+## Durata
 
-The course has a duration of 20 hours.
+Il corso ha una durata di 20 ore.  
 
 
-## Beneficiaries
+## Destinatari
 
 I destinatari di questo corso sono data scientist, data analyst, 
 statistici, professionisti IT, sviluppatori, capi progetto che 
