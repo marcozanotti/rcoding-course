@@ -218,7 +218,7 @@ values <- seq(0, 2 * pi, length = 100)
 sinx <- sin(values)
 
 plot(x = values, y = sinx, type = "l")
-plot(x = values, y = sin(values), type = "l")
+plot(x = seq(0, 2 * pi, length = 100), y = sin(values), type = "l")
 
 # Look at the labels on the axes. How did R know that the variable on the x 
 # axis is called x and the variable on the y axis is called sinx? In most
@@ -256,7 +256,7 @@ plot(x = values, y = sin(values), type = "l")
 
 # * 1. Data Masking -------------------------------------------------------
 # Data masking makes data manipulation faster because it requires less typing. 
-# In most (but not all1) base R functions you need to refer to variables with $, 
+# In most (but not all) base R functions you need to refer to variables with $, 
 # leading to code that repeats the name of the data frame many times:
 
 starwars
