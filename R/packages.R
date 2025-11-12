@@ -25,7 +25,7 @@ pkgs <- c(
   "rvg", 
   "ggiraph",
   "ggrepel",
-  "gganimate",
+  #"gganimate",
   "gapminder",
   "ggside",
   "ggdist",

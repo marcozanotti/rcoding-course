@@ -8,9 +8,9 @@
 
 
 
-<title>Flexdashboard UI Tutorial</title>
+<title>Flexdashboard Shiny Tutorial</title>
 
-<meta property="og:title" content="Flexdashboard UI Tutorial" />
+<meta property="og:title" content="Flexdashboard Shiny Tutorial" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -204,6 +204,14 @@ display: flex;
 .sbframe:not(.active) {
 display: none;
 }
+@media only screen and (min-width: 768px) {
+html, body {
+height: 100%;
+}
+#dashboard-container {
+height: 100%;
+}
+}
 </style>
 
 
@@ -220,7 +228,7 @@ display: none;
   
 </span>
 <span class="navbar-brand">
-  Flexdashboard UI Tutorial
+  Flexdashboard Shiny Tutorial
   <span class="navbar-author">
         </span>
 </span>
@@ -1922,77 +1930,40 @@ window.FlexDashboardComponents.push({
 
 <div id="dashboard-container">
 
-<div id="sidebar" class="section level1 sidebar">
-<h1 class="sidebar">Sidebar</h1>
-<p>Button Inputs</p>
-<ul>
-<li><p>Input 1</p></li>
-<li><p>Input 2</p></li>
-</ul>
-</div>
-<div id="page-1" class="section level1">
-<h1>Page 1</h1>
-<!-- Sidebar {.sidebar} -->
-<!-- ----------------------------------------------------------------------- -->
-<!-- Button Inputs -->
-<!-- - Input 1 -->
-<!-- - Input 2 -->
-<div id="column" class="section level2 tabset" data-height="650">
-<h2 class="tabset">Column</h2>
-<div id="chart-a-1" class="section level3">
-<h3>Chart A-1</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
+<!-- 
+We want to create a dashboard that looks like this:
+- a sidebar with three inputs (a date input, a checkbox inpput and a slider input)
+- a reset buttton  
+- one column with three sections printing the inputs values
+- one column with two sections showing the filtered data and a summary of the filtered data
+-->
+<!-- This is an empty template to create the dashboard live. !!!!!!!!!! -->
+<!-- Clear all the content after the lecture. !!!!!!!!!!!!!!!!!!!!!!!!! -->
+<div id="sidebar" class="section level2 sidebar">
+<h2 class="sidebar">Sidebar</h2>
 </div>
-<div id="chart-a-2" class="section level3">
-<h3>Chart A-2</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
-</div>
-</div>
-</div>
-<div id="column-1" class="section level2 tabset tabset-fade" data-height="350">
-<h2 class="tabset tabset-fade">Column</h2>
-<div id="chart-b" class="section level3">
-<h3>Chart B</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
-</div>
-</div>
-<div id="chart-c" class="section level3">
-<h3>Chart C</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
-</div>
-</div>
-<div id="chart-d" class="section level3">
-<h3>Chart D</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
-</div>
-</div>
-</div>
-</div>
-<div id="page-2" class="section level1" data-orientation="columns">
-<h1>Page 2</h1>
-<div id="column-2" class="section level2" data-height="200">
+<div id="column" class="section level2" data-width="400">
 <h2>Column</h2>
-<div id="chart-e" class="section level3">
-<h3>Chart E</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
+<div id="section---checkbox-output" class="section level3">
+<h3>Section - Checkbox Output</h3>
+</div>
+<div id="section---date-range" class="section level3">
+<h3>Section - Date Range</h3>
+</div>
+<div id="section---slider-output" class="section level3">
+<h3>Section - Slider Output</h3>
 </div>
 </div>
-</div>
-<div id="column-3" class="section level2" data-height="200">
+<div id="column-1" class="section level2" data-width="600">
 <h2>Column</h2>
-<div id="chart-f" class="section level3">
-<h3>Chart F</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
+<div id="section---reactive-output" class="section level3">
+<h3>Section - Reactive Output</h3>
 </div>
-</div>
+<div id="section---reactive-summary" class="section level3">
+<h3>Section - Reactive Summary</h3>
 </div>
 </div>
 
@@ -2015,7 +1986,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function () {
   FlexDashboard.init({
-    fillPage: false,
+    fillPage: true,
     orientation: "columns",
     storyboard: false,
     defaultFigWidth: 576,

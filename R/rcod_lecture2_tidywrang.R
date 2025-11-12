@@ -80,7 +80,7 @@ library(tidyr)
 # in some cases it can be extremely useful. It provides efficient storage
 # for completely crossed designs, and it can lead to extremely efficient 
 # computation if desired operations can be expressed as matrix operations.
-
+?pivot_longer
 relig_income
 relig_income %>% 
   pivot_longer(-religion, names_to = "income", values_to = "frequency")
@@ -338,6 +338,8 @@ starwars %>% select(height, mass, hair_color, skin_color, eye_color, birth_year)
 
 starwars %>% select(height:birth_year)
 
+starwars %>% select(height:birth_year, name)
+
 starwars %>% select(!(height:birth_year))
 
 starwars %>% select(ends_with("color"))
@@ -348,8 +350,9 @@ starwars %>% select(matches("^h"))
 
 starwars %>% select(contains("_"))
 
-vars <- c("name", "height")
+vars <- c("name", "height", "xxxx")
 starwars %>% select(all_of(vars), "mass")
+starwars %>% select(any_of(vars), "mass")
 
 starwars %>% select(height:birth_year, everything()) # relocate with select
 
@@ -375,7 +378,7 @@ starwars %>%
     height_m = height / 100,
     BMI = mass / (height_m ^ 2) # allows direct reference & multiple operations
   ) %>%
-  select(name, BMI, everything())
+  select(name, BMI, height_m, everything())
 
 starwars %>%
   transmute( # mutate that keeps only modified columns
@@ -394,7 +397,7 @@ starwars$height / 100
 div_by_smth <- function(x, div = 100) {
   x / div
 }
-starwars$height |> div_by_smth()
+starwars$height |> div_by_smth(1000)
 
 starwars |> 
   mutate(
@@ -652,7 +655,6 @@ con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 copy_to(con, mtcars)
 
 # Now you can retrieve a table using tbl()
-
 mtcars_db <- tbl(con, "mtcars")
 mtcars_db
 
@@ -677,7 +679,6 @@ res
 # * Bikes Database --------------------------------------------------------
 
 # Here is the database that we work with throughout flexdashboard tutorials.
-
 con <- DBI::dbConnect(RSQLite::SQLite(), "data/bikes_database.db")
 
 DBI::dbListTables(con)

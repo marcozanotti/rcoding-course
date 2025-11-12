@@ -2,8 +2,8 @@
 title: "Flexdashboard UI Tutorial"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
+    orientation: rows
+    vertical_layout: scroll
 ---
 
 ```{r setup, include=FALSE}
@@ -12,4 +12,58 @@ library(flexdashboard)
 
 <!-- This is an empty template to create the dashboard live. !!!!!!!!!! -->
 <!-- Clear all the content after the lecture. !!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+<!-- 
+- add columns
+- add rows
+- add column / row options
+- add sidebar
+- add tabset
+- add pages
+-->
+
+
+# Sidebar {.sidebar}
+
+Button Inputs
+
+- Input 1  
+
+- Input 2  
+
+
+# Page 1
+
+
+## Column 1 {.tabset}
+
+### Chart 1
+
+### Chart 2
+
+
+## Colum 2 {.tabset}
+
+### Plot 1
+
+### Plot 2
+
+### Plot 3
+
+
+# Page 2
+
+## Row 3
+
+### Table 1
+
+
+
+
+
+
+
+
+
+
 

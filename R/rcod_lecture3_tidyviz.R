@@ -644,7 +644,6 @@ p2 <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 
 p1 | p2 # patchwork sintax
 
-
 wrap_plots(p1, p2, guides = "collect") &
   guides(colour = guide_legend(nrow = 1)) &
   theme(legend.position = "top")
@@ -689,11 +688,14 @@ mpg %>%
   theme_minimal()
 
 mpg %>% 
-  ggplot(aes(cty, hwy, color = class)) +
+  ggplot(aes(hwy, cty, color = class)) +
   geom_point(size = 2, alpha = .3) +
   geom_smooth(aes(color = NULL), se = TRUE) +
-  geom_xsideboxplot(alpha = .5, size = 1) +
-  facet_grid(cols = vars(cyl), scales = "free_x") +
+  geom_xsidedensity(
+    aes(y = after_stat(density), fill = class),
+    alpha = .5, size = 1, position = "stack"
+  ) + 
+  geom_ysideboxplot(alpha = .5, size = 1) +
   theme_minimal()
 
 

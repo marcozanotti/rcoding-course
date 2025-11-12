@@ -92,301 +92,49 @@ h6 {font-size: 12px;}
 code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
 pre:not([class]) { background-color: white }</style>
 <script>!function(a,b){"use strict";function c(c,g){var h=this;h.$el=a(c),h.el=c,h.id=e++,h.$el.bind("destroyed",a.proxy(h.teardown,h)),h.$clonedHeader=null,h.$originalHeader=null,h.cachedHeaderHeight=null,h.isSticky=!1,h.hasBeenSticky=!1,h.leftOffset=null,h.topOffset=null,h.init=function(){h.setOptions(g),h.$el.each(function(){var b=a(this);b.css("padding",0),h.$originalHeader=a("thead:first",this),h.$clonedHeader=h.$originalHeader.clone(),b.trigger("clonedHeader."+d,[h.$clonedHeader]),h.$clonedHeader.addClass("tableFloatingHeader"),h.$clonedHeader.css({display:"none",opacity:0}),h.$originalHeader.addClass("tableFloatingHeaderOriginal"),h.$originalHeader.after(h.$clonedHeader),h.$printStyle=a('<style type="text/css" media="print">.tableFloatingHeader{display:none !important;}.tableFloatingHeaderOriginal{position:static !important;}</style>'),h.$head.append(h.$printStyle)}),h.updateWidth(),h.toggleHeaders(),h.bind()},h.destroy=function(){h.$el.unbind("destroyed",h.teardown),h.teardown()},h.teardown=function(){h.isSticky&&h.$originalHeader.css("position","static"),a.removeData(h.el,"plugin_"+d),h.unbind(),h.$clonedHeader.remove(),h.$originalHeader.removeClass("tableFloatingHeaderOriginal"),h.$originalHeader.css("visibility","visible"),h.$printStyle.remove(),h.el=null,h.$el=null},h.bind=function(){h.$scrollableArea.on("scroll."+d,h.toggleHeaders),h.isWindowScrolling||(h.$window.on("scroll."+d+h.id,h.setPositionValues),h.$window.on("resize."+d+h.id,h.toggleHeaders)),h.$scrollableArea.on("resize."+d,h.toggleHeaders),h.$scrollableArea.on("resize."+d,h.updateWidth)},h.unbind=function(){h.$scrollableArea.off("."+d,h.toggleHeaders),h.isWindowScrolling||(h.$window.off("."+d+h.id,h.setPositionValues),h.$window.off("."+d+h.id,h.toggleHeaders)),h.$scrollableArea.off("."+d,h.updateWidth)},h.debounce=function(a,b){var c=null;return function(){var d=this,e=arguments;clearTimeout(c),c=setTimeout(function(){a.apply(d,e)},b)}},h.toggleHeaders=h.debounce(function(){h.$el&&h.$el.each(function(){var b,c=a(this),e=h.isWindowScrolling?isNaN(h.options.fixedOffset)?h.options.fixedOffset.outerHeight():h.options.fixedOffset:h.$scrollableArea.offset().top+(isNaN(h.options.fixedOffset)?0:h.options.fixedOffset),f=c.offset(),g=h.$scrollableArea.scrollTop()+e,i=h.$scrollableArea.scrollLeft(),j=h.options.cacheHeaderHeight?h.cachedHeaderHeight:h.$clonedHeader.height(),k=h.isWindowScrolling?g>f.top:e>f.top,l=(h.isWindowScrolling?g:0)<f.top+c.height()-j-(h.isWindowScrolling?0:e);k&&l?(b=f.left-i+h.options.leftOffset,h.$originalHeader.css({position:"fixed","margin-top":h.options.marginTop,left:b,"z-index":3}),h.leftOffset=b,h.topOffset=e,h.$clonedHeader.css("display",""),h.isSticky||(h.isSticky=!0,h.updateWidth(),c.trigger("enabledStickiness."+d)),h.setPositionValues()):h.isSticky&&(h.$originalHeader.css("position","static"),h.$clonedHeader.css("display","none"),h.isSticky=!1,h.resetWidth(a("td,th",h.$clonedHeader),a("td,th",h.$originalHeader)),c.trigger("disabledStickiness."+d))})},0),h.setPositionValues=h.debounce(function(){var a=h.$window.scrollTop(),b=h.$window.scrollLeft();!h.isSticky||0>a||a+h.$window.height()>h.$document.height()||0>b||b+h.$window.width()>h.$document.width()||h.$originalHeader.css({top:h.topOffset-(h.isWindowScrolling?0:a),left:h.leftOffset-(h.isWindowScrolling?0:b)})},0),h.updateWidth=h.debounce(function(){if(h.isSticky){h.$originalHeaderCells||(h.$originalHeaderCells=a("th,td",h.$originalHeader)),h.$clonedHeaderCells||(h.$clonedHeaderCells=a("th,td",h.$clonedHeader));var b=h.getWidth(h.$clonedHeaderCells);h.setWidth(b,h.$clonedHeaderCells,h.$originalHeaderCells),h.$originalHeader.css("width",h.$clonedHeader.width()),h.options.cacheHeaderHeight&&(h.cachedHeaderHeight=h.$clonedHeader.height())}},0),h.getWidth=function(c){var d=[];return c.each(function(c){var e,f=a(this);if("border-box"===f.css("box-sizing")){var g=f[0].getBoundingClientRect();e=g.width?g.width:g.right-g.left}else{var i=a("th",h.$originalHeader);if("collapse"===i.css("border-collapse"))if(b.getComputedStyle)e=parseFloat(b.getComputedStyle(this,null).width);else{var j=parseFloat(f.css("padding-left")),k=parseFloat(f.css("padding-right")),l=parseFloat(f.css("border-width"));e=f.outerWidth()-j-k-l}else e=f.width()}d[c]=e}),d},h.setWidth=function(a,b,c){b.each(function(b){var d=a[b];c.eq(b).css({"min-width":d,"max-width":d})})},h.resetWidth=function(b,c){b.each(function(b){var d=a(this);c.eq(b).css({"min-width":d.css("min-width"),"max-width":d.css("max-width")})})},h.setOptions=function(b){h.options=a.extend({},f,b),h.$window=a(h.options.objWindow),h.$head=a(h.options.objHead),h.$document=a(h.options.objDocument),h.$scrollableArea=a(h.options.scrollableArea),h.isWindowScrolling=h.$scrollableArea[0]===h.$window[0]},h.updateOptions=function(a){h.setOptions(a),h.unbind(),h.bind(),h.updateWidth(),h.toggleHeaders()},h.init()}var d="stickyTableHeaders",e=0,f={fixedOffset:0,leftOffset:0,marginTop:0,objDocument:document,objHead:"head",objWindow:b,scrollableArea:b,cacheHeaderHeight:!1};a.fn[d]=function(b){return this.each(function(){var e=a.data(this,"plugin_"+d);e?"string"==typeof b?e[b].apply(e):e.updateOptions(b):"destroy"!==b&&a.data(this,"plugin_"+d,new c(this,b))})}}(jQuery,window);</script>
-<style type="text/css">
-
-body {
-background: #f2f2f2;
-padding: 60px 0 0 8px; 
+<style type="text/css">.value-box-primary, .bg-primary {
+background-color: rgba(39, 128, 227, 0.7);
 }
-body hr {
-border-color: #d7d7d7;
-margin: 10px 0;
+.value-box-info, .bg-info {
+background-color: rgba(153, 84, 187, 0.7);
 }
-.navbar-inverse .navbar-nav > li > a,
-.navbar .navbar-brand {
-text-decoration: none;
+.value-box-success, .bg-success {
+background-color: rgba(63, 182, 24, 0.7);
 }
-.navbar-logo {
-margin-top: 1px;
+.value-box-warning, .bg-warning {
+background-color: rgba(255, 117, 24, 0.7);
 }
-.navbar-logo img {
-margin-right: 12px;
+.value-box-danger, .bg-danger {
+background-color: rgba(255, 0, 57, 0.7);
 }
-.navbar-author {
-margin-left: 10px;
-font-size: 15px;
+</style>
+<style type="text/css">body{background:#f5f5f5;padding:60px 0 0 8px}body hr{border-color:#dfdfdf;margin:10px 0}.navbar-inverse .navbar-nav>li>a,.navbar .navbar-brand{text-decoration:none}.navbar-logo{margin-top:1px}.navbar-logo img{margin-right:12px}.navbar-author{margin-left:10px;font-size:15.4px}.navbar .dropdown-menu .fa{min-width:20px}.navbar .dropdown-menu{min-width:150px;max-height:500px;overflow:auto}.chart-wrapper,.nav-tabs-custom,.sbframe-commentary{background:#fff;border:1px solid #dfdfdf;border-radius:.25rem;margin-bottom:8px;margin-right:8px}.chart-title{border-bottom:1px solid #dfdfdf;font-size:14px;font-weight:300;padding:7px 10px 4px;color:inherit;font-family:inherit}.chart-wrapper .chart-title:empty{display:none}.chart-wrapper .chart-stage{overflow:hidden;padding:5px 10px;position:relative}.chart-wrapper .chart-notes{background:#fcfcfc;border-top:1px solid #dfdfdf;color:#999;font-size:12.25px;padding:8px 10px 5px}#dashboard-container{visibility:hidden}.tab-content>.dashboard-page-wrapper.active{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.dashboard-page-wrapper{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}.dashboard-row-orientation{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}.dashboard-row{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row}.dashboard-row-flex{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}.dashboard-column-orientation{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row}.dashboard-column{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}.chart-wrapper-flex{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}.chart-stage-flex{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;position:relative}.chart-shim{position:absolute;left:8px;top:8px;right:8px;bottom:8px}.no-padding .chart-shim{left:0;top:0;right:0;bottom:0}.flowing-content-shim{overflow:auto;left:0;top:0;right:0;bottom:0;padding-left:8px;padding-right:8px}.flowing-content-container{padding-top:8px;padding-bottom:8px}.chart-stage .table-bordered{border:none}.chart-stage .table-bordered>tbody>tr>th,.chart-stage .table-bordered>tfoot>tr>th,.chart-stage .table-bordered>tbody>tr>td,.chart-stage .table-bordered>tfoot>tr>td{border:none}.chart-stage .table-bordered>tbody>tr>td{border-top:1px solid #dfdfdf}.chart-stage .table-bordered>thead>tr>th{border:none;border-bottom:2px solid #dfdfdf}.bootstrap-table table>thead{background-color:#fff}.bootstrap-table table.data,.bootstrap-table table.shiny-table{width:inherit !important}.bootstrap-table table.data>tbody>tr>th,.bootstrap-table table.shiny-table>tbody>tr>th{border-top:none;border-bottom:2px solid #dfdfdf;padding:5px}.bootstrap-table .data td[align=right]{font-family:inherit}.chart-wrapper form{padding-left:5px;padding-right:5px}.shiny-input-container label{font-weight:normal}.chart-stage .html-widget{width:100% !important;height:100% !important}.chart-stage .html-widget-static-bound{width:100% !important;height:100% !important}.chart-stage .shiny-bound-output{width:100% !important;height:100% !important}.chart-shim>p:empty{display:none}.chart-stage>p:empty{display:none}.chart-stage .knitr-options{display:none}.image-container{position:absolute;top:0;left:0;right:0;bottom:0;margin:0}.image-container img{opacity:0;overflow:hidden}.storyboard-nav .sbnext,.storyboard-nav .sbprev{font-size:49px;color:#333}.storyboard-nav .sbframelist ul li{background:#fff;border:1px solid #dfdfdf;border-radius:.25rem;color:#666;font-size:14px}.storyboard-nav .sbframelist ul li.active{color:#fff;background-color:rgba(51,122,183,0.7)}.sbframe-commentary{background:#fcfcfc;font-size:14px}.nav-tabs-custom>.nav-tabs{margin:0;border-bottom:1px solid #dfdfdf;color:rgba(92,92,92,0.6);font-size:14px;font-weight:300;font-family:inherit;border-top-right-radius:3px;border-top-left-radius:3px}.nav-tabs-custom>.nav-tabs>li{border-top:3px solid transparent;margin-bottom:-1px;margin-right:5px}.nav-tabs-custom>.nav-tabs>li>a,.nav-tabs-custom>.nav-tabs>li>a:active{color:#5c5c5c;font-weight:300;font-size:14px;border-radius:0;padding:3px 10px 5px;text-transform:none}.nav-tabs-custom>.nav-tabs>li:not(.active)>a{border-bottom-color:transparent}.nav-tabs-custom>.nav-tabs>li>a.text-muted{color:rgba(92,92,92,0.6)}.nav-tabs-custom>.nav-tabs>li>a,.nav-tabs-custom>.nav-tabs>li>a:hover{background:transparent;margin:0}.nav-tabs-custom>.nav-tabs>li>a:hover{color:rgba(92,92,92,0.6)}.nav-tabs-custom>.nav-tabs>li:not(.active)>a:hover,.nav-tabs-custom>.nav-tabs>li:not(.active)>a:focus,.nav-tabs-custom>.nav-tabs>li:not(.active)>a:active{border-color:transparent}.nav-tabs-custom>.nav-tabs>li.active{border-top-color:#337ab7}.nav-tabs-custom>.nav-tabs>li.active>a,.nav-tabs-custom>.nav-tabs>li.active:hover>a{background-color:#fff;color:#5c5c5c}.nav-tabs-custom>.nav-tabs>li.active>a{border-top-color:transparent;border-left-color:#dfdfdf;border-right-color:#dfdfdf}.nav-tabs-custom>.nav-tabs>li:first-of-type{margin-left:0}.nav-tabs-custom>.nav-tabs>li:first-of-type.active>a{border-left-color:transparent}.nav-tabs-custom>.nav-tabs.pull-right{float:none !important}.nav-tabs-custom>.nav-tabs.pull-right>li{float:right}.nav-tabs-custom>.nav-tabs.pull-right>li:first-of-type{margin-right:0}.nav-tabs-custom>.nav-tabs.pull-right>li:first-of-type>a{border-left-width:1px}.nav-tabs-custom>.nav-tabs.pull-right>li:first-of-type.active>a{border-left-color:#dfdfdf;border-right-color:transparent}.nav-tabs-custom>.nav-tabs>li.header{line-height:35px;padding:0 10px;font-size:21px;color:#5c5c5c}.nav-tabs-custom>.nav-tabs>li.header>.fa,.nav-tabs-custom>.nav-tabs>li.header>.glyphicon,.nav-tabs-custom>.nav-tabs>li.header>.ion{margin-right:5px}.nav-tabs-custom>.tab-content{background:#fff;padding:0;border-bottom-right-radius:3px;border-bottom-left-radius:3px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.nav-tabs-custom>.tab-content>.chart-wrapper{background:#fff;border:none;margin:0}.nav-tabs-custom>.tab-content>.active{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.nav-tabs-custom .dropdown.open>a:active,.nav-tabs-custom .dropdown.open>a:focus{background:transparent;color:#5c5c5c}@media (max-width: 767px){.value-box{text-align:center;margin-right:8px}.value-box .icon{display:none}}.section.sidebar{position:fixed;top:51px;left:0;bottom:0;border-right:1px solid #dfdfdf;background-color:rgba(51,122,183,0.1);padding-top:10px;padding-left:10px;padding-right:10px;visibility:hidden;overflow:auto}.section.sidebar form p:first-child{margin-top:10px}#flexdashboard-source-code{display:none}.featherlight-content #flexdashboard-source-code{display:inline-block}.featherlight-content{width:80%;max-width:800px;padding:0 !important;border-bottom:none !important}.featherlight:last-of-type{background:rgba(51,51,51,0.7)}.featherlight-inner{width:100%}.featherlight-content pre{margin:0;border:0;background:#fff;font-size:12.25px}.unselectable{-ms-user-select:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:-moz-none;-o-user-select:none;user-select:none}#flexdashboard-source-code code{-ms-user-select:text;-webkit-user-select:text;-khtml-user-select:text;-moz-user-select:text;-o-user-select:text;user-select:text}.dataTables_filter input[type="search"]{-webkit-appearance:searchfield;outline:none}.dataTables_wrapper.no-footer .dataTables_info{padding-top:0}table.dataTable thead th{border-bottom:1px solid #dfdfdf}.dataTables_wrapper.no-footer .dataTables_scrollBody{border-bottom:1px solid #dfdfdf}.desktop-layout div.section.mobile{display:none}.mobile-layout div.section.no-mobile{display:none}.mobile-figure{display:none}
+</style>
+<style type="text/css">body {
+padding-top: 60px;
 }
-.navbar .dropdown-menu .fa {
-min-width: 20px;
+.section.sidebar {
+top: 51px;
+background-color: rgba(39, 128, 227, 0.1);
 }
-.navbar .dropdown-menu {
-min-width: 150px;
-max-height: 500px;
-overflow: auto;
+.value-box {
+color: #f9f9f9;
 }
-.chart-wrapper,
-.nav-tabs-custom,
-.sbframe-commentary
-{
-background: #fff;
-border: 1px solid #e2e2e2;
-border-radius: 3px;
-margin-bottom: 8px;
-margin-right: 8px;
+.storyboard-nav .sbframelist ul li.active {
+background-color: rgba(39, 128, 227, 0.7);
+}
+.nav-tabs-custom > .nav-tabs > li.active {
+border-top-color: rgba(39, 128, 227, 0.7);
 }
 .chart-title {
-border-bottom: 1px solid #d7d7d7;
-color: #666;
-font-size: 14px;
-font-weight: 300;
-padding: 7px 10px 4px;
+font-weight: 500;
 }
-.chart-wrapper .chart-title:empty {
-display: none;
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:active {
+font-weight: 500;
 }
-.chart-wrapper .chart-stage {
-overflow: hidden;
-padding: 5px 10px;
-position: relative;
-}
-.chart-wrapper .chart-notes {
-background: #fbfbfb;
-border-top: 1px solid #e2e2e2;
-color: #808080;
-font-size: 12px;
-padding: 8px 10px 5px;
-}
-
-#dashboard-container {
-visibility: hidden;
-}
-.tab-content>.dashboard-page-wrapper.active {
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
-}
-.dashboard-page-wrapper {
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--webkit-flex-direction: column;
--ms-flex-direction: column;
-flex-direction: column;
-}
-.dashboard-row-orientation {
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--webkit-flex-direction: column;
--ms-flex-direction: column;
-flex-direction: column;
-}
-.dashboard-row {
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: horizontal;
--webkit-box-direction: normal;
--webkit-flex-direction: row;
--ms-flex-direction: row;
-flex-direction: row;
-}
-.dashboard-row-flex {
--webkit-box-flex: 1;
--webkit-flex: 1;
--ms-flex: 1;
-flex: 1;
-}
-.dashboard-column-orientation {
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: horizontal;
--webkit-box-direction: normal;
--webkit-flex-direction: row;
--ms-flex-direction: row;
-flex-direction: row;
-}
-.dashboard-column {
--webkit-box-flex: 1;
--webkit-flex: 1;
--ms-flex: 1;
-flex: 1;
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--webkit-flex-direction: column;
--ms-flex-direction: column;
-flex-direction: column;
-}
-.chart-wrapper-flex {
--webkit-box-flex: 1;
--webkit-flex: 1;
--ms-flex: 1;
-flex: 1;
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--webkit-flex-direction: column;
--ms-flex-direction: column;
-flex-direction: column;
-}
-.chart-stage-flex {
--webkit-box-flex: 1;
--webkit-flex: 1;
--ms-flex: 1;
-flex: 1;
-position: relative;
-}
-.chart-shim {
-position: absolute;
-left: 8px; top: 8px; right: 8px; bottom: 8px;
-}
-.no-padding .chart-shim {
-left: 0; top: 0; right: 0; bottom: 0;
-}
-.flowing-content-shim {
-overflow: auto;
-left: 0; top: 0; right: 0; bottom: 0;
-padding-left: 8px;
-padding-right: 8px;
-}
-.flowing-content-container {
-padding-top: 8px;
-padding-bottom: 8px;
-}
-.chart-stage .table-bordered {
-border: none;
-}
-.chart-stage .table-bordered > tbody > tr > th,
-.chart-stage .table-bordered > tfoot > tr > th,
-.chart-stage .table-bordered > tbody > tr > td,
-.chart-stage .table-bordered > tfoot > tr > td {
-border: none;
-}
-.chart-stage .table-bordered > tbody > tr > td {
-border-top: 1px solid #dddddd;
-}
-.chart-stage .table-bordered > thead > tr > th {
-border: none;
-border-bottom: 2px solid #dddddd;
-}
-.bootstrap-table table>thead {
-background-color: #fff;
-}
-.bootstrap-table table.data,
-.bootstrap-table table.shiny-table {
-width: inherit !important;
-}
-.bootstrap-table table.data>tbody>tr>th,
-.bootstrap-table table.shiny-table>tbody>tr>th {
-border-top: none;
-border-bottom: 2px solid #dddddd;
-padding: 5px;
-}
-.bootstrap-table .data td[align=right] {
-font-family: inherit;
-}
-.chart-wrapper form {
-padding-left: 5px;
-padding-right: 5px;
-}
-.shiny-input-container label {
-font-weight: normal;
-}
-.chart-stage .html-widget {
-width: 100% !important;
-height: 100% !important;
-}
-.chart-stage .html-widget-static-bound {
-width: 100% !important;
-height: 100% !important;
-}
-.chart-stage .shiny-bound-output {
-width: 100% !important;
-height: 100% !important;
-}
-
-.chart-shim>p:empty {
-display: none;
-}
-.chart-stage>p:empty {
-display: none;
-}
-
-.chart-stage .knitr-options {
-display: none;
-}
-
-.image-container {
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-margin: 0;
-}
-.image-container img {
-opacity: 0;
-overflow: hidden;
-}
-
-.value-box {
-border-radius: 2px;
-position: relative;
-display: block;
-margin-right: 8px;
-margin-bottom: 8px;
-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-.value-box > .inner {
-padding: 10px;
-padding-left: 20px;
-padding-right: 20px;
-}
-.value-box .value {
-font-size: 38px;
-font-weight: bold;
-margin: 0 0 3px 0;
-white-space: nowrap;
-padding: 0;
-}
-.value-box .caption {
-font-size: 15px;
-}
-.value-box .caption > small {
-display: block;
-font-size: 13px;
-margin-top: 5px;
-}
-.value-box .icon i {
-position: absolute;
-top: 15px;
-right: 15px;
-font-size: 80px;
-color: rgba(0, 0, 0, 0.15);
-}
-.linked-value:hover {
-cursor: pointer;
-}
-.value-box.linked-value:hover {
-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-}
+</style>
+<style type="text/css">
 
 .storyboard-nav button {
 background: transparent;
@@ -408,7 +156,6 @@ opacity: .1;
 float: left;
 width: 2%;
 height: 120px;
-font-size: 50px;
 }
 .storyboard-nav .sbprev {
 text-align: left;
@@ -439,25 +186,14 @@ width: 270px;
 height: 100%;
 padding: 10px 10px 10px 10px;
 margin-right: 8px;
-background: #fff;
-border: 1px solid #e2e2e2;
-border-radius: 3px;
-color: #3a3c47;
 text-align: left;
-font-size: 14px;
 cursor: pointer;
 }
 .storyboard-nav .sbframelist ul li:last-child {
 margin-right: 0px;
 }
-.storyboard-nav .sbframelist ul li.active {
-color: #fff;
-background: #B8B8B8;
-}
 .sbframe-commentary {
 width: 300px;
-background: #fbfbfb;
-font-size: 14px;
 }
 .sbframe-commentary ul {
 padding-left: 22px;
@@ -467,258 +203,6 @@ display: flex;
 }
 .sbframe:not(.active) {
 display: none;
-}
-
-.nav-tabs-custom > .nav-tabs {
-margin: 0;
-border-bottom: 1px solid #d7d7d7;
-color: #666;
-font-size: 14px;
-font-weight: 300;
-border-top-right-radius: 3px;
-border-top-left-radius: 3px;
-}
-.nav-tabs-custom > .nav-tabs > li {
-border-top: 3px solid transparent;
-margin-bottom: -1px;
-margin-right: 5px;
-}
-.nav-tabs-custom > .nav-tabs > li > a,
-.nav-tabs-custom > .nav-tabs > li > a:active {
-color: #666;
-font-weight: 300;
-font-size: 14px;
-border-radius: 0;
-padding: 3px 10px 5px;
-text-transform: none;
-}
-.nav-tabs-custom > .nav-tabs > li:not(.active) > a {
-border-bottom-color: transparent;
-}
-.nav-tabs-custom > .nav-tabs > li > a.text-muted {
-color: #999;
-}
-.nav-tabs-custom > .nav-tabs > li > a,
-.nav-tabs-custom > .nav-tabs > li > a:hover {
-background: transparent;
-margin: 0;
-}
-.nav-tabs-custom > .nav-tabs > li > a:hover {
-color: #999;
-}
-.nav-tabs-custom > .nav-tabs > li:not(.active) > a:hover,
-.nav-tabs-custom > .nav-tabs > li:not(.active) > a:focus,
-.nav-tabs-custom > .nav-tabs > li:not(.active) > a:active {
-border-color: transparent;
-}
-.nav-tabs-custom > .nav-tabs > li.active {
-border-top-color: #3c8dbc;
-}
-.nav-tabs-custom > .nav-tabs > li.active > a,
-.nav-tabs-custom > .nav-tabs > li.active:hover > a {
-background-color: #fff;
-color: #666;
-}
-.nav-tabs-custom > .nav-tabs > li.active > a {
-border-top-color: transparent;
-border-left-color: #d7d7d7;
-border-right-color: #d7d7d7;
-}
-.nav-tabs-custom > .nav-tabs > li:first-of-type {
-margin-left: 0;
-}
-.nav-tabs-custom > .nav-tabs > li:first-of-type.active > a {
-border-left-color: transparent;
-}
-.nav-tabs-custom > .nav-tabs.pull-right {
-float: none !important;
-}
-.nav-tabs-custom > .nav-tabs.pull-right > li {
-float: right;
-}
-.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type {
-margin-right: 0;
-}
-.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type > a {
-border-left-width: 1px;
-}
-.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type.active > a {
-border-left-color: #d7d7d7;
-border-right-color: transparent;
-}
-.nav-tabs-custom > .nav-tabs > li.header {
-line-height: 35px;
-padding: 0 10px;
-font-size: 20px;
-color: #666;
-}
-.nav-tabs-custom > .nav-tabs > li.header > .fa,
-.nav-tabs-custom > .nav-tabs > li.header > .glyphicon,
-.nav-tabs-custom > .nav-tabs > li.header > .ion {
-margin-right: 5px;
-}
-.nav-tabs-custom > .tab-content {
-background: #fff;
-padding: 0;
-border-bottom-right-radius: 3px;
-border-bottom-left-radius: 3px;
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
-}
-.nav-tabs-custom > .tab-content > .chart-wrapper {
-background: #fff;
-border: none;
-margin: 0;
-}
-.nav-tabs-custom > .tab-content > .active {
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
-}
-.nav-tabs-custom .dropdown.open > a:active,
-.nav-tabs-custom .dropdown.open > a:focus {
-background: transparent;
-color: #999;
-}
-@media (max-width: 767px) {
-.value-box {
-text-align: center;
-margin-right: 8px;
-}
-.value-box .icon {
-display: none;
-}
-}
-
-.section.sidebar {
-position: fixed;
-top: 51px; 
-left: 0;
-bottom: 0;
-border-right: 1px solid #e2e2e2;
-background-color: white; 
-padding-left: 10px;
-padding-right: 10px;
-visibility: hidden;
-overflow: auto;
-}
-.section.sidebar form p:first-child {
-margin-top: 10px;
-}
-
-#flexdashboard-source-code {
-display: none;
-}
-.featherlight-content #flexdashboard-source-code {
-display: inline-block;
-}
-.featherlight-content {
-width: 80%;
-max-width: 800px;
-padding: 0 !important;
-border-bottom: none !important;
-}
-.featherlight:last-of-type {
-background: rgba(0, 0, 0, 0.7);
-}
-.featherlight-inner {
-width: 100%;
-}
-.featherlight-content pre {
-margin: 0;
-border: 0;
-background: #fff;
-font-size: 12px;
-}
-.unselectable {
--ms-user-select: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: -moz-none;
--o-user-select: none;
-user-select: none;
-}
-#flexdashboard-source-code code {
--ms-user-select: text;
--webkit-user-select: text;
--khtml-user-select: text;
--moz-user-select: text;
--o-user-select: text;
-user-select: text;
-}
-
-.dataTables_filter input[type="search"] {
--webkit-appearance: searchfield;
-outline: none;
-}
-.dataTables_wrapper.no-footer
-.dataTables_info {
-padding-top: 0;
-}
-table.dataTable thead th {
-border-bottom: 1px solid #d7d7d7;
-}
-.dataTables_wrapper.no-footer .dataTables_scrollBody {
-border-bottom: 1px solid #d7d7d7;
-}
-
-.desktop-layout div.section.mobile {
-display: none;
-}
-.mobile-layout div.section.no-mobile {
-display: none;
-}
-.mobile-figure {
-display: none;
-}
-body {
-padding-top: 60px;
-}
-.section.sidebar {
-top: 51px;
-background-color: rgba(39, 128, 227, 0.1);
-}
-.value-box {
-color: #f9f9f9;
-}
-.bg-primary {
-background-color: rgba(39, 128, 227, 0.7);
-}
-.storyboard-nav .sbframelist ul li.active {
-background-color: rgba(39, 128, 227, 0.7);
-}
-.nav-tabs-custom > .nav-tabs > li.active {
-border-top-color: rgba(39, 128, 227, 0.7);
-}
-.bg-info {
-background-color: rgba(153, 84, 187, 0.7);
-}
-.bg-warning {
-background-color: rgba(255, 117, 24, 0.7);
-}
-.bg-danger {
-background-color: rgba(255, 0, 57, 0.7);
-}
-.bg-success {
-background-color: rgba(63, 182, 24, 0.7);
-}
-.chart-title {
-font-weight: 500;
-}
-.nav-tabs-custom > .nav-tabs > li > a,
-.nav-tabs-custom > .nav-tabs > li > a:active {
-font-weight: 500;
-}
-@media only screen and (min-width: 768px) {
-html, body {
-height: 100%;
-}
-#dashboard-container {
-height: 100%;
-}
 }
 </style>
 
@@ -732,12 +216,6 @@ height: 100%;
 <div class="container-fluid">
 <div class="navbar-header">
 
-<button id="navbar-button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-
 <span class="navbar-logo pull-left">
   
 </span>
@@ -746,6 +224,12 @@ height: 100%;
   <span class="navbar-author">
         </span>
 </span>
+
+<button id="navbar-button" type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
 
 </div>
 <div id="navbar" class="navbar-collapse collapse">
@@ -963,11 +447,13 @@ var FlexDashboard = (function () {
         for (var j = 0; j<item.items.length; j++) {
           var subItem = item.items[j];
           var li = $('<li></li>');
-          li.append(navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target));
+          var a = navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target);
+          a.removeClass("nav-link").addClass("dropdown-item");
+          li.append(a);
           menu.append(li);
         }
       } else {
-        var li = $('<li></li>');
+        var li = $('<li class="nav-item"></li>');
         li.append(navbarLink(item.icon, item.title, item.href, item.target));
         container.append(li);
       }
@@ -982,7 +468,7 @@ var FlexDashboard = (function () {
     if (existingMenu.length > 0) {
       return existingMenu.children('ul');
     } else {
-      var li = $('<li></li>');
+      var li = $('<li class="nav-item"></li>');
       if (id)
         li.attr('id', id);
       li.addClass('dropdown');
@@ -995,6 +481,7 @@ var FlexDashboard = (function () {
       var a = navbarLink(icon, title, "#");
       a.addClass('dropdown-toggle');
       a.attr('data-toggle', 'dropdown');
+      a.attr('data-bs-toggle', 'dropdown');
       a.attr('role', 'button');
       a.attr('aria-expanded', 'false');
       li.append(a);
@@ -1012,6 +499,7 @@ var FlexDashboard = (function () {
     var id = page.attr('id');
     var icon = page.attr('data-icon');
     var navmenu = page.attr('data-navmenu');
+    var navmenuIcon = page.attr('data-navmenu-icon');
 
     // get hidden state (transfer this to navbar)
     var hidden = page.hasClass('hidden');
@@ -1030,8 +518,6 @@ var FlexDashboard = (function () {
 
     // add the tab-pane class to the wrapper
     wrapper.addClass('tab-pane');
-    if (active)
-      wrapper.addClass('active');
 
     // get a reference to the h1, discover its inner contens, then detach it
     var h1 = wrapper.find('h1').first();
@@ -1042,17 +528,24 @@ var FlexDashboard = (function () {
     var li = $('<li></li>');
     var a = navbarLink(icon, title, '#' + id);
     a.attr('data-toggle', 'tab');
+    a.attr('data-bs-toggle', 'tab');
     li.append(a);
 
     // add it to the navbar (or navbar menu if specified)
     var container = $('ul.navbar-left');
     if (navmenu) {
       var menuId = navmenu.replace(/\s+/g, '');
-      var menu = navbarMenu(menuId, null, navmenu, container);
+      var menu = navbarMenu(menuId, navmenuIcon, navmenu, container);
+      li.find("> a").removeClass("nav-link").addClass("dropdown-item");
       menu.append(li);
     } else {
+      li.addClass("nav-item")
       container.append(li);
     }
+
+    // mark active tab and corresponding nav menu item
+    if (active)
+      $(a).tab("show");
 
     // hide it if requested
     if (hidden)
@@ -1061,7 +554,7 @@ var FlexDashboard = (function () {
 
   function navbarLink(icon, title, href, target) {
 
-    var a = $('<a></a>');
+    var a = $('<a class="nav-link"></a>');
     if (icon) {
 
       // get the name of the icon set and icon
@@ -1118,8 +611,7 @@ var FlexDashboard = (function () {
 
      var serviceLinks = {
       "twitter": "https://twitter.com/share?text=" + encodeURIComponent(document.title) + "&url="+encodeURIComponent(location.href),
-      "facebook": "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+encodeURIComponent(location.href),
-      "google-plus": "https://plus.google.com/share?url="+encodeURIComponent(location.href),
+      "facebook": "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(location.href),
       "linkedin": "https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(location.href) + "&title=" + encodeURIComponent(document.title),
       "pinterest": "https://pinterest.com/pin/create/link/?url="+encodeURIComponent(location.href) + "&description=" + encodeURIComponent(document.title)
     };
@@ -1736,7 +1228,8 @@ var FlexDashboard = (function () {
 
     // check for fade option
     var fade = tabset.hasClass("tabset-fade");
-    var navClass = "nav-tabs";
+    var pills = tabset.hasClass("tabset-pills");
+    var navClass = pills ? "nav-pills" : "nav-tabs";
 
     // determine the heading level of the tabset and tabs
     var match = tabset.attr('class').match(/level(\d) /);
@@ -1757,6 +1250,7 @@ var FlexDashboard = (function () {
     $(tabs[0]).before(tabContent);
 
     // build the tabset
+    var activeTab = 0;
     tabs.each(function(i) {
 
       // get the tab div
@@ -1764,6 +1258,10 @@ var FlexDashboard = (function () {
 
       // get the id then sanitize it for use with bootstrap tabs
       var id = tab.attr('id');
+
+      // see if this is marked as the active tab
+      if (tab.hasClass('active'))
+        activeTab = i;
 
       // sanitize the id for use with bootstrap tabs
       id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
@@ -1774,14 +1272,12 @@ var FlexDashboard = (function () {
       var headingDom = heading.contents();
 
       // build and append the tab list item
-      var a = $('<a role="tab" data-toggle="tab"></a>');
+      var a = $('<a role="tab" data-toggle="tab" data-bs-toggle="tab" class="nav-link"></a>');
       a.append(headingDom);
       a.attr('href', '#' + id);
       a.attr('aria-controls', id);
-      var li = $('<li role="presentation"></li>');
+      var li = $('<li role="presentation" class="nav-item"></li>');
       li.append(a);
-      if (i === 0)
-        li.attr('class', 'active');
       tabList.append(li);
 
       // set it's attributes
@@ -1791,15 +1287,17 @@ var FlexDashboard = (function () {
       tab.addClass('no-title');
       if (fade)
         tab.addClass('fade');
-      if (i === 0) {
-        tab.addClass('active');
-        if (fade)
-          tab.addClass('in');
-      }
 
       // move it into the tab content div
       tab.detach().appendTo(tabContent);
     });
+
+    // set active tab
+    $(tabList.children()[activeTab]).tab("show");
+    var active = $(tabContent.children('div.section')[activeTab]);
+    active.addClass('active');
+    if (fade)
+      active.addClass('in');
 
     // add nav-tabs-custom
     tabset.addClass('nav-tabs-custom');
@@ -1975,9 +1473,10 @@ var FlexDashboard = (function () {
 
     // restore tab/page from bookmark
     var hash = window.decodeURIComponent(window.location.hash);
-    if (hash.length > 0)
+    if (hash.length > 0) {
+      // Update the tab without .showPage() so that we don't change page history
       $('ul.nav a[href="' + hash + '"]').tab('show');
-    FlexDashboardUtils.manageActiveNavbarMenu();
+    }
 
     // navigate to a tab when the history changes
     window.addEventListener("popstate", function(e) {
@@ -1986,9 +1485,9 @@ var FlexDashboard = (function () {
       if (activeTab.length) {
         activeTab.tab('show');
       } else {
+        // returning to the base page URL without a hash activates first tab
         $('ul.nav a:first').tab('show');
       }
-      FlexDashboardUtils.manageActiveNavbarMenu();
     });
 
     // add a hash to the URL when the user clicks on a tab/page
@@ -2041,111 +1540,11 @@ var FlexDashboard = (function () {
     }
   }
 
-
-  // get theme color
-  var themeColors = {
-    bootstrap: {
-      primary: "rgba(51, 122, 183, 0.4)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    cerulean: {
-      primary: "rgb(47, 164, 231)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    journal: {
-      primary: "rgba(235, 104, 100, 0.70)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    flatly: {
-      primary: "rgba(44, 62, 80, 0.70)",
-      info: "rgba(52, 152, 219, 0.70)",
-      success: "rgba(24, 188, 156, 0.70)",
-      warning: "rgba(243, 156, 18, 0.70)",
-      danger: "rgba(231, 76, 60, 0.70)"
-    },
-    readable: {
-      primary: "rgba(69, 130, 236, 0.4)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    spacelab: {
-      primary: "rgba(68, 110, 155, 0.25)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    united: {
-      primary: "rgba(221, 72, 20, 0.30)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    cosmo: {
-      primary: "rgba(39, 128, 227, 0.7)",
-      info: "rgba(153, 84, 187, 0.7)",
-      success: "rgba(63, 182, 24, 0.7)",
-      warning: "rgba(255, 117, 24, 0.7)",
-      danger: "rgba(255, 0, 57, 0.7)"
-    },
-    lumen: {
-      primary: "rgba(21, 140, 186, 0.70)",
-      info: "rgba(117, 202, 235, 0.90)",
-      success: "rgba(40, 182, 44, 0.70)",
-      warning: "rgba(255, 133, 27, 0.70)",
-      danger: "rgba(255, 65, 54, 0.70)"
-    },
-    paper: {
-      primary: "rgba(33, 150, 243, 0.35)",
-      info: "rgb(225, 190, 231)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(255, 224, 178)",
-      danger: "rgb(249, 189, 187)"
-    },
-    sandstone: {
-      primary: "rgba(50, 93, 136, 0.3)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    simplex: {
-      primary: "rgba(217, 35, 15, 0.25)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    },
-    yeti: {
-      primary: "rgba(0, 140, 186, 0.298039)",
-      info: "rgb(217, 237, 247)",
-      success: "rgb(223, 240, 216)",
-      warning: "rgb(252, 248, 227)",
-      danger: "rgb(242, 222, 222)"
-    }
-  }
-  function themeColor(color) {
-    return themeColors[_options.theme][color];
-  }
-
   FlexDashboard.prototype = {
     constructor: FlexDashboard,
     init: init,
     isMobilePhone: isMobilePhone,
-    isFillPage: isFillPage,
-    themeColor: themeColor
+    isFillPage: isFillPage
   };
 
   return FlexDashboard;
@@ -2172,7 +1571,6 @@ window.FlexDashboardUtils = {
     setTimeout(function() {
         window.scrollTo(0, 0);
     }, 10);
-    this.manageActiveNavbarMenu();
   },
   showPage: function(href) {
     $('ul.navbar-nav li a[href="' + href + '"]').tab('show');
@@ -2200,17 +1598,6 @@ window.FlexDashboardUtils = {
       return url.substring(hashLoc);
     else
       return "";
-  },
-  manageActiveNavbarMenu: function () {
-    // remove active from anyone currently active
-    $('.navbar ul.nav').find('li').removeClass('active');
-    // find the active tab
-    var activeTab = $('.dashboard-page-wrapper.tab-pane.active');
-    if (activeTab.length > 0) {
-      var tabId = activeTab.attr('id');
-      if (tabId)
-        $(".navbar ul.nav a[href='#" + tabId + "']").parents('li').addClass('active');
-    }
   }
 };
 
@@ -2291,16 +1678,6 @@ window.FlexDashboardComponents.push({
 window.FlexDashboardComponents.push({
   find: function(container) {
     return container.children('div[class^="shiny-"]');
-  }
-});
-
-// datatables
-window.FlexDashboardComponents.push({
-  find: function(container) {
-    return container.find('.datatables');
-  },
-  flex: function(fillPage) {
-    return fillPage;
   }
 });
 
@@ -2472,21 +1849,6 @@ window.FlexDashboardComponents.push({
     if (chartIcon)
       setIcon(chartIcon);
 
-    // set color based on data-background if necessary
-    var dataBackground = valueBox.attr('data-background');
-    if (dataBackground)
-      valueBox.css('background-color', bgColor);
-    else {
-      // default to bg-primary if no other background is specified
-      if (!valueBox.hasClass('bg-primary') &&
-          !valueBox.hasClass('bg-info') &&
-          !valueBox.hasClass('bg-warning') &&
-          !valueBox.hasClass('bg-success') &&
-          !valueBox.hasClass('bg-danger')) {
-        valueBox.addClass('bg-primary');
-      }
-    }
-
     // handle data attributes in valueOutputSpan
     function handleValueOutput(valueOutput) {
 
@@ -2500,19 +1862,30 @@ window.FlexDashboardComponents.push({
       if (dataIcon)
         setIcon(dataIcon);
 
-      // color
+      // If valueBox(color=) was an accent color, this attr should
+      // be populated with the accent color and the relevant CSS comes
+      // in through HTML dependencies
+      var dataColorAccent = valueOutput.attr('data-color-accent');
+      var valueBoxClasses = "value-box-" + (["primary", "info", "danger", "warning", "success"].join(" value-box-"));
+      if (dataColorAccent) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.addClass('value-box-' + dataColorAccent);
+      }
+
+      // If valueBox(color=) was a CSS color, these other data-color-*
+      // attrs will be populated
       var dataColor = valueOutput.attr('data-color');
       if (dataColor) {
-        if (dataColor.indexOf('bg-') === 0) {
-          valueBox.css('background-color', '');
-          if (!valueBox.hasClass(dataColor)) {
-             valueBox.removeClass('bg-primary bg-info bg-warning bg-danger bg-success');
-             valueBox.addClass(dataColor);
-          }
-        } else {
-          valueBox.removeClass('bg-primary bg-info bg-warning bg-danger bg-success');
-          valueBox.css('background-color', dataColor);
-        }
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.css('background-color', dataColor);
+      }
+      var dataColorText = valueOutput.attr('data-color-text');
+      if (dataColorText) {
+        valueBox.find(".inner").css('color', dataColorText);
+      }
+      var dataColorIcon = valueOutput.attr('data-color-icon');
+      if (dataColorIcon) {
+        valueBox.find(".icon").css('color', dataColorIcon);
       }
 
       // url
@@ -2551,29 +1924,52 @@ window.FlexDashboardComponents.push({
 
 <!-- This is an empty template to create the dashboard live. !!!!!!!!!! -->
 <!-- Clear all the content after the lecture. !!!!!!!!!!!!!!!!!!!!!!!!! -->
-<div id="sidebar" class="section level2 sidebar">
-<h2 class="sidebar">Sidebar</h2>
+<!-- 
+- add columns
+- add rows
+- add column / row options
+- add sidebar
+- add tabset
+- add pages
+-->
+<div id="sidebar" class="section level1 sidebar">
+<h1 class="sidebar">Sidebar</h1>
 <p>Button Inputs</p>
 <ul>
 <li><p>Input 1</p></li>
 <li><p>Input 2</p></li>
 </ul>
 </div>
-<div id="column" class="section level2" data-width="650">
-<h2>Column</h2>
-<div id="chart-a-1" class="section level3">
-<h3>Chart A-1</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
+<div id="page-1" class="section level1">
+<h1>Page 1</h1>
+<div id="column-1" class="section level2 tabset">
+<h2 class="tabset">Column 1</h2>
+<div id="chart-1" class="section level3">
+<h3>Chart 1</h3>
+</div>
+<div id="chart-2" class="section level3">
+<h3>Chart 2</h3>
+</div>
+</div>
+<div id="colum-2" class="section level2 tabset">
+<h2 class="tabset">Colum 2</h2>
+<div id="plot-1" class="section level3">
+<h3>Plot 1</h3>
+</div>
+<div id="plot-2" class="section level3">
+<h3>Plot 2</h3>
+</div>
+<div id="plot-3" class="section level3">
+<h3>Plot 3</h3>
 </div>
 </div>
 </div>
-<div id="column-1" class="section level2" data-width="350">
-<h2>Column</h2>
-<div id="chart-b" class="section level3">
-<h3>Chart B</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
+<div id="page-2" class="section level1">
+<h1>Page 2</h1>
+<div id="row-3" class="section level2">
+<h2>Row 3</h2>
+<div id="table-1" class="section level3">
+<h3>Table 1</h3>
 </div>
 </div>
 </div>
@@ -2581,11 +1977,9 @@ window.FlexDashboardComponents.push({
 </div>
 
 <script>
-
-$(document).ready(function () {
-
+$(document).ready(function() {
   // add bootstrap table styles to pandoc tables
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed table-sm');
 
   // initialize mathjax
   var script = document.createElement("script");
@@ -2599,15 +1993,29 @@ $(document).ready(function () {
 <script type="text/javascript">
 $(document).ready(function () {
   FlexDashboard.init({
-    theme: "cosmo",
-    fillPage: true,
-    orientation: "columns",
+    fillPage: false,
+    orientation: "rows",
     storyboard: false,
     defaultFigWidth: 576,
     defaultFigHeight: 460,
     defaultFigWidthMobile: 360,
     defaultFigHeightMobile: 460,
     resize_reload: true
+  });
+  var navbar = $(".navbar").first();
+  var body = $("body").first();
+  var sidebar = $(".section.sidebar").first();
+  function addNavbarPadding() {
+    var navHeight = navbar.outerHeight();
+    body.css("padding-top", (navHeight + 8) + "px");
+    sidebar.css("top", navHeight + "px");
+    var resizeEvent = window.document.createEvent("UIEvents");
+    resizeEvent.initUIEvent("resize", true, false, window, 0);
+    window.dispatchEvent(resizeEvent);
+  }
+  if (!window.Shiny) setTimeout(addNavbarPadding, 100);
+  $(document).on("shiny:idle", function() {
+    setTimeout(addNavbarPadding, 50);
   });
 });
 </script>

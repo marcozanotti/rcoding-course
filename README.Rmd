@@ -14,29 +14,29 @@ knitr::opts_chunk$set(
 
 # R Coding
 
-*Overview*
+This course provides a comprehensive introduction to **R programming**, 
+designed for students, researchers, and professionals who want to develop 
+a solid foundation in data analysis, statistical computing, and reproducible 
+research.
 
-The course aims at providing technical skills about coding/scripting
-aspects for data analysis and to manage persistent data storage of
-sources and results involved in analysis. On the one side, the Python
-programming language and the R framework are illustrated. The goal is to
-deal with essential notions about data structures and control structures
-of both Python and R. On the other side, the goal is to present the core
-notions of relational databases, such as keys, integrity, and
-primary/foreign key constraints, as well as the SQL language for data
-definition, manipulation, and query. Recent and innovative NoSQL
-solutions are also discussed, with special focus on a document-oriented
-system called MongoDB.
+The course begins with the basics of the R environment, syntax, and data 
+structures, then progresses through data wrangling with the **tidyverse**, 
+data visualization with **ggplot2**, and **functional programming** with purrr. 
+Learners will also gain hands-on experience in data import and export, 
+**data cleaning**, and **workflow automation** using reproducible tools such 
+as R Markdown and Quarto.
 
-The **R Coding** part of the course aims at teaching **R Programming**,
-focusing on how to code with modern and state-of-the-art R packages.
+The course also introduces **Business Intelligence** (BI) development using R, 
+where learners will build interactive dashboards and data applications with 
+**Flexdashboard** and **Shiny**. These tools enable the creation of dynamic 
+visual analytics and web-based reports directly from R, empowering participants 
+to share insights interactively with non-technical stakeholders and decision-makers.
 
 
 ## General Information
 
-- [Course Descriprion (for Students)](https://marcozanotti.github.io/rcoding-course/general-infos/rcod_description.html)  
-- [Course Descriprion (for Business Experts)](https://marcozanotti.github.io/rcoding-course/general-infos/rcod_description_business.html)  
-- [Syllabus](https://marcozanotti.github.io/rcoding-course/general-infos/rcod_syllabus.html)  
+- [Website](https://marcozanotti.github.io/rcoding-course/)  
+- [Programme](https://marcozanotti.github.io/rcoding-course/general-infos/rcod_syllabus.html)   
 
   
 ## Materials

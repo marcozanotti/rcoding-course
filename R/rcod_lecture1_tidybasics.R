@@ -325,8 +325,7 @@ select(df, where(is.numeric)) # selects all numeric columns
 library(magrittr)
 
 # Consider this example:
- 
-the_data <- starwars %>%
+the_data <- starwars %>% 
   filter(height > 200) %>%
   mutate(mass_lbs = mass * 2.205) %>% # convert kg to lbs
   select(name, height, mass, mass_lbs)
@@ -523,6 +522,7 @@ str_squish("  hello   world  ")
 # * Count Patterns --------------------------------------------------------
 str_length("hello")
 
+?str_count
 str_count("hello", "h") # h letter
 str_count("hello;", "\\w") # word + numbers
 str_count("hello;", "[:punct:]") # punctuation
@@ -849,4 +849,7 @@ xlsx_example <- readxl_example("datasets.xlsx")
 excel_sheets(xlsx_example)
 read_excel(xlsx_example, sheet = "mtcars")
 
+install.packages('writexl')
+library(writexl)
+write_xlsx(mtcars, "mtcars.xlsx")
 

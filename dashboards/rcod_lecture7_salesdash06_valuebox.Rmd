@@ -185,7 +185,8 @@ renderValueBox({
     value = summary_values_tbl()$health_metric, 
     caption = "Orders", 
     icon = "fa-heartbeat", 
-    color = "success")
+    color = "success"
+  )
 })
 ```
 
@@ -197,7 +198,8 @@ renderValueBox({
     value = summary_values_tbl()$wealth_metric, 
     caption = "Sales", 
     icon = "fa-money-check-alt", 
-    color = "primary")
+    color = "primary"
+  )
 })
 ```
 
@@ -209,7 +211,8 @@ renderValueBox({
     value = summary_values_tbl()$wise_metric, 
     caption = "Average Price", 
     icon = "fa-brain", 
-    color = "info")
+    color = "info"
+  )
 })
 ```
 

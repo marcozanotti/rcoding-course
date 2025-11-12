@@ -37,26 +37,23 @@ We want to create a dashboard that looks like this:
 Sidebar {.sidebar}
 ------------------------
 
-```{r}
+```{r inputs}
+
 checkboxGroupInput(
-  inputId = "checkbox_group", 
-  label = h4("Checkbox Group"),
-  choices = c(
-    "Marketing" = "marketing",
-    "R&D" = "research",
-    "Sales" = "sales"
-  ),
-  selected = c("marketing", "research", "sales")
+  inputId = 'checkbox_group',
+  label = h4('Checkbox Group'),
+  choices = c('Marketing' = 'marketing', 'Sales' = 'sales', 'Research' = 'research'),
+  selected = c('marketing', 'sales', 'research')
 )
 
 dateRangeInput(
-  inputId = "date_range",
-  label = h4("Date Range"),
-  start = "2018-01-01",
-  end = today(), 
+  inputId = 'date_range',
+  label = h4('Date Range'),
+  start = '2018-01-01',
+  end = today(),
   min = min(sales_data_tbl$date),
   max = max(sales_data_tbl$date),
-  startview = "year"
+  startview = 'year'
 )
 
 sliderInput(
@@ -69,6 +66,7 @@ sliderInput(
   round = TRUE,
   pre = "$"
 )
+
 ```
 
 ```{r reset}
@@ -79,32 +77,31 @@ actionButton(
 )
 
 observeEvent(
-  eventExpr = input$reset,
+  eventExpr = input$reset, 
   handlerExpr = {
-
+    
     updateCheckboxGroupInput(
-      session  = session,
-      inputId  = "checkbox_group",
+      session  = session, 
+      inputId  = "checkbox_group", 
       selected = c("marketing", "research", "sales")
     )
-
+    
     updateDateRangeInput(
       session = session,
       inputId = "date_range",
       start = min(sales_data_tbl$date),
       end = today()
     )
-
+    
     updateSliderInput(
       session = session,
       inputId = "slider_input",
       value = c(40, 60)
     )
-
+    
   }
 )
 ```
-
 
 
 Column {data-width=400}
@@ -114,25 +111,20 @@ Column {data-width=400}
 
 ```{r}
 output$checkbox_values <- renderPrint(input$checkbox_group)
-
-textOutput(outputId = "checkbox_values")
+textOutput(outputId = 'checkbox_values')
 ```
-
 
 ### Section - Date Range
 
 ```{r}
 output$date_range_values <- renderPrint(input$date_range)
-
-textOutput(outputId = "date_range_values")
+textOutput(outputId = 'date_range_values')
 ```
-
 
 ### Section - Slider Output
 
 ```{r}
 output$slider_values <- renderPrint(input$slider_input)
-
 textOutput(outputId = "slider_values")
 ```
 
@@ -142,15 +134,14 @@ Column {data-width=600}
 -----------------------
 
 ```{r}
-# Reactive Filter
+# Reactive filter
 sales_data_filtered <- reactive({
-  sales_data_tbl %>%
-    filter(class %in% input$checkbox_group) %>%
-    filter(date %>% between(ymd(input$date_range[1]), ymd(input$date_range[2]))) %>%
+  sales_data_tbl |> 
+    filter(class %in% input$checkbox_group) |> 
+    filter(date %>% between(ymd(input$date_range[1]), ymd(input$date_range[2]))) |> 
     filter(sales %>% between(input$slider_input[1], input$slider_input[2]))
 })
 ```
-
 
 ### Section - Reactive Output
 

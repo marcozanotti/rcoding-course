@@ -2,7 +2,7 @@
 title: "Flexdashboard UI Tutorial"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: rows
+    orientation: columns
     vertical_layout: scroll
 ---
 

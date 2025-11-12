@@ -113,12 +113,14 @@ observeEvent(eventExpr = input$reset, handlerExpr = {
   updateCheckboxGroupButtons(
     session = session, 
     inputId = "checkbox_category_1", 
-    selected = unique(processed_data_tbl$category_1))
+    selected = unique(processed_data_tbl$category_1)
+  )
   
   updatePickerInput(
     session = session, 
     inputId = "picker_category_2", 
-    selected = unique(processed_data_tbl$category_2))
+    selected = unique(processed_data_tbl$category_2)
+  )
   
 })
 
